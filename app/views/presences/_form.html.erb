@@ -50,6 +50,7 @@
 
 <script>
   var signaturePad = new SignaturePad(document.getElementById('signature-pad'));
+  var signatureField = document.getElementById('presence_signature');
   var saveButton = document.getElementById('save');
   var cancelButton = document.getElementById('clear');
 
@@ -57,7 +58,7 @@
     if (signaturePad.isEmpty()){
       event.preventDefault();
     } else {
-      signature.setAttribute('value', signaturePad.toDataURL("image/svg+xml"));
+      signatureField.setAttribute('value', signaturePad.toDataURL("image/svg+xml"));
     }
   });
 
