@@ -1,0 +1,67 @@
+<%= form_with(model: presence) do |form| %>
+  <% if presence.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(presence.errors.count, "error") %> prohibited this presence from being saved:</h2>
+
+      <ul>
+        <% presence.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nom, style: "display: block" %>
+    <%= form.text_field :nom %>
+  </div>
+
+  <div>
+    <%= form.label :prénom, style: "display: block" %>
+    <%= form.text_field :prénom %>
+  </div>
+
+  <div>
+    <%= form.label :heure, style: "display: block" %>
+    <%= form.datetime_field :heure %>
+  </div>
+
+  <div>
+    <%= form.label :signature, style: "display: block" %>
+    <%= form.text_field :signature, style:'display: none' %>
+  </div>
+
+  <div id="signature">
+    <div class="wrapper">
+      <canvas id="signature-pad" class="signature-pad" style="border: 1px solid;" width=400 height=200></canvas>
+    </div>
+
+    <div style="margin-top: 8px;">
+      <button id="save">Enregistrer</button>
+      <a id="clear">Effacer</a>
+    </div>
+  </div>
+
+  <div>
+    <%= form.submit style:'margin-top: 32px; font-size: 16px;' %>
+  </div>
+<% end %>
+
+
+<script>
+  var signaturePad = new SignaturePad(document.getElementById('signature-pad'));
+  var saveButton = document.getElementById('save');
+  var cancelButton = document.getElementById('clear');
+
+  saveButton.addEventListener('click', function (event) {
+    if (signaturePad.isEmpty()){
+      event.preventDefault();
+    } else {
+      signature.setAttribute('value', signaturePad.toDataURL("image/svg+xml"));
+    }
+  });
+
+  cancelButton.addEventListener('click', function (event) {
+    signaturePad.clear();
+  });
+</script>

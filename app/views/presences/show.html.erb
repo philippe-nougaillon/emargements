@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @presence %>
+
+<div>
+  <%= link_to "Edit this presence", edit_presence_path(@presence) %> |
+  <%= link_to "Back to presences", presences_path %>
+
+  <%= button_to "Destroy this presence", @presence, method: :delete %>
+</div>
