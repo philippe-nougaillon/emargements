@@ -1,16 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Presences</h1>
+<h1>Présences</h1>
 
 
 <div id="presences">
   <% @presences.each do |presence| %>
     <%= render presence %>
     <p>
-      <%= link_to "Show this presence", presence %>
+      <%= link_to "Voir", presence %>
     </p>
     <hr>
   <% end %>
 </div>
 
-<%= link_to "New presence", new_presence_path %>
+<%= link_to "Nouvelle présence", new_presence_path %>
