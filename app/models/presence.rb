@@ -1,3 +1,3 @@
 class Presence < ApplicationRecord
-  validates :nom, :prénom, :heure, presence: true
+  validates :nom, :prénom, :heure, :signature, presence: true
 end
