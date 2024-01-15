@@ -3,8 +3,8 @@
 <%= render @presence %>
 
 <div>
-  <%= link_to "Edit this presence", edit_presence_path(@presence) %> |
-  <%= link_to "Back to presences", presences_path %>
+  <%= link_to "Modifier", edit_presence_path(@presence) %> |
+  <%= link_to "Retour aux présences", presences_path %>
 
-  <%= button_to "Destroy this presence", @presence, method: :delete %>
+  <%= button_to "[X]", @presence, method: :delete %>
 </div>
