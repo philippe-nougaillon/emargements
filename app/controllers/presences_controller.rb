@@ -25,7 +25,7 @@ class PresencesController < ApplicationController
 
     respond_to do |format|
       if @presence.save
-        format.html { redirect_to presence_url(@presence), notice: "Presence was successfully created." }
+        format.html { redirect_to presence_url(@presence), notice: "Présence créée avec succès" }
         format.json { render :show, status: :created, location: @presence }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class PresencesController < ApplicationController
   def update
     respond_to do |format|
       if @presence.update(presence_params)
-        format.html { redirect_to presence_url(@presence), notice: "Presence was successfully updated." }
+        format.html { redirect_to presence_url(@presence), notice: "Présence modifiée." }
         format.json { render :show, status: :ok, location: @presence }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class PresencesController < ApplicationController
     @presence.destroy!
 
     respond_to do |format|
-      format.html { redirect_to presences_url, notice: "Presence was successfully destroyed." }
+      format.html { redirect_to presences_url, notice: "Présence supprimée." }
       format.json { head :no_content }
     end
   end
