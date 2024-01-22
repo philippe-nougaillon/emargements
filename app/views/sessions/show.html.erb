@@ -3,8 +3,8 @@
 <%= render @session %>
 
 <div>
-  <%= link_to "Edit this session", edit_session_path(@session) %> |
-  <%= link_to "Back to sessions", sessions_path %>
+  <%= link_to "Modifier", edit_session_path(@session), class:'btn btn-success btn-sm' %> |
+  <%= link_to "Retour", sessions_path, class:'btn btn-sm' %>
 
-  <%= button_to "Destroy this session", @session, method: :delete %>
+  <%= button_to "Supprimer", @session, method: :delete, class:'btn btn-error btn-sm' %>
 </div>

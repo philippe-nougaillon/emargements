@@ -11,9 +11,11 @@
     </div>
   <% end %>
 
-  <div>
+  <p style="color: green" class="text-2xl notice font-bold mb-4"><%= notice %></p>
+
+  <div class="mb-4">
     <%= form.label :nom, style: "display: block" %>
-    <%= form.collection_select(:participant_id, Participant.all, :id, :nom, {}, class:"") %>
+    <%= form.collection_select(:participant_id, @participants, :id, :nom, {required: true}, class:"input input-bordered input-sm w-full") %>
   </div>
 
   <div>
@@ -23,17 +25,13 @@
 
   <div id="signature">
     <div class="wrapper">
-      <canvas id="signature-pad" class="signature-pad" style="border: 1px solid;" width=400 height=200></canvas>
+      <canvas id="signature-pad" class="signature-pad border border-slate-300" width=700 height=350></canvas>
     </div>
 
-    <div style="margin-top: 8px;">
-      <button id="save">Enregistrer</button>
-      <a id="clear">Effacer</a>
+    <div class="flex gap-4 mt-4">
+      <button id="save" class="btn btn-success btn-lg">Enregistrer</button>
+      <a id="clear" class="btn btn-lg">Effacer</a>
     </div>
-  </div>
-
-  <div>
-    <%= form.submit style:'margin-top: 32px; font-size: 16px;' %>
   </div>
 <% end %>
 

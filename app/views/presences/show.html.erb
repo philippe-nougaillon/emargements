@@ -3,8 +3,8 @@
 <%= render @presence %>
 
 <div>
-  <%= link_to "Edit this presence", edit_presence_path(@presence) %> |
-  <%= link_to "Back to presences", presences_path %>
+  <%= link_to "Modifier", edit_presence_path(@presence), class:'btn btn-success btn-sm' %> |
+  <%= link_to "Retour", presences_path, class:'btn btn-sm' %>
 
-  <%= button_to "Destroy this presence", @presence, method: :delete %>
+  <%= button_to "Supprimer", @presence, method: :delete, class:'btn btn-error btn-sm' %>
 </div>

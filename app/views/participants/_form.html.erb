@@ -13,15 +13,15 @@
 
   <div>
     <%= form.label :nom, style: "display: block" %>
-    <%= form.text_field :nom %>
+    <%= form.text_field :nom, class: 'input input-bordered input-sm w-full', required: true %>
   </div>
 
   <div>
     <%= form.label :prénom, style: "display: block" %>
-    <%= form.text_field :prénom %>
+    <%= form.text_field :prénom, class: 'input input-bordered input-sm w-full', required: true %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-success btn-sm mt-6' %>
   </div>
 <% end %>

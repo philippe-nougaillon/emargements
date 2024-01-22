@@ -17,18 +17,29 @@
 
 .wrapper {
   position: relative;
-  width: 400px;
-  height: 200px;
+  width: 700px;
+  height: 350px;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.signature-pad {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width:400px;
-  height:200px;
+.notice {
+  animation-name: example;
+  animation-delay: 10s;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+
+@keyframes example {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }

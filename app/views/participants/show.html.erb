@@ -3,8 +3,8 @@
 <%= render @participant %>
 
 <div>
-  <%= link_to "Edit this participant", edit_participant_path(@participant) %> |
-  <%= link_to "Back to participants", participants_path %>
+  <%= link_to "Modifier", edit_participant_path(@participant), class:'btn btn-success btn-sm' %> |
+  <%= link_to "Retour", participants_path, class:'btn btn-sm' %>
 
-  <%= button_to "Destroy this participant", @participant, method: :delete %>
+  <%= button_to "Supprimer", @participant, method: :delete, class:'btn btn-error btn-sm' %>
 </div>

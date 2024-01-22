@@ -13,6 +13,8 @@ class PresencesController < ApplicationController
   # GET /presences/new
   def new
     @presence = Presence.new
+    @presence.session_id = Session.where("DATE(sessions.date) = ?", Date.today).first.id
+    @participants = Participant.where.not(id: Presence.where(session_id: @presence.session_id).pluck(:participant_id)).ordered
   end
 
   # GET /presences/1/edit
@@ -27,7 +29,7 @@ class PresencesController < ApplicationController
 
     respond_to do |format|
       if @presence.save
-        format.html { redirect_to presence_url(@presence), notice: "Presence was successfully created." }
+        format.html { redirect_to new_presence_url, notice: "L'émargement de #{@presence.participant.nom_prénom}a été créé avec succès." }
         format.json { render :show, status: :created, location: @presence }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +42,7 @@ class PresencesController < ApplicationController
   def update
     respond_to do |format|
       if @presence.update(presence_params)
-        format.html { redirect_to presence_url(@presence), notice: "Presence was successfully updated." }
+        format.html { redirect_to presence_url(@presence), notice: "L'émargement a été modifié avec succès." }
         format.json { render :show, status: :ok, location: @presence }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +56,7 @@ class PresencesController < ApplicationController
     @presence.destroy!
 
     respond_to do |format|
-      format.html { redirect_to presences_url, notice: "Presence was successfully destroyed." }
+      format.html { redirect_to presences_url, notice: "L'émargement a été supprimé avec succès." }
       format.json { head :no_content }
     end
   end
