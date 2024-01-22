@@ -14,9 +14,10 @@
   <p style="color: green" class="text-2xl notice font-bold mb-4"><%= notice %></p>
 
   <div class="mb-4">
-    <%= form.label :nom, style: "display: block" %>
-    <%= form.collection_select(:participant_id, @participants, :id, :nom, {required: true}, class:"input input-bordered input-sm w-full") %>
+    <%= form.label :participant_id, style: "display: block" %>
+    <%= form.collection_select(:participant_id, @participants, :id, :nom_prénom, {required: true}) %>
   </div>
+
 
   <div>
     <%= form.label :signature, style: "display: block" %>
@@ -53,4 +54,14 @@
   cancelButton.addEventListener('click', function (event) {
     signaturePad.clear();
   });
+
+  // slimselect
+  new SlimSelect({
+    select: '#presence_participant_id',
+    settings: {
+      searchPlaceholder: 'Recherche',
+      searchText: 'Pas de résultat',
+      searchingText: 'Recherche...',
+    }
+  })
 </script>
