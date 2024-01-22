@@ -1,27 +1,24 @@
-<div id="<%= dom_id presence %>">
-  <p>
-    <strong>Nom:</strong>
-    <%= presence.participant.nom %>
-  </p>
+<div id="<%= dom_id presence %>" class="flex gap-8">
+  <div>
+    <p>
+      <strong>Nom:</strong>
+      <%= presence.participant.nom %>
+    </p>
 
-  <p>
-    <strong>Prénom:</strong>
-    <%= presence.participant.prénom %>
-  </p>
+    <p>
+      <strong>Prénom:</strong>
+      <%= presence.participant.prénom %>
+    </p>
 
-  <p>
-    <strong>Session:</strong>
-    <%= l presence.session.date %>
-  </p>
+    <p>
+      <strong>Session:</strong>
+      <%= l presence.session.date %>
+    </p>
 
-  <p>
-    <strong>Heure:</strong>
-    <%= l presence.heure %>
-  </p>
-
-  <p>
-    <strong>Signature:</strong>
-    <br>
-    <img src=<%= presence.signature %> style="border: 1px #CCC solid; padding: 10px;">
-  </p>
+    <p>
+      <strong>Signature le:</strong>
+      <%= l presence.heure %>
+    </p>
+  </div>
+  <img src=<%= presence.signature %> style="border: 1px #CCC solid; padding: 10px; height:150px">
 </div>
