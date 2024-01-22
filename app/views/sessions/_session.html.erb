@@ -1,12 +1,17 @@
 <div id="<%= dom_id session %>">
   <p>
-    <strong>Date:</strong>
+    <strong>Date :</strong>
     <%= l session.date %>
   </p>
 
   <p>
-    <strong>Durée:</strong>
+    <strong>Durée :</strong>
     <%= session.durée %>
+  </p>
+
+  <p>
+    <strong>Nb Signatures :</strong>
+    <%= session.presences.count %> / <%= Participant.count %>
   </p>
 
 </div>

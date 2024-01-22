@@ -1,15 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
-<h1 class="text-4xl font-bold mb-6">Participants</h1>
+<div>
+  <%= link_to "Nouveau participant", new_participant_path, class:'btn btn-success btn-lg float-end' %>
+  <h1 class="text-4xl font-bold mb-6">Participants</h1>
+</div>
 
 <div id="participants">
   <% @participants.each do |participant| %>
     <%= render participant %>
-    <p>
-      <%= link_to "Voir", participant, class:'btn btn-sm mt-2 mb-6' %>
-    </p>
+    <div class="flex gap-4 mt-2">
+      <%= link_to "Modifier", edit_participant_path(participant), class:'btn btn-sm mb-6' %>
+      <%= button_to "Supprimer", participant, method: :delete, class:'btn btn-error btn-sm' %>
+    </div>
     <hr>
   <% end %>
 </div>
-
-<%= link_to "Nouveau participant", new_participant_path, class:'btn btn-success btn-sm' %>
