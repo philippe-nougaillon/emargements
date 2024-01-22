@@ -1,17 +1,22 @@
 <div id="<%= dom_id presence %>">
   <p>
     <strong>Nom:</strong>
-    <%= presence.nom %>
+    <%= presence.participant.nom %>
   </p>
 
   <p>
     <strong>Prénom:</strong>
-    <%= presence.prénom %>
+    <%= presence.participant.prénom %>
+  </p>
+
+  <p>
+    <strong>Session:</strong>
+    <%= l presence.session.date %>
   </p>
 
   <p>
     <strong>Heure:</strong>
-    <%= presence.heure %>
+    <%= l presence.heure %>
   </p>
 
   <p>

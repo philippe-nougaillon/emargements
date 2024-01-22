@@ -22,6 +22,8 @@ class PresencesController < ApplicationController
   # POST /presences or /presences.json
   def create
     @presence = Presence.new(presence_params)
+    @presence.session_id = Session.where("DATE(sessions.date) = ?", Date.today).first.id
+    @presence.heure = DateTime.now
 
     respond_to do |format|
       if @presence.save
