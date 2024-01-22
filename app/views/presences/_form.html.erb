@@ -36,6 +36,12 @@
   </div>
 <% end %>
 
+<div class="mt-8">
+  <% presence.session.presences.order(created_at: :desc).each do |p| %>
+    Il y a <%= time_ago_in_words p.created_at%>, <%= p.participant.nom_prénom %> a signé
+    <br>
+  <% end %>
+</div>
 
 <script>
   var signaturePad = new SignaturePad(document.getElementById('signature-pad'));
