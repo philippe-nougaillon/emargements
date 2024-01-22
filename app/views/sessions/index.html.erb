@@ -6,9 +6,9 @@
   <% @sessions.each do |session| %>
     <%= render session %>
     <p>
-      <%= link_to "Voir", session, class:'btn btn-sm' %>
+      <%= link_to "Voir", session, class:'btn btn-sm mb-6' %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New session", new_session_path %>
+<%= link_to "Nouvelle Session", new_session_path, class:'btn btn-success btn-sm' %>

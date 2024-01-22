@@ -13,15 +13,15 @@
 
   <div>
     <%= form.label :date, style: "display: block" %>
-    <%= form.datetime_field :date %>
+    <%= form.datetime_field :date, class: 'input input-bordered input-sm w-full' %>
   </div>
 
   <div>
     <%= form.label :durée, style: "display: block" %>
-    <%= form.text_field :durée %>
+    <%= form.text_field :durée, class: 'input input-bordered input-sm w-full' %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class:'btn btn-success btn-sm mt-6' %>
   </div>
 <% end %>
