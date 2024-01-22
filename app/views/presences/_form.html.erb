@@ -13,17 +13,7 @@
 
   <div>
     <%= form.label :nom, style: "display: block" %>
-    <%= form.text_field :nom %>
-  </div>
-
-  <div>
-    <%= form.label :prénom, style: "display: block" %>
-    <%= form.text_field :prénom %>
-  </div>
-
-  <div>
-    <%= form.label :heure, style: "display: block" %>
-    <%= form.datetime_field :heure %>
+    <%= form.collection_select(:participant_id, Participant.all, :id, :nom, {}, class:"") %>
   </div>
 
   <div>

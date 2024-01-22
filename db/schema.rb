@@ -10,17 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_02_084023) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_22_083817) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "presences", force: :cascade do |t|
-    t.string "nom"
-    t.string "prénom"
-    t.datetime "heure"
-    t.string "signature"
+  create_table "participants", force: :cascade do |t|
+    t.string "nom", null: false
+    t.string "prénom", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "presences", force: :cascade do |t|
+    t.datetime "heure"
+    t.string "signature"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "participant_id", null: false
+    t.bigint "session_id", null: false
+    t.index ["participant_id"], name: "index_presences_on_participant_id"
+    t.index ["session_id"], name: "index_presences_on_session_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.datetime "date"
+    t.decimal "durée", precision: 4, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "presences", "participants"
+  add_foreign_key "presences", "sessions"
 end
