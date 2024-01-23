@@ -46,7 +46,10 @@ class PresencesController < ApplicationController
         format.html { redirect_to new_presence_url, notice: "L'émargement de '#{@presence.participant.nom_prénom}' a été créé avec succès." }
         format.json { render :show, status: :created, location: @presence }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html do
+          @participants = [] 
+          render :new, status: :unprocessable_entity
+        end
         format.json { render json: @presence.errors, status: :unprocessable_entity }
       end
     end

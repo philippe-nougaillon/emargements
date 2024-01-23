@@ -1,8 +1,6 @@
 <%= form_with(model: presence) do |form| %>
   <% if presence.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(presence.errors.count, "erreur") %></h2>
-
       <ul>
         <% presence.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -28,6 +26,13 @@
     <div class="wrapper">
       <canvas id="signature-pad" class="signature-pad border border-slate-300" width=700 height=350></canvas>
     </div>
+
+    <% if ((presence.assemblee.début + presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
+      <p class="mt-2">
+        Temps restant : 
+        <%= time_ago_in_words(presence.assemblee.début + presence.assemblee.durée.to_f.hours)  %>
+      </p>
+    <% end %>
 
     <div class="flex gap-4 mt-4">
       <button id="save" class="btn btn-success btn-lg">Enregistrer</button>
