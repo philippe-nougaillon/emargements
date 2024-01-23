@@ -13,8 +13,8 @@ class PresencesController < ApplicationController
   # GET /presences/new
   def new
     @presence = Presence.new
-    @presence.session_id = Session.where("DATE(sessions.date) = ?", Date.today).first.id
-    @participants = Participant.where.not(id: Presence.where(session_id: @presence.session_id).pluck(:participant_id)).ordered
+    @presence.assemblee_id = Assemblee.where("DATE(assemblees.début) = ?", Date.today).first.id
+    @participants = Participant.where.not(id: Presence.where(assemblee_id: @presence.assemblee_id).pluck(:participant_id)).ordered
   end
 
   # GET /presences/1/edit
@@ -24,7 +24,7 @@ class PresencesController < ApplicationController
   # POST /presences or /presences.json
   def create
     @presence = Presence.new(presence_params)
-    @presence.session_id = Session.where("DATE(sessions.date) = ?", Date.today).first.id
+    @presence.assemblee_id = Assemblee.where("DATE(assemblees.début ) = ?", Date.today).first.id
     @presence.heure = DateTime.now
 
     respond_to do |format|

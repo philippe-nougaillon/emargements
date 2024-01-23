@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :sessions
+
+  resources :assemblees
   resources :participants
   resources :presences
 

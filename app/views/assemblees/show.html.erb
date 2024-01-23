@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @assemblee %>
+
+<div>
+  <%= link_to "Modifier", edit_assemblee_path(@assemblee), class:'btn btn-success btn-sm' %> |
+  <%= link_to "Retour", assemblees_path, class:'btn btn-sm' %>
+
+  <%= button_to "Supprimer", @assemblee, method: :delete, class:'btn btn-error btn-sm' %>
+</div>

@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<div>
+  <%= link_to "Nouvelle Assemblée", new_assemblee_path, class:'btn btn-success btn-lg float-end' %>
+  <h1 class="text-4xl font-bold mb-6">Assemblée</h1>
+</div>
+
+<div id="assemblees">
+  <% @assemblees.each do |assemblee| %>
+    <%= render assemblee %>
+    <p>
+      <%= link_to "Voir", assemblee, class:'btn btn-sm mt-2 mb-6' %>
+    </p>
+  <% end %>
+</div>
