@@ -8,7 +8,7 @@
         <%= link_to "Admin", admin_index_path, class: 'btn btn-sm' %>
       </li>
       <li>
-        <%= button_to destroy_user_session_path, method: :delete, title: "Fermer la session de #{current_user.email}", form_class: 'p-0', class:'h-full' do %>
+        <%= button_to destroy_user_session_path, method: :delete, title: "Fermer la session de #{current_user.email}", form_class: '!p-0', class:'h-full' do %>
           <span class="btn btn-ghost btn-sm font-normal">
             Déconnexion
           </span>
