@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? %>
       <%= render "partials/navbar" %>
     <% end %>
     <main class="p-4">
