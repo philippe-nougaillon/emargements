@@ -3,6 +3,7 @@ class PresencesController < ApplicationController
 
   # GET /presences or /presences.json
   def index
+    authorize Presence
     @presences = Presence.ordered
   end
 
@@ -42,7 +43,7 @@ class PresencesController < ApplicationController
   def update
     respond_to do |format|
       if @presence.update(presence_params)
-        format.html { redirect_to presence_url(@presence), notice: "L'émargement a été modifié avec succès." }
+        format.html { redirect_to presences_url, notice: "L'émargement a été modifié avec succès." }
         format.json { render :show, status: :ok, location: @presence }
       else
         format.html { render :edit, status: :unprocessable_entity }

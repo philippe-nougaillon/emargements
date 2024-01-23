@@ -3,6 +3,7 @@ class AssembleesController < ApplicationController
 
   # GET /assemblees or /assemblees.json
   def index
+    authorize Assemblee
     @assemblees = Assemblee.ordered
   end
 
@@ -38,7 +39,7 @@ class AssembleesController < ApplicationController
   def update
     respond_to do |format|
       if @assemblee.update(assemblee_params)
-        format.html { redirect_to assemblee_url(@assemblee), notice: "Assemblée modifiée avec succès." }
+        format.html { redirect_to assemblees_url, notice: "Assemblée modifiée avec succès." }
         format.json { render :show, status: :ok, location: @assemblee }
       else
         format.html { render :edit, status: :unprocessable_entity }

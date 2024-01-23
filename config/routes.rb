@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
 
 
-  resources :assemblees
-  resources :participants
-  resources :presences
+  resources :assemblees, only: %i[ index new create edit update destroy ]
+  resources :participants, only: %i[ index new create edit update destroy ]
+  resources :presences, only: %i[ index new create edit update destroy ]
 
   get 'admin/index'
 
