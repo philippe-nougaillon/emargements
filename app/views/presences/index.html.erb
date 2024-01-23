@@ -5,10 +5,13 @@
   <h1 class="text-4xl font-bold mb-6">Émargements / Présences</h1>
 </div>
 
-
 <div id="presences">
   <% @presences.each do |presence| %>
     <%= render presence %>
     <hr class="my-3">
   <% end %>
 </div>
+
+<%= link_to presences_path(format: :xls), class: "text-success hover:underline mb-12" do %>
+  Exporter vers Excel
+<% end %>

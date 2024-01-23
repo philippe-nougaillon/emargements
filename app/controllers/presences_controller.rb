@@ -5,6 +5,19 @@ class PresencesController < ApplicationController
   def index
     authorize Presence
     @presences = Presence.ordered
+
+    respond_to do |format|
+      format.html do 
+      end
+
+      format.xls do
+        book = PresencesToXls.new(@presences).call
+        file_contents = StringIO.new
+        book.write file_contents # => Now file_contents contains the rendered file output
+        filename = "Émargements.xls"
+        send_data file_contents.string.force_encoding('binary'), filename: filename 
+      end
+    end
   end
 
   # GET /presences/1 or /presences/1.json
