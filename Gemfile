@@ -67,3 +67,5 @@ gem "devise", "~> 4.9"
 gem "pundit", "~> 2.3"
 
 gem "spreadsheet", "~> 1.3"
+
+gem "tailwindcss-rails", "~> 2.3"
