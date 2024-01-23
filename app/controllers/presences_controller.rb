@@ -27,7 +27,7 @@ class PresencesController < ApplicationController
   # GET /presences/new
   def new
     @presence = Presence.new
-    @presence.assemblee = Assemblee.where("DATE(assemblees.début) = ?", Date.today).first
+    @presence.assemblee = Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
     @participants = Participant.where.not(id: Presence.where(assemblee_id: @presence.assemblee_id).pluck(:participant_id)).ordered
   end
 
@@ -38,7 +38,7 @@ class PresencesController < ApplicationController
   # POST /presences or /presences.json
   def create
     @presence = Presence.new(presence_params)
-    @presence.assemblee_id = Assemblee.where("DATE(assemblees.début ) = ?", Date.today).first.id
+    @presence.assemblee = Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
     @presence.heure = DateTime.now
 
     respond_to do |format|
