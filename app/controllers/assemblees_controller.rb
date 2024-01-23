@@ -25,7 +25,7 @@ class AssembleesController < ApplicationController
 
     respond_to do |format|
       if @assemblee.save
-        format.html { redirect_to assemblee_url(@assemblee), notice: "Assemblée créée avec succès." }
+        format.html { redirect_to assemblees_url, notice: "Assemblée créée avec succès." }
         format.json { render :show, status: :created, location: @assemblee }
       else
         format.html { render :new, status: :unprocessable_entity }
