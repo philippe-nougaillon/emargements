@@ -18,7 +18,12 @@
     <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
   </head>
 
-  <body class="p-4">
-    <%= yield %>
+  <body>
+    <% if user_signed_in? && current_user.admin? %>
+      <%= render "partials/navbar" %>
+    <% end %>
+    <main class="p-4">
+      <%= yield %>
+    </main>
   </body>
 </html>
