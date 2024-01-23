@@ -1,0 +1,17 @@
+<div id="<%= dom_id assemblee %>">
+  <p>
+    <strong>Début :</strong>
+    <%= l assemblee.début %>
+  </p>
+
+  <p>
+    <strong>Durée :</strong>
+    <%= assemblee.durée %> h
+  </p>
+
+  <p>
+    <strong>Nbr Signatures :</strong>
+    <%= assemblee.presences.count %> / <%= Participant.count %>
+  </p>
+
+</div>

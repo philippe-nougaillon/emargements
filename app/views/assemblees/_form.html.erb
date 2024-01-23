@@ -1,10 +1,10 @@
-<%= form_with(model: session) do |form| %>
-  <% if session.errors.any? %>
+<%= form_with(model: assemblee) do |form| %>
+  <% if assemblee.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(session.errors.count, "error") %> prohibited this session from being saved:</h2>
+      <h2><%= pluralize(assemblee.errors.count, "error") %> prohibited this assemblee from being saved:</h2>
 
       <ul>
-        <% session.errors.each do |error| %>
+        <% assemblee.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -12,8 +12,8 @@
   <% end %>
 
   <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.datetime_field :date, class: 'input input-bordered input-sm w-full' %>
+    <%= form.label :début, style: "display: block" %>
+    <%= form.datetime_field :début, class: 'input input-bordered input-sm w-full' %>
   </div>
 
   <div>

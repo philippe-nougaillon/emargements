@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<div>
+  <%= link_to "Nouvelle Assemblée", new_assemblee_path, class:'btn btn-success btn-lg float-end' %>
+  <h1 class="text-4xl font-bold mb-6">Assemblées</h1>
+</div>
+
+<div id="assemblees">
+  <% @assemblees.each do |assemblee| %>
+    <%= render assemblee %>
+    <div class="flex gap-4 mt-2 mb-6">
+      <%= link_to "Modifier", edit_assemblee_path(assemblee), class:'btn btn-success btn-sm' %>
+      <%= button_to "Supprimer", assemblee, method: :delete, class:'btn btn-error btn-sm' %>
+    </div>
+    <hr>
+  <% end %>
+</div>

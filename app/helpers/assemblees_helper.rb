@@ -1,0 +1,2 @@
+module AssembleesHelper
+end
