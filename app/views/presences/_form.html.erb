@@ -12,28 +12,32 @@
   <p style="color: green" class="text-2xl notice font-bold mb-4"><%= notice %></p>
 
   <% if presence.assemblee %>
-    <div>
-      <%= form.label :signature, style: "display: block" %>
-      <%= form.text_field :signature, style:'display: none' %>
-    </div>
-
-    <div id="signature">
-      <div class="wrapper">
-        <canvas id="signature-pad" class="signature-pad border border-slate-300" width=700 height=350></canvas>
+    <% if p = presence.assemblee.presences.where(user_id: current_user.id).first %>
+      <p>Vous avez signé il y a <%= time_ago_in_words p.created_at %></p>
+    <% else %>
+      <div>
+        <%= form.label :signature, style: "display: block" %>
+        <%= form.text_field :signature, style:'display: none' %>
       </div>
 
-      <% if ((presence.assemblee.début + presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
-        <p class="mt-2">
-          Temps restant : 
-          <%= time_ago_in_words(presence.assemblee.début + presence.assemblee.durée.to_f.hours)  %>
-        </p>
-      <% end %>
+      <div id="signature">
+        <div class="wrapper">
+          <canvas id="signature-pad" class="signature-pad border border-slate-300" width=700 height=350></canvas>
+        </div>
 
-      <div class="flex gap-4 mt-4">
-        <button id="save" class="btn btn-success btn-lg">Enregistrer</button>
-        <a id="clear" class="btn btn-lg">Effacer</a>
+        <% if ((presence.assemblee.début + presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
+          <p class="mt-2">
+            Temps restant : 
+            <%= time_ago_in_words(presence.assemblee.début + presence.assemblee.durée.to_f.hours)  %>
+          </p>
+        <% end %>
+
+        <div class="flex gap-4 mt-4">
+          <button id="save" class="btn btn-success btn-lg">Enregistrer</button>
+          <a id="clear" class="btn btn-lg">Effacer</a>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% elsif @assemblee_futur %>
     <p>
       La prochaine assemblée commencera le <%= l(@assemblee_futur.début, format: :long) %>
@@ -43,15 +47,6 @@
   <% else %>
     <p>Il n'y a pas d'assemblée en cours</p>
   <% end %>
-<% end %>
-
-<% if presence.assemblee %>
-  <div class="mt-8">
-    <% presence.assemblee.presences.order(created_at: :desc).each do |p| %>
-      Il y a <%= time_ago_in_words p.created_at%>, <%= p.user.nom_prénom %> a signé
-      <br>
-    <% end %>
-  </div>
 <% end %>
 
 <script>

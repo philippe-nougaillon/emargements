@@ -10,7 +10,7 @@
     <%= render assemblee %>
     <div class="flex gap-4 mt-2 mb-6">
       <%= link_to "Modifier", edit_assemblee_path(assemblee), class:'btn btn-success btn-sm' %>
-      <%= link_to "PDF", assemblee_path(assemblee, format: :pdf), class:'btn btn-success btn-sm' %>
+      <%= link_to "Générer convocs PDF", assemblee_path(assemblee, format: :pdf), class:'btn btn-error btn-outline btn-sm' %>
       <%= button_to "Supprimer", assemblee, method: :delete, class:'btn btn-error btn-sm' %>
     </div>
     <hr>

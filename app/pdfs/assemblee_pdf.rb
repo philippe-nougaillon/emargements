@@ -9,27 +9,54 @@ class AssembleePdf
   def convocation(assemblee)
     User.ordered.each_with_index do |user, index|
       start_new_page unless index == 0
-      text "<color rgb='032E4D'><b>Convocation</b></color>", inline_format: true, size: 16, style: :bold, align: :center
+      move_down @margin_down
+      text "<b>CESER - Grand Est<b>", inline_format: true, size: 16
+      text "1 Pl. Adrien Zeller"
+      text "67000 Strasbourg"
+      move_down @margin_down * 4
+      text "<b>Convocation</b>", inline_format: true, size: 16, align: :center
+      move_down @margin_down * 4
       text "Bonjour #{user.prénom_nom},"
       move_down @margin_down
-      text "Vous êtes convoqué à #{assemblee.nom} à #{assemblee.adresse} le #{I18n.l(assemblee.début, format: :long)}"
+      text "Vous êtes convoqué à l'assemblée '<b>#{assemblee.nom}</b>' qui aura lieu <b>#{assemblee.adresse}</b>, le <b>#{I18n.l(assemblee.début, format: :long)}</b>", inline_format: true
       move_down @margin_down
       text "Voici plusieurs trajets pour y aller depuis chez vous :"
 
       move_down @margin_down
       y_position = cursor
-      bounding_box([0, y_position], :width => 176) do
-        text "En transport en commun", align: :center
-        image "#{@image_path}/trajet.png", :width => 120, position: :center
+      bounding_box([0, y_position], :width => 125) do
+        text "En transports", align: :center
+        image "#{@image_path}/trajet.png", :width => 100, position: :center
+        move_down @margin_down
+        text "Émission CO2 : 0.8kg", align: :center
+        text "Durée : 30min", align: :center
       end
-      bounding_box([176, y_position], :width => 176) do
+      bounding_box([130, y_position], :width => 125) do
         text "À pied", align: :center
-        image "#{@image_path}/trajet.png", :width => 120, position: :center
+        image "#{@image_path}/trajet.png", :width => 100, position: :center
+        move_down @margin_down
+        text "Émission CO2 : 0g", align: :center
+        text "Durée : 3h", align: :center
       end
-      bounding_box([353, y_position], :width => 176) do
-        text "En voiture (8x plus de CO2 a a a a qu'en transport)", align: :center
-        image "#{@image_path}/trajet.png", :width => 120, position: :center
+      bounding_box([260, y_position], :width => 125) do
+        text "En voiture", align: :center
+        image "#{@image_path}/trajet.png", :width => 100, position: :center
+        move_down @margin_down
+        text "Émission CO2 : 6kg", align: :center
+        text "Durée : 20min", align: :center
       end
+
+      bounding_box([390, y_position], :width => 125) do
+        text "En voiture", align: :center
+        image "#{@image_path}/trajet.png", :width => 100, position: :center
+        move_down @margin_down
+        text "Émission CO2 : 0g", align: :center
+        text "Durée : 1h", align: :center
+      end
+
+      move_down @margin_down * 6
+      text "Itinéraires générés par", align: :center
+      image "#{@image_path}/fluo.png", :width => 100, position: :center
     end
   end
 end
