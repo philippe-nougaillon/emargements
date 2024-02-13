@@ -17,4 +17,8 @@ class User < ApplicationRecord
   def nom_prénom
     "#{self.nom} #{self.prénom}"
   end
+
+  def prénom_nom
+    "#{self.prénom} #{self.nom}"
+  end
 end

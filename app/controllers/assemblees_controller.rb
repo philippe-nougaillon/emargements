@@ -1,14 +1,28 @@
 class AssembleesController < ApplicationController
   before_action :set_assemblee, only: %i[ show edit update destroy ]
+  before_action :is_user_authorized
 
   # GET /assemblees or /assemblees.json
   def index
-    authorize Assemblee
     @assemblees = Assemblee.ordered
   end
 
   # GET /assemblees/1 or /assemblees/1.json
   def show
+    respond_to do |format|
+      format.html do 
+      end
+
+      format.pdf do
+        pdf = AssembleePdf.new
+        pdf.convocation(@assemblee)
+
+        send_data pdf.render,
+            filename: "Assemblée.pdf",
+            type: 'application/pdf',
+            disposition: 'inline'
+      end
+    end
   end
 
   # GET /assemblees/new
@@ -66,6 +80,10 @@ class AssembleesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def assemblee_params
-      params.require(:assemblee).permit(:début, :durée)
+      params.require(:assemblee).permit(:nom, :début, :durée, :adresse)
+    end
+
+    def is_user_authorized
+      authorize Assemblee
     end
 end

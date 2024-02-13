@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :assemblees, only: %i[ index new create edit update destroy ]
+  resources :assemblees
   resources :users
   resources :presences, only: %i[ index new create edit update destroy ]
 

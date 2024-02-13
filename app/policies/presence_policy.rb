@@ -10,4 +10,27 @@ class PresencePolicy
     user.admin?
   end
 
+  def show?
+    index?
+  end
+
+  def new?
+    true
+  end
+
+  def create?
+    new?
+  end
+
+  def edit?
+    index?
+  end
+
+  def update?
+    edit?
+  end
+
+  def destroy?
+    index?
+  end
 end

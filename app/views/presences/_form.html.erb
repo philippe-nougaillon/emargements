@@ -34,6 +34,12 @@
         <a id="clear" class="btn btn-lg">Effacer</a>
       </div>
     </div>
+  <% elsif @assemblee_futur %>
+    <p>
+      La prochaine assemblée commencera le <%= l(@assemblee_futur.début, format: :long) %>
+      <br>
+      Voici comment vous y rendre <%= link_to "ici", "https://www.fluo.eu/fr/itineraires/4/TripPlanner/index?KeywordDep=HAGUENAU%20-%20Haguenau&PointDep=3029159_1&LatDep=48%2C81439018&LngDep=7%2C7891794&KeywordArr=STRASBOURG%20-%20Strasbourg&PointArr=3029435_1&LatArr=48%2C58509906&LngArr=7%2C7369193&Date=13%2F02%2F2024&TypeDate=65&Hour=16&Minute=50&Algorithm=Fastest&TypeTrip=PlanTrip&IgnoreDisruptions=False&WalkDistance=2000&WalkSpeed=5&CarDistance=25&CarLeave=0&BikeDistance=10&BikeLeave=0&BikeSpeed=15&Accessibility=0&IsoBefore=True&IsSeveralNetworks=False&Submit=False&ExpandCriteria=0&ListModes=Bus%7CCoach%7CMetro%7CTram%7CTod%7CTrain%7CTgv%7CTer%7CSchool&ListPartners=22%7C47%7C57%7C43%7C56%7C51%7C53%7C52%7C61%7C42%7C45%7C50%7C58%7C49%7C44%7C46%7C6%7C60%7C8%7C4%7C39%7C2%7C7%7C11%7C21%7C23%7C15%7C63%7C9%7C41%7C17%7C40%7C59%7C20%7C14%7C18%7C12%7C19%7C16%7C24%7C26%7C30%7C31%7C32%7C25%7C27%7C28%7C29%7C3%7C13%7C5%7C64%7C55%7C54%7C33&Length=11&_=1707830182242", target: "_blank", class: "text-primary hover:underline" %>
+    </p>
   <% else %>
     <p>Il n'y a pas d'assemblée en cours</p>
   <% end %>

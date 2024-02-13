@@ -69,3 +69,7 @@ gem "pundit", "~> 2.3"
 gem "spreadsheet", "~> 1.3"
 
 gem "tailwindcss-rails", "~> 2.3"
+
+gem "prawn", "~> 2.4"
+
+gem "matrix", "~> 0.4.2"

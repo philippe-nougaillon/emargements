@@ -1,9 +1,9 @@
 class PresencesController < ApplicationController
   before_action :set_presence, only: %i[ show edit update destroy ]
+  before_action :is_user_authorized
 
   # GET /presences or /presences.json
   def index
-    authorize Presence
     @presences = Presence.ordered
 
     respond_to do |format|
@@ -28,6 +28,7 @@ class PresencesController < ApplicationController
   def new
     @presence = Presence.new
     @presence.assemblee = Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
+    @assemblee_futur = Assemblee.where("NOW() < assemblees.début").first
   end
 
   # GET /presences/1/edit
@@ -87,5 +88,9 @@ class PresencesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def presence_params
       params.require(:presence).permit(:user_id, :signature)
+    end
+
+    def is_user_authorized
+      authorize Presence
     end
 end
