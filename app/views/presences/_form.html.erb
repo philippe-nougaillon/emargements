@@ -12,12 +12,6 @@
   <p style="color: green" class="text-2xl notice font-bold mb-4"><%= notice %></p>
 
   <% if presence.assemblee %>
-    <div class="mb-4">
-      <%= form.label :user_id, style: "display: block" %>
-      <%= form.collection_select(:user_id, @users, :id, :nom_prénom, {required: true}) %>
-    </div>
-
-
     <div>
       <%= form.label :signature, style: "display: block" %>
       <%= form.text_field :signature, style:'display: none' %>

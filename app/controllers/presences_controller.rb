@@ -28,7 +28,6 @@ class PresencesController < ApplicationController
   def new
     @presence = Presence.new
     @presence.assemblee = Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
-    @users = User.where.not(id: Presence.where(assemblee_id: @presence.assemblee_id).pluck(:user_id)).ordered
   end
 
   # GET /presences/1/edit
@@ -40,10 +39,11 @@ class PresencesController < ApplicationController
     @presence = Presence.new(presence_params)
     @presence.assemblee = Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
     @presence.heure = DateTime.now
+    @presence.user = current_user
 
     respond_to do |format|
       if @presence.save
-        format.html { redirect_to new_presence_url, notice: "L'émargement de '#{@presence.user.nom_prénom}' a été créé avec succès." }
+        format.html { redirect_to new_presence_url, notice: "L'émargement a été créé avec succès." }
         format.json { render :show, status: :created, location: @presence }
       else
         format.html do

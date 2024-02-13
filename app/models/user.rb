@@ -1,13 +1,12 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  #:lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise  :database_authenticatable,
           :registerable,
           :recoverable,
           :rememberable,
           :validatable,
-          :trackable,
-          :confirmable
+          :trackable
 
 
   normalizes :nom, with: -> nom { nom.upcase.strip }
