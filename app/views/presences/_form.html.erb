@@ -13,8 +13,8 @@
 
   <% if presence.assemblee %>
     <div class="mb-4">
-      <%= form.label :participant_id, style: "display: block" %>
-      <%= form.collection_select(:participant_id, @participants, :id, :nom_prénom, {required: true}) %>
+      <%= form.label :user_id, style: "display: block" %>
+      <%= form.collection_select(:user_id, @users, :id, :nom_prénom, {required: true}) %>
     </div>
 
 
@@ -48,7 +48,7 @@
 <% if presence.assemblee %>
   <div class="mt-8">
     <% presence.assemblee.presences.order(created_at: :desc).each do |p| %>
-      Il y a <%= time_ago_in_words p.created_at%>, <%= p.participant.nom_prénom %> a signé
+      Il y a <%= time_ago_in_words p.created_at%>, <%= p.user.nom_prénom %> a signé
       <br>
     <% end %>
   </div>
@@ -74,7 +74,7 @@
 
   // slimselect
   new SlimSelect({
-    select: '#presence_participant_id',
+    select: '#presence_user_id',
     settings: {
       searchPlaceholder: 'Recherche',
       searchText: 'Pas de résultat',

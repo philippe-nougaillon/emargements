@@ -23,7 +23,7 @@ class PresencesToXls < ApplicationService
 
       @presences.each do |presence|
         fields_to_export = [
-          presence.participant.nom_prénom,
+          presence.user.nom_prénom,
           presence.assemblee.id,
           I18n.l(presence.assemblee.début),
           I18n.l(presence.created_at)

@@ -28,7 +28,7 @@ class PresencesController < ApplicationController
   def new
     @presence = Presence.new
     @presence.assemblee = Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
-    @participants = Participant.where.not(id: Presence.where(assemblee_id: @presence.assemblee_id).pluck(:participant_id)).ordered
+    @users = User.where.not(id: Presence.where(assemblee_id: @presence.assemblee_id).pluck(:user_id)).ordered
   end
 
   # GET /presences/1/edit
@@ -43,11 +43,11 @@ class PresencesController < ApplicationController
 
     respond_to do |format|
       if @presence.save
-        format.html { redirect_to new_presence_url, notice: "L'émargement de '#{@presence.participant.nom_prénom}' a été créé avec succès." }
+        format.html { redirect_to new_presence_url, notice: "L'émargement de '#{@presence.user.nom_prénom}' a été créé avec succès." }
         format.json { render :show, status: :created, location: @presence }
       else
         format.html do
-          @participants = [] 
+          @users = [] 
           render :new, status: :unprocessable_entity
         end
         format.json { render json: @presence.errors, status: :unprocessable_entity }
@@ -86,6 +86,6 @@ class PresencesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def presence_params
-      params.require(:presence).permit(:participant_id, :signature)
+      params.require(:presence).permit(:user_id, :signature)
     end
 end

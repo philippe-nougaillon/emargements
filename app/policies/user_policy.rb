@@ -1,4 +1,4 @@
-class ParticipantPolicy
+class UserPolicy
   attr_reader :user
 
   # `_record` in this example will be :admin
