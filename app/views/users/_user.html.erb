@@ -3,6 +3,7 @@
     <%= user.nom %> <%= user.prénom %>
   </p>
   <div class="flex gap-4 mt-2">
+    <%= link_to "Voir", user_path(user), class:'btn btn-primary btn-sm' %>
     <%= link_to "Modifier", edit_user_path(user), class:'btn btn-sm' %>
     <%= button_to "Supprimer", user, method: :delete, class:'btn btn-error btn-sm' %>
   </div>
