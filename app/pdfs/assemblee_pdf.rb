@@ -14,12 +14,12 @@ class AssembleePdf
       text "1 Pl. Adrien Zeller"
       text "67000 Strasbourg"
       move_down @margin_down * 4
-      text "<b>Convocation</b>", inline_format: true, size: 16, align: :center
+      text "<b>CONVOCATION</b>", inline_format: true, size: 16, align: :center
       move_down @margin_down * 4
       text "Bonjour #{user.prénom_nom},"
       move_down @margin_down
       text "Vous êtes convoqué à l'assemblée '<b>#{assemblee.nom}</b>' qui aura lieu <b>#{assemblee.adresse}</b>, le <b>#{I18n.l(assemblee.début, format: :long)}</b>", inline_format: true
-      move_down @margin_down
+      move_down @margin_down * 5
       text "Voici plusieurs trajets pour y aller depuis chez vous :"
 
       move_down @margin_down
@@ -54,7 +54,7 @@ class AssembleePdf
         text "Durée : 1h", align: :center
       end
 
-      move_down @margin_down * 6
+      move_down @margin_down * 2
       text "Itinéraires générés par", align: :center
       image "#{@image_path}/fluo.png", :width => 100, position: :center
     end
