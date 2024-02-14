@@ -1,16 +1,11 @@
 <p class="mb-4" style="color: green"><%= notice %></p>
 
 <div>
-  <h1 class="text-4xl font-bold mb-6">Utilisateurs</h1>
+  <h1 class="text-4xl font-bold mb-8">Utilisateurs</h1>
 </div>
 
 <div id="users">
   <% @users.each do |user| %>
     <%= render user %>
-    <div class="flex gap-4 mt-2 mb-6">
-      <%= link_to "Modifier", edit_user_path(user), class:'btn btn-sm' %>
-      <%= button_to "Supprimer", user, method: :delete, class:'btn btn-error btn-sm' %>
-    </div>
-    <hr>
   <% end %>
 </div>

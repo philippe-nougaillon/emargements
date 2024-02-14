@@ -3,6 +3,6 @@
   <%= link_to "Utilisateurs", users_path, class: 'btn btn-lg' %>
   <%= link_to "Émargements", presences_path, class: 'btn btn-lg' %>
   <% if policy(:admin).index? %>
-    <%= link_to "Nouvel Émargement", admin_signature_path, class: 'btn btn-primary btn-lg' %>
+    <%= link_to "Émargement collectif", admin_signature_path, class: 'btn btn-primary btn-lg' %>
   <% end %>
 </div>

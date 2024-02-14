@@ -6,6 +6,10 @@ class PresencesController < ApplicationController
   def index
     @presences = Presence.ordered
 
+    if params[:assemblee_id].present?
+      @presences = @presences.where(assemblee_id: params[:assemblee_id])
+    end
+
     respond_to do |format|
       format.html do 
       end

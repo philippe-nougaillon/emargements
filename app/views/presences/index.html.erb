@@ -1,14 +1,12 @@
 <p class="mb-4" style="color: green"><%= notice %></p>
 
 <div>
-  <%= link_to "Nouvel Émargement", new_presence_path, class:'btn btn-primary btn-lg float-end' %>
-  <h1 class="text-4xl font-bold mb-6">Émargements / Présences</h1>
+  <h1 class="text-4xl font-bold mb-8">Émargements / Présences</h1>
 </div>
 
-<div id="presences">
+<div id="presences" class="flex flex-wrap gap-4 justify-between px-12 mb-12">
   <% @presences.each do |presence| %>
     <%= render presence %>
-    <hr class="my-3">
   <% end %>
 </div>
 

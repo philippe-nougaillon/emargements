@@ -1,10 +1,10 @@
-<div id="<%= dom_id presence %>" class="flex gap-8">
+<div id="<%= dom_id presence %>" class="flex gap-8 mt-6">
   <div>
-    <p class="text-2xl"><%= presence.user.nom_prénom %></p>
+    <p class="text-2xl mb-4"><%= presence.user.nom_prénom %></p>
 
     <p>
       <strong>Assemblée :</strong>
-      <%= l presence.assemblee.début %>
+      <%= presence.assemblee.nom %>
     </p>
 
     <p>
