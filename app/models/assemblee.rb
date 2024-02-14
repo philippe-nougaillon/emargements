@@ -5,6 +5,10 @@ class Assemblee < ApplicationRecord
 
   scope :ordered, -> { order(début: :desc) }
 
+  def self.current
+    Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
+  end
+
   private
 
   def update_fin
