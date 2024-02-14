@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :users
   resources :presences, only: %i[ index new create edit update destroy ]
 
-  get 'admin/index'
+  namespace :admin do
+    get :index
+    get :signature
+    post :signature_do
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

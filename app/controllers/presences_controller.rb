@@ -28,7 +28,7 @@ class PresencesController < ApplicationController
   def new
     @presence = Presence.new
     @presence.assemblee = Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
-    @assemblee_futur = Assemblee.where("NOW() < assemblees.début").first
+    @assemblée_future = Assemblee.where("NOW() < assemblees.début").first
   end
 
   # GET /presences/1/edit
@@ -87,7 +87,7 @@ class PresencesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def presence_params
-      params.require(:presence).permit(:user_id, :signature)
+      params.require(:presence).permit(:signature)
     end
 
     def is_user_authorized

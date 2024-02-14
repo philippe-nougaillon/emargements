@@ -1,8 +1,10 @@
-<%= form_with(model: presence) do |form| %>
-  <% if presence.errors.any? %>
+<h1 class="text-4xl font-bold mb-6">Nouvel Émargement</h1>
+
+<%= form_tag({action: "signature_do", method: :post}) do %>
+  <% if @presence.errors.any? %>
     <div style="color: red">
       <ul>
-        <% presence.errors.each do |error| %>
+        <% @presence.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -11,33 +13,40 @@
 
   <p style="color: green" class="text-2xl notice font-bold mb-4"><%= notice %></p>
 
-  <% if presence.assemblee %>
-    <% if p = presence.assemblee.presences.where(user_id: current_user.id).first %>
-      <p>Vous avez signé il y a <%= time_ago_in_words p.created_at %></p>
-    <% else %>
-      <div>
-        <%= form.label :signature, style: "display: block" %>
-        <%= form.text_field :signature, style:'display: none' %>
+  <% if @presence.assemblee %>
+    <div class="mb-4">
+      <%= label_tag :user_id, "Utilisateur", style: "display: block" %>
+      <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :id, :nom_prénom) %>
+    </div>
+    <div>
+      <%= label_tag :signature, "Signature", style: "display: block" %>
+      <%= text_field_tag :signature, "", style:'display: none' %>
+    </div>
+
+    <div id="signature-container">
+      <div class="wrapper">
+        <canvas id="signature-pad" class="signature-pad border border-slate-300" width=700 height=350></canvas>
       </div>
 
-      <div id="signature">
-        <div class="wrapper">
-          <canvas id="signature-pad" class="signature-pad border border-slate-300" width=700 height=350></canvas>
-        </div>
+      <% if ((@presence.assemblee.début + @presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
+        <p class="mt-2">
+          Temps restant : 
+          <%= time_ago_in_words(@presence.assemblee.début + @presence.assemblee.durée.to_f.hours)  %>
+        </p>
+      <% end %>
 
-        <% if ((presence.assemblee.début + presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
-          <p class="mt-2">
-            Temps restant : 
-            <%= time_ago_in_words(presence.assemblee.début + presence.assemblee.durée.to_f.hours)  %>
-          </p>
-        <% end %>
-
-        <div class="flex gap-4 mt-4">
-          <button id="save" class="btn btn-success btn-lg">Enregistrer</button>
-          <a id="clear" class="btn btn-lg">Effacer</a>
-        </div>
+      <div class="flex gap-4 mt-4">
+        <button id="save" class="btn btn-success btn-lg">Enregistrer</button>
+        <a id="clear" class="btn btn-lg">Effacer</a>
       </div>
-    <% end %>
+    </div>
+
+    <div class="mt-8">
+      <% @presence.assemblee.presences.order(created_at: :desc).each do |p| %>
+        Il y a <%= time_ago_in_words p.created_at%>, <%= p.user.nom_prénom %> a signé
+        <br>
+      <% end %>
+    </div>
   <% elsif @assemblée_future %>
     <p>
       La prochaine assemblée commencera le <%= l(@assemblée_future.début, format: :long) %>
@@ -51,9 +60,12 @@
 
 <script>
   var signaturePad = new SignaturePad(document.getElementById('signature-pad'));
-  var signatureField = document.getElementById('presence_signature');
+  var signatureField = document.getElementById('signature');
   var saveButton = document.getElementById('save');
   var cancelButton = document.getElementById('clear');
+
+  console.log(signaturePad);
+  console.log(signatureField);
 
   saveButton.addEventListener('click', function (event) {
     if (signaturePad.isEmpty()){
@@ -69,7 +81,7 @@
 
   // slimselect
   new SlimSelect({
-    select: '#presence_user_id',
+    select: '#user_id',
     settings: {
       searchPlaceholder: 'Recherche',
       searchText: 'Pas de résultat',

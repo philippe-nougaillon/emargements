@@ -33,4 +33,12 @@ class PresencePolicy
   def destroy?
     index?
   end
+
+  def signature_admin?
+    user && user.admin?
+  end
+
+  def signature_admin_do?
+    signature_admin?
+  end
 end
