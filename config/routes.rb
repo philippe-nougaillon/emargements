@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  devise_scope :user do
+    authenticated :user do
+      root 'presences#new', as: :authenticated_root
+    end
+  
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+
   resources :assemblees
   resources :users
   resources :presences, only: %i[ index new create edit update destroy ]

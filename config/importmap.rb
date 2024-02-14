@@ -13,5 +13,8 @@ pin "@babel/runtime/helpers/esm/createSuper", to: "https://ga.jspm.io/npm:@babel
 pin "@babel/runtime/helpers/esm/defineProperty", to: "https://ga.jspm.io/npm:@babel/runtime@7.23.9/helpers/esm/defineProperty.js"
 pin "@babel/runtime/helpers/esm/inherits", to: "https://ga.jspm.io/npm:@babel/runtime@7.23.9/helpers/esm/inherits.js"
 pin "@babel/runtime/helpers/esm/typeof", to: "https://ga.jspm.io/npm:@babel/runtime@7.23.9/helpers/esm/typeof.js"
-pin "@hotwired/stimulus", to: "https://ga.jspm.io/npm:@hotwired/stimulus@3.2.2/dist/stimulus.js"
+pin "@hotwired/stimulus", to: "@hotwired--stimulus.js" # @3.2.2
 pin "date-fns", to: "https://ga.jspm.io/npm:date-fns@2.30.0/esm/index.js"
+pin "stimulus-notification" # @2.2.0
+pin "hotkeys-js" # @3.13.7
+pin "stimulus-use" # @0.51.3
