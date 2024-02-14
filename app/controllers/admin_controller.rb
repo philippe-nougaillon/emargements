@@ -23,7 +23,7 @@ class AdminController < ApplicationController
       else
         format.html do
           @users_not_signed = [] 
-          render :new, status: :unprocessable_entity
+          render :signature, status: :unprocessable_entity
         end
         format.json { render json: @presence.errors, status: :unprocessable_entity }
       end

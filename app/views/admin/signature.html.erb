@@ -14,38 +14,46 @@
   <p style="color: green" class="text-2xl notice font-bold mb-4"><%= notice %></p>
 
   <% if @presence.assemblee %>
-    <div class="mb-4">
-      <%= label_tag :user_id, "Utilisateur", style: "display: block" %>
-      <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :id, :nom_prénom) %>
-    </div>
-    <div>
-      <%= label_tag :signature, "Signature", style: "display: block" %>
-      <%= text_field_tag :signature, "", style:'display: none' %>
-    </div>
+    <div class="flex flex-wrap gap-24">
+      <div class="flex flex-col">
+        <div class="mb-4">
+          <%= label_tag :user_id, "Utilisateur", style: "display: block" %>
+          <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :id, :nom_prénom) %>
+        </div>
+        <div>
+          <div>
+            <%= label_tag :signature, "Signature", style: "display: block" %>
+            <%= text_field_tag :signature, "", style:'display: none' %>
+          </div>
 
-    <div id="signature-container">
-      <div class="wrapper">
-        <canvas id="signature-pad" class="signature-pad border border-slate-300" width=700 height=350></canvas>
+          <div id="signature-container">
+            <div class="wrapper">
+              <canvas id="signature-pad" class="signature-pad border border-slate-300" width=700 height=350></canvas>
+            </div>
+
+            <% if ((@presence.assemblee.début + @presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
+              <p class="mt-2">
+                Temps restant : 
+                <%= time_ago_in_words(@presence.assemblee.début + @presence.assemblee.durée.to_f.hours)  %>
+              </p>
+            <% end %>
+
+            <div class="flex gap-4 mt-4">
+              <button id="save" class="btn btn-success btn-lg">Enregistrer</button>
+              <a id="clear" class="btn btn-lg">Effacer</a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <% if ((@presence.assemblee.début + @presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
-        <p class="mt-2">
-          Temps restant : 
-          <%= time_ago_in_words(@presence.assemblee.début + @presence.assemblee.durée.to_f.hours)  %>
-        </p>
-      <% end %>
-
-      <div class="flex gap-4 mt-4">
-        <button id="save" class="btn btn-success btn-lg">Enregistrer</button>
-        <a id="clear" class="btn btn-lg">Effacer</a>
+      <div>
+        <h2 class="text-2xl font-bold mb-4"><%= @presence.assemblee.nom %></h2>
+        <h3 class="text-xl font-bold mb-4">Derniers émargements</h3>
+        <% @presence.assemblee.presences.order(created_at: :desc).each do |p| %>
+          <%= p.user.nom_prénom %> a signé il y a <%= time_ago_in_words p.created_at%>
+          <br>
+        <% end %>
       </div>
-    </div>
-
-    <div class="mt-8">
-      <% @presence.assemblee.presences.order(created_at: :desc).each do |p| %>
-        Il y a <%= time_ago_in_words p.created_at%>, <%= p.user.nom_prénom %> a signé
-        <br>
-      <% end %>
     </div>
   <% elsif @assemblée_future %>
     <p>
