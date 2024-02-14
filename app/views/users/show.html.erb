@@ -3,7 +3,7 @@
 <%= render @user %>
 
 <div>
-  <%= link_to "Modifier", edit_user_path(@user), class:'btn btn-success btn-sm' %> |
+  <%= link_to "Modifier", edit_user_path(@user), class:'btn btn-primary btn-sm' %> |
   <%= link_to "Retour", users_path, class:'btn btn-sm' %>
   <%= button_to "Supprimer", @user, method: :delete, class:'btn btn-error btn-sm' %>
 </div>
