@@ -27,8 +27,8 @@
 
         <% if ((presence.assemblee.début + presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
           <p class="mt-2">
-            Temps restant : 
-            <%= time_ago_in_words(presence.assemblee.début + presence.assemblee.durée.to_f.hours)  %>
+            Temps restant :
+            <time data-controller="timeago" data-timeago-datetime-value="<%= presence.assemblee.fin %>" data-timeago-refresh-interval-value="60000"></time>.
           </p>
         <% end %>
 
