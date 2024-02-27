@@ -1,16 +1,17 @@
-<div id="<%= dom_id presence %>" class="flex gap-8 mt-6">
+<div id="<%= dom_id presence %>" class="flex gap-8 mt-4">
   <div>
-    <p class="text-2xl mb-4"><%= presence.user.nom_prénom %></p>
+    <p class="text-2xl"><%= presence.user.nom_prénom %></p>
 
-    <p>
-      <strong>Assemblée :</strong>
-      <%= presence.assemblee.nom %>
+    <p class="text-xl">
+      <%= presence.assemblee.nom.humanize %>
     </p>
 
-    <p>
-      <strong>Signature le :</strong>
-      <%= l presence.heure %>
+    <p class="mt-4">
+      Le
+      <%= l presence.heure, format: :long %>
+      <br>
+      (Il y a <%= time_ago_in_words presence.heure %>)
     </p>
   </div>
-  <img src=<%= presence.signature %> style="border: 1px #CCC solid; padding: 10px; height:100px">
+  <img src=<%= presence.signature %> style="border: 1px #CCC solid; padding: 10px; height:125px">
 </div>

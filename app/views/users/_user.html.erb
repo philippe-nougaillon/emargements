@@ -1,10 +1,13 @@
-<div id="<%= dom_id user %>" class="mt-6 pb-6 border-b border-gray-200">
+<div id="<%= dom_id user %>" class="mt-4 pb-4 border-b border-gray-200">
   <p class="text-2xl">
     <%= user.nom %> <%= user.prénom %>
   </p>
+  <p class="my-4">
+    <%= user.email %>
+  </p>
   <div class="flex gap-4 mt-2">
-    <%= link_to "Voir", user_path(user), class:'btn btn-primary btn-sm' %>
-    <%= link_to "Modifier", edit_user_path(user), class:'btn btn-sm' %>
-    <%= button_to "Supprimer", user, method: :delete, class:'btn btn-error btn-sm' %>
+    <%= link_to "Voir", user_path(user), class:'btn btn-info btn-outline btn-sm' %>
+    <%= link_to "Modifier", edit_user_path(user), class:'btn btn-primary btn-outline btn-sm' %>
+    <%= button_to "[X]", user, method: :delete, class:'btn btn-error btn-outline btn-sm' %>
   </div>
 </div>

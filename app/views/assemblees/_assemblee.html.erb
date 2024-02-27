@@ -1,9 +1,10 @@
-<div id="<%= dom_id assemblee %>" class="mt-8 pb-8 border-b border-gray-200">
+<div id="<%= dom_id assemblee %>" class="mt-4 pb-4 border-b border-gray-200">
   <p class="text-2xl font-bold">
-    <%= assemblee.nom %>
+    <%= assemblee.nom.humanize %>
   </p>
-  <p>
+  <p class="mt-4">
     <%= l(assemblee.début, format: :long) %>
+    <%= "(dans #{time_ago_in_words assemblee.début})" if assemblee.début > DateTime.now %>
   </p>
 
   <p>
@@ -11,15 +12,15 @@
   </p>
 
   <p class="my-4">
-    <strong>Nbr Signatures :</strong>
+    Signatures :
     <%= assemblee.presences.count %> / <%= User.count %>
   </p>
 
   <div class="flex gap-4 mt-2">
-    <%= link_to_if assemblee.presences.any? , "Voir les émargements", presences_path(assemblee_id: assemblee.id), class: 'btn btn-info btn-sm' %>
-    <%= link_to "Modifier", edit_assemblee_path(assemblee), class:'btn btn-primary btn-sm' %>
-    <%= link_to "Générer les convocations (PDF)", assemblee_path(assemblee, format: :pdf), class:'btn btn-error btn-outline btn-sm' %>
-    <%= button_to "Supprimer", assemblee, method: :delete, class:'btn btn-error btn-sm' %>
+    <%= link_to "Modifier", edit_assemblee_path(assemblee), class:'btn btn-primary btn-outline btn-sm' %>
+    <%= link_to "Voir les émargements", presences_path(assemblee_id: assemblee.id), class: 'btn btn-info btn-outline btn-sm' %>
+    <%= link_to "Générer les convocations", assemblee_path(assemblee, format: :pdf), class:'btn btn-success btn-outline btn-sm' %>
+    <%= button_to "[X]", assemblee, method: :delete, class:'btn btn-error btn-outline btn-sm' %>
   </div>
 
 </div>

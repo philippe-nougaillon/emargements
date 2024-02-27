@@ -28,7 +28,7 @@
   </p>
 <% end %>
 <div class="flex flex-wrap gap-4">
-  <%= link_to "Modifier", edit_user_path(@user), class:'btn btn-primary btn-sm' %>
-  <%= link_to "Retour", users_path, class:'btn btn-sm' %>
-  <%= button_to "Supprimer", @user, method: :delete, class:'btn btn-error btn-sm' %>
+  <%= link_to "Modifier", edit_user_path(@user), class:'btn btn-primary btn-outline btn-sm' %>
+  <%= link_to "Retour", users_path, class:'btn btn-outline btn-sm' %>
+  <%= button_to "[X]", @user, method: :delete, class:'btn btn-error btn-outline btn-sm' %>
 </div>
