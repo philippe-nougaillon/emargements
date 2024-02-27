@@ -1,0 +1,5 @@
+<div class="timeline-<%= start ? 'start' : 'end' %> timeline-box">
+  <b><%= link_to assemblee.nom.humanize, assemblee_path(assemblee) %></b>
+  <br>
+  <%= l assemblee.try(:début), format: :short %>
+</div>

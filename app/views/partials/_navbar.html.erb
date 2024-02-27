@@ -4,14 +4,14 @@
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1 gap-4">
-      <% if user_signed_in? %>
-        <li>
-          <p class="!p-1.5"><%= current_user.email %></p>
-        </li>
-      <% end %>
       <% if current_user.admin? %>
         <li>
           <%= link_to "Administration", admin_index_path, class: 'btn btn-sm' %>
+        </li>
+      <% end %>
+      <% if user_signed_in? %>
+        <li>
+          <p class="!p-1.5"><%= current_user.email %></p>
         </li>
       <% end %>
       <li>
