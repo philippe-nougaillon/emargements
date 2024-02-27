@@ -1,6 +1,6 @@
 <div class="navbar bg-white shadow sticky top-0">
   <div class="flex-1">
-    <%= link_to_if current_user.admin?, "Émargements", admin_index_path, class: 'btn btn-ghost text-xl' %>
+    <%= link_to "Émargements", current_user.admin? ? admin_index_path : new_presence_path, class: 'btn btn-ghost btn-lg' %>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1 gap-4">
