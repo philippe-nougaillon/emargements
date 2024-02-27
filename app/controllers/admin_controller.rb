@@ -2,6 +2,7 @@ class AdminController < ApplicationController
 
   def index
     authorize :admin
+    @assemblees = Assemblee.order(:début).where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today - 1.month, Date.today + 2.months)
   end
 
   def signature

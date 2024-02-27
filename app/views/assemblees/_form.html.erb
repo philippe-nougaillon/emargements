@@ -13,12 +13,12 @@
 
   <div>
     <%= form.label :nom, style: "display: block" %>
-    <%= form.text_field :nom, class: 'input input-bordered input-sm w-full' %>
+    <%= form.text_field :nom, class: 'input input-bordered input-sm w-full', required: true %>
   </div>
 
   <div class="mt-4">
     <%= form.label :début, style: "display: block" %>
-    <%= form.datetime_field :début, class: 'input input-bordered input-sm w-full' %>
+    <%= form.datetime_field :début, class: 'input input-bordered input-sm w-full', required: true %>
   </div>
 
   <div class="mt-4">
