@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   acts_as_taggable_on :tags
 
+  has_many :presences
+
   normalizes :nom, with: -> nom { nom.upcase.strip }
   normalizes :prénom, with: -> prénom { prénom.humanize.strip }
 

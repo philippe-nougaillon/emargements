@@ -6,6 +6,28 @@ class PresencesController < ApplicationController
   def index
     @presences = Presence.ordered
 
+    users = User.all
+    @tags = User.all.tag_counts_on(:tags).order(:taggings_count).reverse
+
+    unless params[:tag].blank? 
+      if params[:tag] != session[:tag]
+        users = users.tagged_with(params[:tag])
+        session[:tag] = params[:tag]
+      else
+        session[:tag] = params[:tag] = nil
+      end
+    end
+
+    unless params[:search].blank?
+      users = users.where("nom ILIKE :search OR prénom ILIKE :search OR email ILIKE :search", {search: "%#{params[:search]}%"})
+    end
+
+    users_presences_ids = []
+    users.each do |user|
+      users_presences_ids << user.presences.pluck(:id)
+    end
+    @presences = @presences.where(id: users_presences_ids.flatten)
+
     if params[:assemblee_id].present?
       @presences = @presences.where(assemblee_id: params[:assemblee_id])
     end
