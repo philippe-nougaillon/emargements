@@ -11,7 +11,7 @@
     <div>
       <% tag_cloud(@tags, %w(badge-sm badge badge-md badge-lg)) do |tag, css_class| %>
           <%= link_to url_for(params.permit!.merge(tag: tag.name)), data: { turbo_frame: "results_frame" }, class: "inline #{tag.name == params[:tag] ? "" : "" }" do %>
-              <span class="inline-block align-bottom badge <%= css_class %> <%= tag.name == params[:tag] ? "badge-outline" : "badge-warning" %>">
+              <span class="inline-block align-bottom badge <%= css_class %> <%= tag.name == params[:tag] ? "badge-warning" : "badge-outline" %>">
                   <span class=""><%= tag.name.humanize %></span>
                   <% if params[:tag] == tag.name %>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
