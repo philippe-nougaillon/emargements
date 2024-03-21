@@ -1,6 +1,9 @@
 <div class="navbar bg-white shadow sticky top-0">
   <div class="flex-1">
-    <%= link_to "Émargements", current_user.admin? ? admin_index_path : new_presence_path, class: 'font-bold pl-2 text-primary text-xl' %>
+    <span class="material-symbols-outlined !text-4xl">
+      history_edu
+    </span>
+    <%= link_to "Émargements", current_user.admin? ? admin_index_path : new_presence_path, class: 'font-bold pl-2 text-primary text-2xl' %>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1 gap-4">
