@@ -94,6 +94,14 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-  
+
+  ActionMailer::Base.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    :api_key => ENV['MAILGUN_API_KEY'],
+    :domain => ENV['MAILGUN_DOMAIN'],
+    :api_host => 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
+  }
+
   config.action_mailer.default_url_options = { host: 'emargements-ceser.philnoug.com', protocol: 'https' }
+  config.action_mailer.asset_host = 'https://signature-pad-81cc27dbe0cf.herokuapp.com/'
 end
