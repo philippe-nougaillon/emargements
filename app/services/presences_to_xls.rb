@@ -14,7 +14,7 @@ class PresencesToXls < ApplicationService
       sheet = book.create_worksheet name: @presences.name
       bold = Spreadsheet::Format.new :weight => :bold, :size => 11
 
-      headers = %w{nom_prénom id_assemblée date_assemblée date_signature}
+      headers = %w{nom_utilisateur prénom_utilisateur tags_utilisateur id_assemblée date_assemblée nom_assemblée date_signature}
 
       sheet.row(0).concat headers
       sheet.row(0).default_format = bold
@@ -23,9 +23,12 @@ class PresencesToXls < ApplicationService
 
       @presences.each do |presence|
         fields_to_export = [
-          presence.user.nom_prénom,
+          presence.user.nom,
+          presence.user.prénom,
+          presence.user.tag_list.join(', '),
           presence.assemblee.id,
           I18n.l(presence.assemblee.début),
+          presence.assemblee.nom,
           I18n.l(presence.created_at)
         ]
         sheet.row(index).replace fields_to_export
