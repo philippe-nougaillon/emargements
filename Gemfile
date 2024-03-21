@@ -78,3 +78,5 @@ gem "matrix", "~> 0.4.2"
 gem "acts-as-taggable-on", "~> 10.0"
 
 gem "mailgun-ruby", "~> 1.2"
+
+gem "dotenv-rails", "~> 3.1"

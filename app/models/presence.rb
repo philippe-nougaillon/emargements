@@ -4,6 +4,8 @@ class Presence < ApplicationRecord
 
   validate :check_heure
 
+  encrypts :signature
+
   scope :ordered, -> { order(heure: :desc) }
 
   def check_heure
