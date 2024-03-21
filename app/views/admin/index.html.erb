@@ -17,11 +17,11 @@
 
 <div class="flex flex-col justify-center gap-8 mt-24">
   <div class="flex flex-wrap gap-8">
-    <%= link_to "Assemblées", assemblees_path, class: 'btn btn-lg flex-1' %>
-    <%= link_to "Émargements", presences_path, class: 'btn btn-lg flex-1' %>
+    <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+    <%= link_to "ÉMARGEMENTS", presences_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
   </div>
   <div class="flex flex-wrap gap-8">
-    <%= link_to "Utilisateurs", users_path, class: 'btn btn-lg flex-1' %>
-    <%= link_to "Émargement collectif '#{ Assemblee.current.try(:nom) }'".upcase, admin_signature_path, class: 'btn btn-primary btn-outline btn-lg flex-1', disabled: !Assemblee.current %>
+    <%= link_to "UTILISATEURS", users_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+    <%= link_to "Émargement collectif #{ "'#{Assemblee.current.nom}'" if Assemblee.current }".upcase, admin_signature_path, class: 'btn btn-success btn-outline btn-lg flex-1' %>
   </div>
 </div>

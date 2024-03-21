@@ -9,6 +9,7 @@ class User < ApplicationRecord
           :trackable,
           :timeoutable
 
+  acts_as_taggable_on :tags
 
   normalizes :nom, with: -> nom { nom.upcase.strip }
   normalizes :prénom, with: -> prénom { prénom.humanize.strip }

@@ -1,12 +1,12 @@
 <div class="navbar bg-white shadow sticky top-0">
   <div class="flex-1">
-    <%= link_to "Émargements", current_user.admin? ? admin_index_path : new_presence_path, class: 'btn btn-ghost btn-lg' %>
+    <%= link_to "Émargements", current_user.admin? ? admin_index_path : new_presence_path, class: 'font-bold pl-2 text-primary text-xl' %>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1 gap-4">
       <% if current_user.admin? %>
         <li>
-          <%= link_to "Administration", admin_index_path, class: 'btn btn-sm' %>
+          <%= link_to "Administration", admin_index_path, class: 'btn btn-outline btn-primary btn-sm' %>
         </li>
       <% end %>
       <% if user_signed_in? %>

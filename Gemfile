@@ -73,3 +73,5 @@ gem "tailwindcss-rails", "~> 2.3"
 gem "prawn", "~> 2.4"
 
 gem "matrix", "~> 0.4.2"
+
+gem "acts-as-taggable-on", "~> 10.0"

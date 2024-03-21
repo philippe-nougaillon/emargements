@@ -5,6 +5,21 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.ordered
+
+    @tags = @users.tag_counts_on(:tags).order(:taggings_count).reverse
+
+    unless params[:tag].blank? 
+      if params[:tag] != session[:tag]
+        @users = User.tagged_with(params[:tag])
+        session[:tag] = params[:tag]
+      else
+        session[:tag] = params[:tag] = nil
+      end
+    end
+
+    unless params[:search].blank?
+      @users = @users.where("nom ILIKE :search OR prénom ILIKE :search OR email ILIKE :search", {search: "%#{params[:search]}%"})
+    end
   end
 
   # GET /users/1 or /users/1.json
@@ -66,7 +81,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:nom, :prénom, :email, :adresse)
+      params.require(:user).permit(:nom, :prénom, :email, :adresse, :tag_list)
     end
 
     def is_user_authorized
