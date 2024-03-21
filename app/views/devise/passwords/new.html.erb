@@ -3,13 +3,13 @@
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="field">
+    <div class="field mb-4">
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'input input-sm input-bordered w-full' %>
     </div>
 
     <div class="actions">
-      <%= f.submit "Changer de mot de passe", class: 'btn btn-lg w-full my-4' %>
+      <%= f.submit "Changer de mot de passe", class: 'btn btn-outline btn-primary btn-lg w-full my-4' %>
     </div>
   <% end %>
 

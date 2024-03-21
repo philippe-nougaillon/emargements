@@ -21,9 +21,7 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <%= render "partials/navbar" %>
-    <% end %>
+    <%= render "partials/navbar" %>
     <main class="p-4">
       <%= render "partials/notification" %>
       <%= yield %>

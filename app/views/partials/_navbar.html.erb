@@ -3,27 +3,27 @@
     <span class="material-symbols-outlined !text-4xl">
       history_edu
     </span>
-    <%= link_to "Émargements", current_user.admin? ? admin_index_path : new_presence_path, class: 'font-bold pl-2 text-primary text-2xl' %>
+    <%= link_to "Émargements", user_signed_in? && current_user.admin? ? admin_index_path : new_presence_path, class: 'font-bold pl-2 text-primary text-2xl' %>
   </div>
-  <div class="flex-none">
-    <ul class="menu menu-horizontal px-1 gap-4">
-      <% if current_user.admin? %>
-        <li>
-          <%= link_to "Administration", admin_index_path, class: 'btn btn-outline btn-primary btn-sm' %>
-        </li>
-      <% end %>
-      <% if user_signed_in? %>
+  <% if user_signed_in? %>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1 gap-4">
+        <% if current_user.admin? %>
+          <li>
+            <%= link_to "Administration", admin_index_path, class: 'btn btn-outline btn-primary btn-sm' %>
+          </li>
+        <% end %>
         <li>
           <p class="!p-1.5"><%= current_user.email %></p>
         </li>
-      <% end %>
-      <li>
-        <%= button_to destroy_user_session_path, method: :delete, title: "Fermer la session de #{current_user.email}", form_class: '!p-0', class:'h-full' do %>
-          <span class="btn btn-ghost btn-sm font-normal">
-            Déconnexion
-          </span>
-        <% end %> 
-      </li>
-    </ul>
-  </div>
+        <li>
+          <%= button_to destroy_user_session_path, method: :delete, title: "Fermer la session de #{current_user.email}", form_class: '!p-0', class:'h-full' do %>
+            <span class="btn btn-ghost btn-sm font-normal">
+              Déconnexion
+            </span>
+          <% end %> 
+        </li>
+      </ul>
+    </div>
+  <% end %>
 </div>

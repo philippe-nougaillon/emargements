@@ -7,7 +7,7 @@
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'input input-sm input-bordered w-full' %>
     </div>
 
-    <div class="field">
+    <div class="field my-4">
       <%= f.label :password %><br />
       <%= f.password_field :password, autocomplete: "current-password", class:'input input-sm input-bordered w-full' %>
     </div>
@@ -20,7 +20,7 @@
     <% end %>
 
     <div class="actions">
-      <%= f.submit "Se connecter", class: 'btn btn-lg w-full my-4' %>
+      <%= f.submit "Se connecter", class: 'btn btn-outline btn-primary btn-lg w-full my-4' %>
     </div>
   <% end %>
 
