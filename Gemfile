@@ -70,7 +70,8 @@ gem "spreadsheet", "~> 1.3"
 
 gem "tailwindcss-rails", "~> 2.3"
 
-gem "prawn", "~> 2.4"
+gem "prawn-svg", "~> 0.34.2"
+gem "prawn", "~> 2.5"
 
 gem "matrix", "~> 0.4.2"
 

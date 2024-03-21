@@ -43,6 +43,16 @@ class PresencesController < ApplicationController
         filename = "Émargements.xls"
         send_data file_contents.string.force_encoding('binary'), filename: filename 
       end
+
+      format.pdf do
+        pdf = PresencePdf.new
+        pdf.rapport(@presences.joins(:user).reorder("users.nom"))
+
+        send_data pdf.render,
+            filename: "Présences.pdf",
+            type: 'application/pdf',
+            disposition: 'inline'
+      end
     end
   end
 
