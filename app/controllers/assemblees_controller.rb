@@ -28,6 +28,7 @@ class AssembleesController < ApplicationController
   # GET /assemblees/new
   def new
     @assemblee = Assemblee.new
+    @assemblee.durée = 2
   end
 
   # GET /assemblees/1/edit

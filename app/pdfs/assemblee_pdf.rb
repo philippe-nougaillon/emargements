@@ -9,6 +9,7 @@ class AssembleePdf
   def convocation(assemblee)
     User.ordered.each_with_index do |user, index|
       start_new_page unless index == 0
+      image "#{@image_path}/ceser.png", :width => 100, position: :center
       move_down @margin_down
       text "<b>CESER - Grand Est<b>", inline_format: true, size: 16
       text "1 Pl. Adrien Zeller"
@@ -54,9 +55,9 @@ class AssembleePdf
       #   text "Durée : 1h", align: :center
       # end
 
-      move_down @margin_down * 25
-      text "<u><a href='https://www.fluo.eu/'>Voir les itinéraires avec Fluo</a></u>", align: :center, inline_format: true
-      image "#{@image_path}/fluo.png", :width => 100, position: :center
+      # move_down @margin_down * 25
+      # text "<u><a href='https://www.fluo.eu/'>Voir les itinéraires avec Fluo</a></u>", align: :center, inline_format: true
+      # image "#{@image_path}/fluo.png", :width => 100, position: :center
     end
   end
 end

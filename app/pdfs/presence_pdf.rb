@@ -8,7 +8,7 @@ class PresencePdf
 
   def rapport(presences)
     text "Feuille d'émargement", size: 36, align: :center
-    text "#{presences.first.assemblee.nom}", size: 36, align: :center
+    text "#{presences.first.assemblee.nom if presences.any?}", size: 36, align: :center
     move_down @margin_down
     presences.each_with_index do |presence, index|
       start_new_page if (index%4 == 3)
