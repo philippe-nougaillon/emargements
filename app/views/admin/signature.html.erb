@@ -1,4 +1,4 @@
-<h1 class="text-4xl font-bold mb-6">ÉMARGEMENT <%= @presence.assemblee if @presence.assemblee %></h1>
+<h1 class="text-4xl font-bold mb-6">ÉMARGEMENT <%= @presence.assemblee.nom if @presence.assemblee %></h1>
 
 <%= form_tag({action: "signature_do", method: :post}) do %>
   <% if @presence.errors.any? %>
