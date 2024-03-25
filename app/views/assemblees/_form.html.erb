@@ -17,6 +17,11 @@
   </div>
 
   <div class="mt-4">
+    <%= form.label :tag_list, "Groupes", style: "display: block" %>
+    <%= form.text_field :tag_list, value: assemblee.tag_list.join(', '), class: 'input input-bordered input-sm w-full' %>
+  </div>
+
+  <div class="mt-4">
     <%= form.label :début, style: "display: block" %>
     <%= form.datetime_field :début, class: 'input input-bordered input-sm w-full', required: true %>
   </div>

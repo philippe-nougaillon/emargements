@@ -2,6 +2,11 @@
   <p class="text-2xl font-bold">
     <%= assemblee.nom.humanize %>
   </p>
+  <p>
+    <% assemblee.tags.each do |tag| %>
+      <%= link_to(tag.name.humanize, assemblees_path(tag:tag.name), class: 'badge badge-ghost') %>
+    <% end %>
+  </p>
   <p class="mt-4">
     <%= l(assemblee.début, format: :long) %>
     <%= "(dans #{time_ago_in_words assemblee.début})" if assemblee.début > DateTime.now %>
@@ -13,7 +18,7 @@
 
   <p class="my-4">
     Signatures :
-    <%= assemblee.presences.count %> / <%= User.count %>
+    <%= assemblee.presences.count %> / <%= assemblee.related_users.count %>
   </p>
 
   <div class="flex gap-4 mt-2">
