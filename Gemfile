@@ -80,3 +80,5 @@ gem "acts-as-taggable-on", "~> 10.0"
 gem "mailgun-ruby", "~> 1.2"
 
 gem "dotenv-rails", "~> 3.1"
+
+gem "friendly_id", "~> 5.5"

@@ -1,5 +1,5 @@
 class AssembleesController < ApplicationController
-  before_action :set_assemblee, only: %i[ show edit update destroy ]
+  before_action :set_assemblee, only: %i[ show edit update destroy commencer ]
   before_action :is_user_authorized
 
   # GET /assemblees or /assemblees.json
@@ -73,10 +73,15 @@ class AssembleesController < ApplicationController
     end
   end
 
+  def commencer
+    AssembleeMailer.lien_assemblee(@assemblee).deliver_now
+    redirect_to request.referrer, notice: "Lien de signature envoyée au CODIR"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_assemblee
-      @assemblee = Assemblee.find(params[:id])
+      @assemblee = Assemblee.find_by(slug: params[:id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -33,4 +33,8 @@ class AssembleePolicy
   def destroy?
     index?
   end
+
+  def commencer?
+    index?
+  end
 end

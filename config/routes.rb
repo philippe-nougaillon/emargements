@@ -11,7 +11,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :assemblees
+  resources :assemblees do
+    member do
+      get :commencer
+    end
+  end
   resources :users
   resources :presences, only: %i[ index new create edit update destroy ]
 

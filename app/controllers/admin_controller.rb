@@ -1,13 +1,14 @@
 class AdminController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[signature]
+  before_action :is_user_authorized, except: %i[signature]
 
   def index
-    authorize :admin
     @assemblees = Assemblee.order(:début).where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today - 1.month, Date.today + 2.months)
   end
 
   def signature
     @presence = Presence.new
-    @presence.assemblee = Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
+    @presence.assemblee = Assemblee.find_by(slug: params[:assemblee_id])
     @assemblée_future = Assemblee.where("NOW() < assemblees.début").first
     @users_not_signed = User.where.not(id: Presence.where(assemblee_id: @presence.assemblee_id).pluck(:user_id)).ordered
   end
@@ -29,5 +30,11 @@ class AdminController < ApplicationController
         format.json { render json: @presence.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  private
+
+  def is_user_authorized
+    authorize :admin
   end
 end

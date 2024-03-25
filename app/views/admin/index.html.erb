@@ -20,7 +20,4 @@
     <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
     <%= link_to "UTILISATEURS", users_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
   </div>
-  <div class="flex flex-wrap gap-8">
-    <%= link_to "Émargement collectif #{ "'#{Assemblee.current.nom}'" if Assemblee.current }".upcase, admin_signature_path, class: 'btn btn-success btn-outline btn-lg flex-1', disabled: !Assemblee.current %>
-  </div>
 </div>
