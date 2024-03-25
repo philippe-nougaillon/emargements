@@ -19,9 +19,11 @@
   <div class="flex gap-4 mt-2">
     <%= link_to "Modifier", edit_assemblee_path(assemblee), class:'btn btn-primary btn-outline btn-sm' %>
     <%= link_to "Générer les convocations", assemblee_path(assemblee, format: :pdf), class:'btn btn-success btn-outline btn-sm', target: "_blank" %>
+    <% if assemblee.fin > DateTime.now %>
+      <%= link_to "Envoyer le lien au gestionnaire", commencer_assemblee_path(assemblee), class: 'btn btn-warning btn-outline btn-sm', title: "Envoyer au gestionnaire un mail contenant le lien public vers la feuille d'émargement des présences" %>
+    <% end %>
     <%= link_to "Voir les émargements", presences_path(assemblee_id: assemblee.id), class: 'btn btn-info btn-outline btn-sm' %>
-    <%= link_to "Commencer", commencer_assemblee_path(assemblee), class: 'btn btn-warning btn-outline btn-sm' %>
-    <%= button_to "[X]", assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ?" }, class:'btn btn-error btn-outline btn-sm', disabled: assemblee.presences.any? %>
+    <%= button_to "[X]", assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures qui y sont liés s'il y en a" }, class:'btn btn-error btn-outline btn-sm' %>
   </div>
 
 </div>

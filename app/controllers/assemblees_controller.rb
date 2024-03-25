@@ -75,7 +75,7 @@ class AssembleesController < ApplicationController
 
   def commencer
     AssembleeMailer.lien_assemblee(@assemblee).deliver_now
-    redirect_to request.referrer, notice: "Lien de signature envoyée au CODIR"
+    redirect_to request.referrer, notice: "Lien de signature envoyée au gestionnaire."
   end
 
   private
@@ -86,7 +86,7 @@ class AssembleesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def assemblee_params
-      params.require(:assemblee).permit(:nom, :début, :durée, :adresse)
+      params.require(:assemblee).permit(:nom, :début, :durée, :adresse, :user_id)
     end
 
     def is_user_authorized

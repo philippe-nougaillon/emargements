@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_25_130058) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_25_140118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,7 +23,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_130058) do
     t.string "nom"
     t.string "adresse"
     t.string "slug"
+    t.bigint "user_id", null: false
     t.index ["slug"], name: "index_assemblees_on_slug", unique: true
+    t.index ["user_id"], name: "index_assemblees_on_user_id"
   end
 
   create_table "presences", force: :cascade do |t|
@@ -89,6 +91,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_130058) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "assemblees", "users"
   add_foreign_key "presences", "assemblees"
   add_foreign_key "presences", "users"
   add_foreign_key "taggings", "tags"

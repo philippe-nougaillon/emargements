@@ -3,13 +3,13 @@
     <%= user.nom %> <%= user.prénom %>
   </p>
   <p>
-    <% tag_cloud(user.tags, ['badge-sm', '', 'badge-md', 'badge-lg']) do |tag, css_class| %>
-      <%= link_to(tag.name.humanize, users_path(tag:tag.name), class: 'badge badge-outline ' + css_class) %>
+    <% user.tags.each do |tag| %>
+      <%= link_to(tag.name.humanize, users_path(tag:tag.name), class: 'badge badge-ghost') %>
     <% end %>
   </p>
-  <div class="flex gap-4 mt-8">
+  <div class="flex gap-4 mt-6">
     <%= link_to "Voir", user_path(user), class:'btn btn-info btn-outline btn-sm' %>
     <%= link_to "Modifier", edit_user_path(user), class:'btn btn-primary btn-outline btn-sm' %>
-    <%= button_to "[X]", user, method: :delete, class:'btn btn-error btn-outline btn-sm', disabled: user.presences.any? %>
+    <%= button_to "[X]", user, method: :delete, data:{turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cet utilisateur ?"}, class:'btn btn-error btn-outline btn-sm', disabled: user.presences.any? %>
   </div>
 </div>

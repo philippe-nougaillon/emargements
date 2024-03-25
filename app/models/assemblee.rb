@@ -2,7 +2,8 @@ class Assemblee < ApplicationRecord
   extend FriendlyId
 	friendly_id :slug_candidates, use: :slugged
 
-  has_many :presences
+  has_many :presences, dependent: :destroy
+  belongs_to :user
 
   after_save :update_fin
 

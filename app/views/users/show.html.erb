@@ -1,8 +1,8 @@
 <p class="text-2xl">
   <%= @user.nom %> <%= @user.prénom %>
 </p>
-<% tag_cloud(@user.tags, ['badge-sm', '', 'badge-md', 'badge-lg']) do |tag, css_class| %>
-  <%= link_to(tag.name.humanize, users_path(tag:tag.name), class: 'badge badge-outline ' + css_class) %>
+<% @user.tags.each do |tag| %>
+  <%= link_to(tag.name.humanize, users_path(tag:tag.name), class: 'badge badge-ghost') %>
 <% end %>
 
 <p class="mt-4">

@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[signature]
-  before_action :is_user_authorized, except: %i[signature]
+  skip_before_action :authenticate_user!, only: %i[signature signature_do]
+  before_action :is_user_authorized, except: %i[signature signature_do]
 
   def index
     @assemblees = Assemblee.order(:début).where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today - 1.month, Date.today + 2.months)
@@ -15,7 +15,7 @@ class AdminController < ApplicationController
 
   def signature_do
     @presence = Presence.new(user_id: params[:user_id], signature: params[:signature])
-    @presence.assemblee = Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
+    @presence.assemblee = Assemblee.find_by(slug: params[:assemblee_id])
     @presence.heure = DateTime.now
 
     respond_to do |format|
