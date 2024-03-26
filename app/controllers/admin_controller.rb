@@ -8,9 +8,12 @@ class AdminController < ApplicationController
 
   def signature
     @presence = Presence.new
-    @presence.assemblee = Assemblee.find_by(slug: params[:assemblee_id])
-    @assemblée_future = Assemblee.where("NOW() < assemblees.début").first
-    @users_not_signed = User.where.not(id: Presence.where(assemblee_id: @presence.assemblee_id).pluck(:user_id)).ordered
+    if assemblee = Assemblee.find_by(slug: params[:assemblee_id])
+      @presence.assemblee = assemblee
+      @users_not_signed = User.where(id: @presence.assemblee.related_users).where.not(id: Presence.where(assemblee_id: @presence.assemblee_id).pluck(:user_id)).ordered
+    else 
+      redirect_to root_path, alert: "Problème avec l'uuid"
+    end
   end
 
   def signature_do
@@ -20,7 +23,7 @@ class AdminController < ApplicationController
 
     respond_to do |format|
       if @presence.save
-        format.html { redirect_to admin_signature_url, notice: "L'émargement de #{@presence.user.nom_prénom} a été créé avec succès." }
+        format.html { redirect_to admin_signature_url(assemblee_id: params[:assemblee_id]), notice: "L'émargement de #{@presence.user.nom_prénom} a été créé avec succès." }
         format.json { render :show, status: :created, location: @presence }
       else
         format.html do

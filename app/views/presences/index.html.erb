@@ -4,8 +4,8 @@
 <%= form_tag request.path, method: :get do %>
   <div class="flex items-end gap-4">
     <div class="w-1/6">
-      <%= label_tag :search, "Nom/Prénom/Email" %>
-      <%= text_field_tag :search, params[:search], include_blank:true, onchange:'this.form.submit()', class: 'input input-bordered input-sm w-full' %>
+      <%= label_tag :search, "Rechercher" %>
+      <%= text_field_tag :search, params[:search], include_blank:true, onchange:'this.form.submit()', class: 'input input-bordered input-sm w-full', placeholder: 'Nom/Prénom/Email' %>
     </div>
     <div>
       <% tag_cloud(@tags, %w(badge-sm badge badge-md badge-lg)) do |tag, css_class| %>

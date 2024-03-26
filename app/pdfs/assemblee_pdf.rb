@@ -7,7 +7,8 @@ class AssembleePdf
   end
 
   def convocation(assemblee)
-    User.ordered.each_with_index do |user, index|
+    users = User.where(id: assemblee.related_users)
+    users.ordered.each_with_index do |user, index|
       start_new_page unless index == 0
       image "#{@image_path}/ceser.png", :width => 150
       move_down @margin_down * 4

@@ -86,7 +86,7 @@ class AssembleesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def assemblee_params
-      params.require(:assemblee).permit(:nom, :début, :durée, :adresse, :user_id, :tag_list)
+      params.require(:assemblee).permit(:nom, :début, :durée, :adresse, :user_id, :tag_list, :automatique)
     end
 
     def is_user_authorized

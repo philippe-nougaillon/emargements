@@ -15,6 +15,10 @@ class Assemblee < ApplicationRecord
     Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
   end
 
+  def in_progress?
+    self.début < DateTime.now && self.fin > DateTime.now
+  end
+
   def related_users
     ids = []
     self.tags.each do |tag|

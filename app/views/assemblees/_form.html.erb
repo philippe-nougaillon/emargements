@@ -41,6 +41,11 @@
     <%= form.collection_select(:user_id, User.tagged_with("Gestionnaire"), :id, :nom_prénom, {include_blank: true, required: true}, class:"select select-bordered select-sm w-full") %>
   </div>
 
+  <div class="mt-4">
+    <%= form.check_box :automatique %>
+    <%= form.label :automatique, "Envoyer le lien au gestionnaire automatiquement à T-10minutes" %>
+  </div>
+
   <div>
     <%= form.submit class:'btn btn-primary btn-outline btn-sm mt-6' %>
   </div>
