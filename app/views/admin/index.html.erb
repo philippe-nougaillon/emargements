@@ -1,17 +1,21 @@
 <div class="overflow-x-auto">
   <div class="flex justify-center mt-12">
-    <ul class="timeline">
-      <% @assemblees.each_with_index do |assemblee, index| %>
-        <% past = (assemblee.début.to_date < Date.today) %>
-        <li>
-          <hr class="<%= 'bg-primary' if past || assemblee == Assemblee.current %>"/>
-          <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.even? %>
-          <div class="timeline-middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 <%= 'text-primary' if past || assemblee == Assemblee.current %>"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg></div>
-          <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.odd? %>
-          <hr class="<%= 'bg-primary' if past %>"/>
-        </li>
-      <% end %>
-    </ul>
+    <% if @assemblees.any? %>
+      <ul class="timeline">
+        <% @assemblees.each_with_index do |assemblee, index| %>
+          <% past = (assemblee.début.to_date < Date.today) %>
+          <li>
+            <hr class="<%= 'bg-primary' if past || assemblee == Assemblee.current %>"/>
+            <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.even? %>
+            <div class="timeline-middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 <%= 'text-primary' if past || assemblee == Assemblee.current %>"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg></div>
+            <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.odd? %>
+            <hr class="<%= 'bg-primary' if past %>"/>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <%= link_to "Nouvelle Assemblée", new_assemblee_path, class:'btn btn-primary btn-outline btn-lg float-end' %>
+    <% end %>
   </div>
 </div>
 
