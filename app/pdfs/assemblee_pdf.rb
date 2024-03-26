@@ -9,11 +9,7 @@ class AssembleePdf
   def convocation(assemblee)
     User.ordered.each_with_index do |user, index|
       start_new_page unless index == 0
-      image "#{@image_path}/ceser.png", :width => 100, position: :center
-      move_down @margin_down
-      text "<b>CESER - Grand Est<b>", inline_format: true, size: 16
-      text "1 Pl. Adrien Zeller"
-      text "67000 Strasbourg"
+      image "#{@image_path}/ceser.png", :width => 150
       move_down @margin_down * 4
       text "<b>CONVOCATION</b>", inline_format: true, size: 16, align: :center
       move_down @margin_down * 4

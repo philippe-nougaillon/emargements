@@ -31,4 +31,8 @@
     <%= button_to "[X]", assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures qui y sont liés s'il y en a" }, class:'btn btn-error btn-outline btn-sm' %>
   </div>
 
+  <p class="mt-4">
+    Lien signature : <%= admin_signature_url(assemblee_id: assemblee.slug) %>
+  </p>
+
 </div>
