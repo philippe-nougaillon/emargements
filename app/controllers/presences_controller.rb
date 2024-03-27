@@ -9,13 +9,11 @@ class PresencesController < ApplicationController
     users = User.all
     @tags = User.all.tag_counts_on(:tags).order(:taggings_count).reverse
 
-    unless params[:tag].blank? 
-      if params[:tag] != session[:tag]
-        users = users.tagged_with(params[:tag])
-        session[:tag] = params[:tag]
-      else
-        session[:tag] = params[:tag] = nil
-      end
+    unless params[:tags].blank?
+      users = users.tagged_with(params[:tags].reject(&:blank?))
+      session[:tags] = params[:tags]
+    else
+      session[:tags] = params[:tags] = []
     end
 
     unless params[:search].blank?

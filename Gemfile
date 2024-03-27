@@ -82,3 +82,5 @@ gem "mailgun-ruby", "~> 1.2"
 gem "dotenv-rails", "~> 3.1"
 
 gem "friendly_id", "~> 5.5"
+
+gem "view_component", "~> 3.11"

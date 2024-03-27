@@ -141,6 +141,7 @@ GEM
       rest-client (>= 2.0.2)
     marcel (1.0.2)
     matrix (0.4.2)
+    method_source (1.0.0)
     mime-types (3.5.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.0305)
@@ -259,6 +260,10 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    view_component (3.11.0)
+      activesupport (>= 5.2.0, < 8.0)
+      concurrent-ruby (~> 1.0)
+      method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -298,6 +303,7 @@ DEPENDENCIES
   tailwindcss-rails (~> 2.3)
   turbo-rails
   tzinfo-data
+  view_component (~> 3.11)
   web-console
 
 RUBY VERSION
