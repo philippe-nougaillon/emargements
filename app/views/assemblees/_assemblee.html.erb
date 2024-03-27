@@ -1,29 +1,50 @@
 <div id="<%= dom_id assemblee %>" class="mt-4 pb-4 border-b border-gray-200">
-  <p class="text-2xl font-bold">
-    <%= assemblee.nom.humanize %>
-  </p>
-  <p>
-    <% assemblee.tags.each do |tag| %>
-      <%= link_to(tag.name.humanize, assemblees_path(tag:tag.name), class: 'badge badge-ghost') %>
-    <% end %>
-  </p>
-  <p class="mt-4">
-    <%= l(assemblee.début, format: :long) %>
-    <%= "(dans #{time_ago_in_words assemblee.début})" if assemblee.début > DateTime.now %>
-  </p>
+  <div class="flex">
+    <div>
+      <p class="text-2xl font-bold">
+        <%= assemblee.nom.humanize %>
+      </p>
+      <p>
+        <% assemblee.tags.each do |tag| %>
+          <%= link_to(tag.name.humanize, assemblees_path(tag:tag.name), class: 'badge badge-ghost') %>
+        <% end %>
+      </p>
+      <p class="mt-4">
+        <%= l(assemblee.début, format: :long) %>
+        <%= "(dans #{time_ago_in_words assemblee.début})" if assemblee.début > DateTime.now %>
+      </p>
 
-  <p>
-    <%= assemblee.adresse %>
-  </p>
+      <p>
+        <%= assemblee.adresse %>
+      </p>
 
-  <p class="mt-4">
-    Lien : <%= link_to admin_signature_url(assemblee_id: assemblee.slug), admin_signature_url(assemblee_id: assemblee.slug), class: 'text-primary hover:underline', target: '_blank' %>
-  </p>
+      <p class="mt-4">
+        Lien : <%= link_to admin_signature_url(assemblee_id: assemblee.slug), admin_signature_url(assemblee_id: assemblee.slug), class: 'text-primary hover:underline', target: '_blank' %>
+      </p>
 
-  <p class="my-4">
-    Signatures :
-    <%= assemblee.presences.count %> / <%= assemblee.related_users.count %>
-  </p>
+      <p class="my-4">
+        Signatures :
+        <%= assemblee.presences.count %> / <%= assemblee.related_users.count %>
+      </p>
+    </div>
+
+    <div class="flex-1">
+
+      <% qrcode = RQRCode::QRCode.new(admin_signature_url(assemblee_id: assemblee.slug)) %>
+
+      <% qrcode_svg = qrcode.as_svg(
+              color: "000",
+              shape_rendering: "crispEdges",
+              module_size: 4,
+              standalone: true,
+              use_path: true,
+        )
+        %>
+
+      <span class="float-right"><%= raw qrcode_svg %></span>
+    </div>
+
+  </div>
 
   <div class="flex gap-4 mt-2">
     <%= link_to "Modifier", edit_assemblee_path(assemblee), class:'btn btn-primary btn-outline btn-sm' %>

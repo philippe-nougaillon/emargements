@@ -84,3 +84,5 @@ gem "dotenv-rails", "~> 3.1"
 gem "friendly_id", "~> 5.5"
 
 gem "view_component", "~> 3.11"
+
+gem "rqrcode", "~> 2.2"
