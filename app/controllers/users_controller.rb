@@ -15,6 +15,10 @@ class UsersController < ApplicationController
       session[:tags] = params[:tags] = []
     end
 
+    unless params[:assemblee_id].blank?
+      @users = @users.where(id: Assemblee.find(params[:assemblee_id]).related_users)
+    end
+
     unless params[:search].blank?
       @users = @users.where("nom ILIKE :search OR prénom ILIKE :search OR email ILIKE :search", {search: "%#{params[:search]}%"})
     end
