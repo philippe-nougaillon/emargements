@@ -1,7 +1,7 @@
 <div class="overflow-x-auto">
   <div class="flex justify-center mt-12">
     <% if @assemblees.any? %>
-      <ul class="timeline">
+      <ul class="timeline -z-10">
         <% @assemblees.each_with_index do |assemblee, index| %>
           <% past = (assemblee.début.to_date < Date.today) %>
           <li>
