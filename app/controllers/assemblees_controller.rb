@@ -29,6 +29,7 @@ class AssembleesController < ApplicationController
   def new
     @assemblee = Assemblee.new
     @assemblee.durée = 2
+    @assemblee.début = DateTime.now.change(sec: 0)
     @tags = User.tag_counts_on(:tags).order(:name)
   end
 
