@@ -29,15 +29,18 @@ class AssembleesController < ApplicationController
   def new
     @assemblee = Assemblee.new
     @assemblee.durée = 2
+    @tags = User.tag_counts_on(:tags).order(:name)
   end
 
   # GET /assemblees/1/edit
   def edit
+    @tags = User.tag_counts_on(:tags).order(:name)
   end
 
   # POST /assemblees or /assemblees.json
   def create
     @assemblee = Assemblee.new(assemblee_params)
+    @assemblee.tag_list.add(params[:assemblee][:tags])
 
     respond_to do |format|
       if @assemblee.save
@@ -54,6 +57,9 @@ class AssembleesController < ApplicationController
   def update
     respond_to do |format|
       if @assemblee.update(assemblee_params)
+        @assemblee.tags.delete_all
+        @assemblee.tag_list.add(params[:assemblee][:tags])
+        @assemblee.save
         format.html { redirect_to assemblees_url, notice: "Assemblée modifiée avec succès." }
         format.json { render :show, status: :ok, location: @assemblee }
       else

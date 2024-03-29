@@ -17,8 +17,8 @@
   </div>
 
   <div class="mt-4">
-    <%= form.label :tag_list, "Groupes", style: "display: block" %>
-    <%= form.text_field :tag_list, value: assemblee.tag_list.join(', '), class: 'input input-bordered input-sm w-full' %>
+    <%= form.label :tags, "Groupes", style: "display: block" %>
+    <%= form.select :tags, options_from_collection_for_select(@tags, :name, :name, assemblee.tags.map(&:name)), multiple: true %>
   </div>
 
   <div class="mt-4">
@@ -50,3 +50,15 @@
     <%= form.submit class:'btn btn-primary btn-outline btn-sm mt-6' %>
   </div>
 <% end %>
+
+<script>
+  // slimselect
+  new SlimSelect({
+    select: '#assemblee_tags',
+    settings: {
+      searchPlaceholder: 'Recherche',
+      searchText: 'Pas de résultat',
+      searchingText: 'Recherche...',
+    }
+  })
+</script>
