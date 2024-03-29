@@ -5,21 +5,17 @@
         <%= assemblee.nom.humanize %>
       </p>
       <p>
-        <% assemblee.tags.each do |tag| %>
-          <%= link_to(tag.name.humanize, assemblees_path(tag:tag.name), class: 'badge badge-ghost') %>
-        <% end %>
-      </p>
-      <p class="mt-4">
         <%= l(assemblee.début, format: :long) %>
         <%= "(dans #{time_ago_in_words assemblee.début})" if assemblee.début > DateTime.now %>
       </p>
-
-      <p>
-        <%= assemblee.adresse %>
+      <p class="mt-4">
+        Groupes : <% assemblee.tags.each do |tag| %>
+          <%= link_to(tag.name.humanize, assemblees_path(tag:tag.name), class: 'badge !text-white') %>
+        <% end %>
       </p>
 
       <p class="mt-4">
-        Lien : <%= link_to admin_signature_url(assemblee_id: assemblee.slug), admin_signature_url(assemblee_id: assemblee.slug), class: 'text-primary hover:underline', target: '_blank' %>
+        Adresse : <%= assemblee.adresse %>
       </p>
 
       <p class="my-4">
@@ -28,6 +24,11 @@
         /
         <%= link_to "#{assemblee.related_users.count} participants", users_path(assemblee_id: assemblee.id), class: 'text-primary hover:underline' %>
       </p>
+
+      <p class="my-4 hidden">
+        Lien émargement : <%= link_to admin_signature_url(assemblee_id: assemblee.slug), admin_signature_url(assemblee_id: assemblee.slug), class: 'text-primary hover:underline', target: '_blank' %>
+      </p>
+
     </div>
 
     <div>
@@ -37,7 +38,7 @@
       <% qrcode_svg = qrcode.as_svg(
               color: "000",
               shape_rendering: "crispEdges",
-              module_size: 4,
+              module_size: 3,
               standalone: true,
               use_path: true,
         )

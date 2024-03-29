@@ -4,7 +4,7 @@
   </p>
   <p>
     <% user.tags.each do |tag| %>
-      <%= link_to(tag.name.humanize, users_path(tag:tag.name), class: 'badge badge-ghost') %>
+      <%= link_to(tag.name.humanize, users_path(tag:tag.name), class: 'badge') %>
     <% end %>
   </p>
   <div class="flex gap-4 mt-6">

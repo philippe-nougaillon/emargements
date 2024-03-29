@@ -45,5 +45,8 @@
 }
 
 .badge{
-  border-radius: .75rem !important;
+  border-color: #5897fb !important;
+  background-color: #5897fb !important;
+  color: white !important;
+  border-radius: 4px !important;
 }
