@@ -62,7 +62,7 @@ class PresencesController < ApplicationController
   def new
     @presence = Presence.new
     @presence.assemblee = Assemblee.current
-    @assemblée_future = Assemblee.where("NOW() < assemblees.début").first
+    @assemblée_future = Assemblee.where("NOW() < assemblees.début").order(:début).first
   end
 
   # GET /presences/1/edit
