@@ -24,7 +24,9 @@
 
       <p class="my-4">
         Signatures :
-        <%= assemblee.presences.count %> / <%= link_to assemblee.related_users.count, users_path(assemblee_id: assemblee.id), class: 'text-primary hover:underline' %>
+        <%= assemblee.presences.count %>
+        /
+        <%= link_to "#{assemblee.related_users.count} participants", users_path(assemblee_id: assemblee.id), class: 'text-primary hover:underline' %>
       </p>
     </div>
 
