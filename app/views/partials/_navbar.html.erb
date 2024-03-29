@@ -1,4 +1,4 @@
-<div class="navbar bg-white shadow sticky top-0">
+<div class="navbar bg-white shadow sticky top-0 z-10">
   <div class="flex-1">
     <%= link_to user_signed_in? && current_user.admin? ? admin_index_path : new_presence_path, class: 'flex items-center' do %>
       <span class="material-symbols-outlined !text-4xl">
