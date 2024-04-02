@@ -27,14 +27,18 @@
 
       <div class="flex flex-wrap gap-4 mt-2">
         <%= link_to "Modifier", edit_assemblee_path(assemblee), class:'btn btn-primary btn-outline btn-sm' %>
-        <%= link_to "Convocations", assemblee_path(assemblee, format: :pdf), class:'btn btn-success btn-outline btn-sm', target: "_blank", title: "Générer les convocations (PDF)" %>
+        <%= link_to "Générer les convocations", assemblee_path(assemblee, format: :pdf), class:'btn btn-success btn-outline btn-sm', target: "_blank", title: "Générer les convocations (PDF)" %>
         <% if assemblee.fin > DateTime.now %>
           <%= link_to "Envoyer le lien au gestionnaire", commencer_assemblee_path(assemblee), class: 'btn btn-warning btn-outline btn-sm', title: "Envoyer au gestionnaire un mail contenant le lien public vers la feuille d'émargement des présences" %>
         <% end %>
-        <% if assemblee.in_progress? %>
-          <%= link_to "Signer", admin_signature_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm', target: '_blank' %>
+        <%= button_to assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures liées" }, class:'btn btn-error btn-outline btn-sm' do %>
+          <span class="material-symbols-outlined">
+            delete
+          </span>
         <% end %>
-        <%= button_to "[X]", assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures liées" }, class:'btn btn-error btn-outline btn-sm' %>
+        <% if assemblee.in_progress? %>
+          <%= link_to "Signer (Émargement)", admin_signature_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm', target: '_blank' %>
+        <% end %>
       </div>
     </div>
 
