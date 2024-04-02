@@ -31,7 +31,7 @@
         <% if assemblee.fin > DateTime.now %>
           <%= link_to "Envoyer le lien au gestionnaire", commencer_assemblee_path(assemblee), class: 'btn btn-warning btn-outline btn-sm', title: "Envoyer au gestionnaire un mail contenant le lien public vers la feuille d'émargement des présences" %>
         <% end %>
-        <%= button_to assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures liées" }, form_class:'btn btn-error btn-outline btn-sm' do %>
+        <%= button_to assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain(e) de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures liées" }, form_class:'btn btn-error btn-outline btn-sm' do %>
           <span class="material-symbols-outlined">
             delete
           </span>

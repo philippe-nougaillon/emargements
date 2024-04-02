@@ -21,7 +21,7 @@
 </p>
 
 <p class="mt-4">
-  <%= @user.presences.count %> émargement.s
+  <%= @user.presences.count %> émargement(s)
 </p>
 
 <% unless @user.sign_in_count.zero? %>
@@ -41,7 +41,7 @@
 <% end %>
 <div class="flex flex-wrap gap-4 mt-8">
   <%= link_to "Modifier", edit_user_path(@user), class:'btn btn-primary btn-outline btn-sm' %>
-  <%= button_to @user, method: :delete, data:{turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cet utilisateur ?"}, class:'btn btn-error btn-outline btn-sm', disabled: @user.presences.any? do %>
+  <%= button_to @user, method: :delete, data:{turbo_confirm: "Êtes-vous certain(e) de vouloir supprimer cet utilisateur ?"}, class:'btn btn-error btn-outline btn-sm', disabled: @user.presences.any? do %>
     <span class="material-symbols-outlined">
       delete
     </span>
