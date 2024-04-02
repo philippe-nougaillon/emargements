@@ -15,7 +15,7 @@
     <%= hidden_field_tag :assemblee_id, params[:assemblee_id] %>
     <div class="flex flex-wrap gap-24">
       <div class="flex flex-col">
-        <div class="mb-4">
+        <div class="mb-4 max-w-72">
           <%= label_tag :user_id, "Utilisateur", style: "display: block" %>
           <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :id, :nom_prénom), include_blank: true %>
         </div>
@@ -25,7 +25,7 @@
             <%= text_field_tag :signature, "", style:'display: none' %>
           </div>
 
-          <div id="signature-container">
+          <div id="signature-container" class="pr-8">
             <div class="wrapper">
               <canvas id="signature-pad" class="signature-pad border border-slate-300" width=700 height=350></canvas>
             </div>
@@ -89,6 +89,7 @@
       searchText: 'Pas de résultat',
       searchingText: 'Recherche...',
       placeholderText: 'Tout le monde a signé !',
+      allowDeselect: true,
     }
   })
 </script>
