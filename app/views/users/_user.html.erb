@@ -12,6 +12,9 @@
       <%= link_to(tag.name.humanize, users_path(tag:tag.name), class: 'badge') %>
     <% end %>
   </p>
+  <p>
+    <%= user.presences.count %> émargement.s
+  </p>
   <div class="flex gap-4 mt-6">
     <%= link_to "Modifier", edit_user_path(user), class:'btn btn-primary btn-outline btn-sm' %>
     <%= button_to user, method: :delete, data:{turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cet utilisateur ?"}, class:'btn btn-error btn-outline btn-sm', disabled: user.presences.any? do %>

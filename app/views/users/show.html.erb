@@ -20,6 +20,10 @@
   <%= @user.adresse %>
 </p>
 
+<p class="mt-4">
+  <%= @user.presences.count %> émargement.s
+</p>
+
 <% unless @user.sign_in_count.zero? %>
   <p class="mt-8 mb-4">
     Connexion actuelle : 
