@@ -46,7 +46,7 @@ class PresencesController < ApplicationController
 
       format.pdf do
         pdf = PresencePdf.new
-        pdf.rapport(@presences.joins(:user).reorder("users.nom"))
+        pdf.rapport(@presences.joins(:user).reorder("users.nom"), assemblee)
 
         send_data pdf.render,
             filename: "Présences_#{assemblee.try(:nom)}_#{DateTime.now}.pdf",
