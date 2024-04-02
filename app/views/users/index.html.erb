@@ -5,9 +5,14 @@
 
 <%= form_tag request.path, method: :get do %>
   <div class="flex flex-wrap items-end gap-4">
-    <div class="max-w-96">
+    <div class="max-w-72">
       <%= label_tag :search, "Nom/Prénom/Email" %>
       <%= text_field_tag :search, params[:search], include_blank:true, onchange:'this.form.submit()', class: 'input input-bordered input-sm w-full' %>
+    </div>
+
+    <div class="max-w-72 w-full">
+      <%= label_tag :assemblee_id, "Assemblée" %>
+      <%= select_tag :assemblee_id, options_from_collection_for_select(@assemblees, :id, :nom, params[:assemblee_id]), include_blank: true %>
     </div>
     <div>
       <%= render TagCloudComponent.new(tags: @tags) %>
@@ -23,3 +28,16 @@
 
 
 <p class="mt-8">Affichage de <b><%= @users.count %></b> utilisateurs sur <%= User.all.count %> au total</p>
+
+<script>
+  new SlimSelect({
+    select: '#assemblee_id',
+    settings: {
+      searchPlaceholder: 'Recherche',
+      searchText: 'Pas de résultat',
+      searchingText: 'Recherche...',
+      placeholderText: 'Filtrer par assemblée',
+      allowDeselect: true
+    }
+  })
+</script>

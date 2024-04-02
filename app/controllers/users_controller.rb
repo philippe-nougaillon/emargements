@@ -8,6 +8,8 @@ class UsersController < ApplicationController
 
     @tags = @users.tag_counts_on(:tags).order(:taggings_count).reverse
 
+    @assemblees = Assemblee.all.order(:nom)
+
     unless params[:tags].blank?
       @users = @users.tagged_with(params[:tags].reject(&:blank?))
       session[:tags] = params[:tags]
