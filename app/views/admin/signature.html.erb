@@ -53,7 +53,7 @@
         <% end %>
       </div>
     </div>
-  <% elsif @presence.assemblee.début < DateTime.now %>
+  <% elsif @presence.assemblee.début > DateTime.now %>
     <p>L'assemblée n'a pas encore commencé. Elle commencera le <%= l @presence.assemblee.début.to_date %> à <%= @presence.assemblee.début.strftime("%H:%M") %></p>
   <% else %>
     <p>L'assemblée est terminée. Vous ne pouvez plus signer.</p>
