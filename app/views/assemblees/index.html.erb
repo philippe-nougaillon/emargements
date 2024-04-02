@@ -10,7 +10,7 @@
       <%= text_field_tag :search, params[:search], include_blank:true, onchange:'this.form.submit()', class: 'input input-bordered input-sm w-full', placeholder: 'Nom/Adresse' %>
     </div>
 
-    <div class="max-w-72 w-full">
+    <div>
       <%= label_tag :date %>
       <%= date_field_tag :date, params[:date], onchange: 'this.form.submit()', class: 'input input-bordered input-sm w-full' %>
     </div>
