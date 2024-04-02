@@ -40,7 +40,7 @@ class PresencesController < ApplicationController
         book = PresencesToXls.new(@presences).call
         file_contents = StringIO.new
         book.write file_contents # => Now file_contents contains the rendered file output
-        filename = "Émargements_#{assemblee.nom}_#{DateTime.now}.xls"
+        filename = "Émargements_#{assemblee.try(:nom)}_#{DateTime.now}.xls"
         send_data file_contents.string.force_encoding('binary'), filename: filename 
       end
 
@@ -49,7 +49,7 @@ class PresencesController < ApplicationController
         pdf.rapport(@presences.joins(:user).reorder("users.nom"))
 
         send_data pdf.render,
-            filename: "Présences_#{assemblee.nom}_#{DateTime.now}.pdf",
+            filename: "Présences_#{assemblee.try(:nom)}_#{DateTime.now}.pdf",
             type: 'application/pdf',
             disposition: 'inline'
       end
