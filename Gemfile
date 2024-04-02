@@ -86,3 +86,5 @@ gem "friendly_id", "~> 5.5"
 gem "view_component", "~> 3.11"
 
 gem "rqrcode", "~> 2.2"
+
+gem "exception_notification", "~> 4.5"
