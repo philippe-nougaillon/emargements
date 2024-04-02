@@ -16,8 +16,6 @@ class User < ApplicationRecord
   normalizes :nom, with: -> nom { nom.upcase.strip }
   normalizes :prénom, with: -> prénom { prénom.humanize.strip }
 
-  encrypts :nom
-
   scope :ordered, -> { order(:nom) }
 
   def nom_prénom
