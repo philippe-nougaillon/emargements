@@ -20,32 +20,29 @@
 
       <p class="my-4">
         Signatures :
-        <%= assemblee.presences.count %>
+        <%= link_to "#{assemblee.presences.count} émargement(s)", presences_path(assemblee_id: assemblee.id), class: 'text-primary hover:underline' %>
         /
-        <%= link_to "#{assemblee.related_users.count} participants", users_path(assemblee_id: assemblee.id), class: 'text-primary hover:underline' %>
+        <%= link_to "#{assemblee.related_users.count} participant(s)", users_path(assemblee_id: assemblee.id), class: 'text-primary hover:underline' %>
       </p>
-
-      <p class="my-4 hidden">
-        Lien émargement : <%= link_to admin_signature_url(assemblee_id: assemblee.slug), admin_signature_url(assemblee_id: assemblee.slug), class: 'text-primary hover:underline', target: '_blank' %>
-      </p>
-
     </div>
 
-    <div class="pt-8">
+    <% if assemblee.in_progress? %>
+      <div class="pt-8">
 
-      <% qrcode = RQRCode::QRCode.new(admin_signature_url(assemblee_id: assemblee.slug)) %>
+        <% qrcode = RQRCode::QRCode.new(admin_signature_url(assemblee_id: assemblee.slug)) %>
 
-      <% qrcode_svg = qrcode.as_svg(
-              color: "000",
-              shape_rendering: "crispEdges",
-              module_size: 3,
-              standalone: true,
-              use_path: true,
-        )
-        %>
+        <% qrcode_svg = qrcode.as_svg(
+                color: "000",
+                shape_rendering: "crispEdges",
+                module_size: 3,
+                standalone: true,
+                use_path: true,
+          )
+          %>
 
-      <%= raw qrcode_svg %>
-    </div>
+        <%= raw qrcode_svg %>
+      </div>
+    <% end %>
 
   </div>
 
@@ -55,8 +52,9 @@
     <% if assemblee.fin > DateTime.now %>
       <%= link_to "Envoyer le lien au gestionnaire", commencer_assemblee_path(assemblee), class: 'btn btn-warning btn-outline btn-sm', title: "Envoyer au gestionnaire un mail contenant le lien public vers la feuille d'émargement des présences" %>
     <% end %>
-    <%= link_to "Signer", admin_signature_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm', target: '_blank' %>
-    <%= link_to "Voir les émargements", presences_path(assemblee_id: assemblee.id), class: 'btn btn-info btn-outline btn-sm' %>
+    <% if assemblee.in_progress? %>
+      <%= link_to "Signer", admin_signature_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm', target: '_blank' %>
+    <% end %>
     <%= button_to "[X]", assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures liées" }, class:'btn btn-error btn-outline btn-sm' %>
   </div>
 
