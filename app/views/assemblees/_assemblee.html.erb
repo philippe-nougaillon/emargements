@@ -31,20 +31,18 @@
         <% if assemblee.fin > DateTime.now %>
           <%= link_to "Envoyer le lien au gestionnaire", commencer_assemblee_path(assemblee), class: 'btn btn-warning btn-outline btn-sm', title: "Envoyer au gestionnaire un mail contenant le lien public vers la feuille d'émargement des présences" %>
         <% end %>
-        <%= button_to assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures liées" }, class:'btn btn-error btn-outline btn-sm' do %>
+        <%= button_to assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures liées" }, form_class:'btn btn-error btn-outline btn-sm' do %>
           <span class="material-symbols-outlined">
             delete
           </span>
-        <% end %>
-        <% if assemblee.in_progress? %>
         <% end %>
       </div>
     </div>
 
     <% if assemblee.in_progress? %>
-      <div>
+      <div class="self-end">
         <%= raw assemblee.qrcode(admin_signature_url(assemblee_id: assemblee.slug)) %>
-        <%= link_to "Signer (Émargement)", admin_signature_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm mt-8', target: '_blank' %>
+        <%= link_to "Signer (Émargement)", admin_signature_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm mt-4', target: '_blank' %>
       </div>
     <% end %>
 
