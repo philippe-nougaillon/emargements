@@ -5,6 +5,14 @@ class AssembleesController < ApplicationController
   # GET /assemblees or /assemblees.json
   def index
     @assemblees = Assemblee.ordered
+
+    unless params[:search].blank?
+      @assemblees = @assemblees.where("nom ILIKE :search OR adresse ILIKE :search", {search: "%#{params[:search]}%"})
+    end
+
+    unless params[:date].blank?
+      @assemblees = @assemblees.where("DATE(début) = ?", params[:date])
+    end
   end
 
   # GET /assemblees/1 or /assemblees/1.json

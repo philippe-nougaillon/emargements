@@ -1,9 +1,23 @@
-<div class="mb-12">
+<div class="mb-4">
   <%= link_to "Nouvelle Assemblée", new_assemblee_path, class:'btn btn-primary btn-outline btn-lg float-end hover:shadow-xl hover:!text-white' %>
   <h1 class="text-4xl font-bold">Assemblées</h1>
 </div>
 
-<div id="assemblees">
+<%= form_tag request.path, method: :get do %>
+  <div class="flex flex-wrap items-end gap-4">
+    <div class="max-w-72">
+      <%= label_tag :search, "Rechercher" %>
+      <%= text_field_tag :search, params[:search], include_blank:true, onchange:'this.form.submit()', class: 'input input-bordered input-sm w-full', placeholder: 'Nom/Adresse' %>
+    </div>
+
+    <div class="max-w-72 w-full">
+      <%= label_tag :date %>
+      <%= date_field_tag :date, params[:date], onchange: 'this.form.submit()', class: 'input input-bordered input-sm w-full' %>
+    </div>
+  </div>
+<% end %>
+
+<div id="assemblees" class="mt-8">
   <% @assemblees.each do |assemblee| %>
     <%= render assemblee %>
   <% end %>

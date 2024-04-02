@@ -1,5 +1,5 @@
 <div>
-  <h1 class="text-4xl font-bold mb-8">Liste des émargements</h1>
+  <h1 class="text-4xl font-bold mb-4">Liste des émargements</h1>
 </div>
 <%= form_tag request.path, method: :get do %>
   <div class="flex flex-wrap items-end gap-4">
@@ -17,7 +17,7 @@
   </div>
 <% end %>
 
-<div id="presences" class="flex flex-wrap gap-4 justify-between px-12 mb-12">
+<div id="presences" class="flex flex-wrap gap-4 justify-between px-12 mt-8 mb-12">
   <% @presences.each do |presence| %>
     <%= render presence %>
   <% end %>
