@@ -1,4 +1,4 @@
-<div id="<%= dom_id presence %>" class="flex flex-col shadow p-8 gap-4 mt-4">
+<div id="<%= dom_id presence %>" class="flex flex-col shadow p-8 gap-2 mt-4">
   <div>
     <small>
       Il y a <%= time_ago_in_words presence.heure %>
@@ -6,7 +6,7 @@
     <p class="text-2xl"><%= presence.user.nom_prénom %></p>
 
 
-    <p class="my-4">
+    <p class="my-2">
       Le <%= l presence.heure, format: :long %>
     </p>
     <p class="text-xl">
