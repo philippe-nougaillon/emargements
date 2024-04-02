@@ -27,6 +27,18 @@ class Assemblee < ApplicationRecord
     return ids.flatten.uniq
   end
 
+  def qrcode(url)
+    qrcode = RQRCode::QRCode.new(url)
+
+    qrcode_svg = qrcode.as_svg(
+                color: "000",
+                shape_rendering: "crispEdges",
+                module_size: 3,
+                standalone: true,
+                use_path: true,
+          )
+  end
+
   private
 
   def update_fin

@@ -1,6 +1,6 @@
 <div id="<%= dom_id assemblee %>" class="mt-4 pb-4 border-b border-gray-200">
-  <div class="flex flex-wrap">
-    <div class="flex-1">
+  <div class="flex flex-wrap gap-8">
+    <div>
       <p class="text-2xl font-bold">
         <%= assemblee.nom.humanize %>
       </p>
@@ -24,38 +24,25 @@
         /
         <%= link_to "#{assemblee.related_users.count} participant(s)", users_path(assemblee_id: assemblee.id), class: 'text-primary hover:underline' %>
       </p>
+
+      <div class="flex flex-wrap gap-4 mt-2">
+        <%= link_to "Modifier", edit_assemblee_path(assemblee), class:'btn btn-primary btn-outline btn-sm' %>
+        <%= link_to "Convocations", assemblee_path(assemblee, format: :pdf), class:'btn btn-success btn-outline btn-sm', target: "_blank", title: "Générer les convocations (PDF)" %>
+        <% if assemblee.fin > DateTime.now %>
+          <%= link_to "Envoyer le lien au gestionnaire", commencer_assemblee_path(assemblee), class: 'btn btn-warning btn-outline btn-sm', title: "Envoyer au gestionnaire un mail contenant le lien public vers la feuille d'émargement des présences" %>
+        <% end %>
+        <% if assemblee.in_progress? %>
+          <%= link_to "Signer", admin_signature_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm', target: '_blank' %>
+        <% end %>
+        <%= button_to "[X]", assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures liées" }, class:'btn btn-error btn-outline btn-sm' %>
+      </div>
     </div>
 
     <% if assemblee.in_progress? %>
-      <div class="pt-8">
-
-        <% qrcode = RQRCode::QRCode.new(admin_signature_url(assemblee_id: assemblee.slug)) %>
-
-        <% qrcode_svg = qrcode.as_svg(
-                color: "000",
-                shape_rendering: "crispEdges",
-                module_size: 3,
-                standalone: true,
-                use_path: true,
-          )
-          %>
-
-        <%= raw qrcode_svg %>
+      <div>
+        <%= raw assemblee.qrcode(admin_signature_url(assemblee_id: assemblee.slug)) %>
       </div>
     <% end %>
 
   </div>
-
-  <div class="flex flex-wrap gap-4 mt-2">
-    <%= link_to "Modifier", edit_assemblee_path(assemblee), class:'btn btn-primary btn-outline btn-sm' %>
-    <%= link_to "Convocations", assemblee_path(assemblee, format: :pdf), class:'btn btn-success btn-outline btn-sm', target: "_blank", title: "Générer les convocations (PDF)" %>
-    <% if assemblee.fin > DateTime.now %>
-      <%= link_to "Envoyer le lien au gestionnaire", commencer_assemblee_path(assemblee), class: 'btn btn-warning btn-outline btn-sm', title: "Envoyer au gestionnaire un mail contenant le lien public vers la feuille d'émargement des présences" %>
-    <% end %>
-    <% if assemblee.in_progress? %>
-      <%= link_to "Signer", admin_signature_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm', target: '_blank' %>
-    <% end %>
-    <%= button_to "[X]", assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain.e de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures liées" }, class:'btn btn-error btn-outline btn-sm' %>
-  </div>
-
 </div>
