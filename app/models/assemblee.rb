@@ -43,6 +43,10 @@ class Assemblee < ApplicationRecord
     "#{I18n.l self.try(:début), format: :short}->#{self.try(:fin).try(:hour)}h#{self.try(:fin).try(:min)}"
   end
 
+  def users_not_signed
+    User.where(id: self.related_users).where.not(id: Presence.where(assemblee_id: self.id).pluck(:user_id)).ordered
+  end
+
   private
 
   def update_fin

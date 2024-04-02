@@ -10,7 +10,7 @@ class AdminController < ApplicationController
     @presence = Presence.new
     if assemblee = Assemblee.find_by(slug: params[:assemblee_id])
       @presence.assemblee = assemblee
-      @users_not_signed = User.where(id: @presence.assemblee.related_users).where.not(id: Presence.where(assemblee_id: @presence.assemblee_id).pluck(:user_id)).ordered
+      @users_not_signed = assemblee.users_not_signed
     else 
       redirect_to root_path, alert: "Problème avec l'uuid"
     end
@@ -27,7 +27,7 @@ class AdminController < ApplicationController
         format.json { render :show, status: :created, location: @presence }
       else
         format.html do
-          @users_not_signed = [] 
+          @users_not_signed = @presence.assemblee.users_not_signed
           render :signature, status: :unprocessable_entity
         end
         format.json { render json: @presence.errors, status: :unprocessable_entity }
