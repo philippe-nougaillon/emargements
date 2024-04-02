@@ -39,6 +39,10 @@ class Assemblee < ApplicationRecord
           )
   end
 
+  def horaires
+    "#{I18n.l self.try(:début), format: :short}->#{self.try(:fin).try(:hour)}h#{self.try(:fin).try(:min)}"
+  end
+
   private
 
   def update_fin

@@ -2,6 +2,6 @@
   <%= link_to assemblee_path(assemblee) do %>
     <b><%= assemblee.nom.humanize %></b>
     <br>
-    <%= l assemblee.try(:début), format: :short %>
+    <%= assemblee.horaires %>
   <% end %>
 </div>
