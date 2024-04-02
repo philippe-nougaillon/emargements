@@ -5,6 +5,7 @@ class PresencesController < ApplicationController
   # GET /presences or /presences.json
   def index
     @presences = Presence.ordered
+    @assemblees = Assemblee.all.order(:nom)
 
     users = User.all
     @tags = User.all.tag_counts_on(:tags).order(:taggings_count).reverse
@@ -27,7 +28,8 @@ class PresencesController < ApplicationController
     @presences = @presences.where(id: users_presences_ids.flatten)
 
     if params[:assemblee_id].present?
-      @presences = @presences.where(assemblee_id: params[:assemblee_id])
+      assemblee = Assemblee.find_by(id: params[:assemblee_id])
+      @presences = @presences.where(assemblee_id: assemblee.id)
     end
 
     respond_to do |format|
@@ -38,7 +40,7 @@ class PresencesController < ApplicationController
         book = PresencesToXls.new(@presences).call
         file_contents = StringIO.new
         book.write file_contents # => Now file_contents contains the rendered file output
-        filename = "Émargements.xls"
+        filename = "Émargements_#{assemblee.nom}_#{DateTime.now}.xls"
         send_data file_contents.string.force_encoding('binary'), filename: filename 
       end
 
@@ -47,7 +49,7 @@ class PresencesController < ApplicationController
         pdf.rapport(@presences.joins(:user).reorder("users.nom"))
 
         send_data pdf.render,
-            filename: "Présences.pdf",
+            filename: "Présences_#{assemblee.nom}_#{DateTime.now}.pdf",
             type: 'application/pdf',
             disposition: 'inline'
       end

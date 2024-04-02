@@ -18,7 +18,7 @@ class AssembleesController < ApplicationController
         pdf.convocation(@assemblee)
 
         send_data pdf.render,
-            filename: "Assemblée.pdf",
+            filename: "#{@assemblee.nom}-#{l @assemblee.début.to_date} #{DateTime.now}.pdf",
             type: 'application/pdf',
             disposition: 'inline'
       end
