@@ -6,6 +6,7 @@ class Organisation < ApplicationRecord
 
   has_many :users
   has_many :assemblees
+  has_many :presences, through: :assemblees
 
   validates :nom, presence: true
 
@@ -16,7 +17,7 @@ class Organisation < ApplicationRecord
       1
     elsif !self.assemblees.any?
       2
-    elsif self.assemblees.count == 1
+    elsif self.assemblees.count == 1 && self.presences.count.zero?
       3
     else
       4

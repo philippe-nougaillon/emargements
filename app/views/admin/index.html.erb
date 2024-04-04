@@ -1,19 +1,22 @@
 <div class="overflow-x-auto">
   <div class="flex justify-center mt-12">
-    <% if current_user.organisation.assemblees.count > 1 %>
-      <ul class="timeline mb-24">
-        <% @assemblees.each_with_index do |assemblee, index| %>
-          <% started = (assemblee.début < DateTime.now) %>
-          <% finished = (assemblee.fin < DateTime.now) %>
-          <li>
-            <hr class="<%= 'bg-primary' if started || assemblee == Assemblee.current %>"/>
-            <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.even? %>
-            <div class="timeline-middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 <%= 'text-primary' if started || assemblee == Assemblee.current %>"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg></div>
-            <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.odd? %>
-            <hr class="<%= 'bg-primary' if finished %>"/>
-          </li>
-        <% end %>
-      </ul>
+    <% if current_user.organisation.step >= 4 %>
+      <div class="flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-8">Chronologie des assemblées</h1>
+        <ul class="timeline mb-24">
+          <% @assemblees.each_with_index do |assemblee, index| %>
+            <% started = (assemblee.début < DateTime.now) %>
+            <% finished = (assemblee.fin < DateTime.now) %>
+            <li>
+              <hr class="<%= 'bg-primary' if started || assemblee == Assemblee.current %>"/>
+              <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.even? %>
+              <div class="timeline-middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 <%= 'text-primary' if started || assemblee == Assemblee.current %>"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg></div>
+              <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.odd? %>
+              <hr class="<%= 'bg-primary' if finished %>"/>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     <% else %>
       <div class="flex flex-col items-center gap-4 mb-12">
         <h1 class="text-3xl font-bold">Bienvenue</h1>
@@ -41,7 +44,7 @@
   </div>
 </div>
 
-<% if current_user.organisation.assemblees.any? %>
+<% if current_user.organisation.step >= 3 %>
   <div class="flex flex-wrap gap-8">
     <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
     <%= link_to "UTILISATEURS / PARTICIPANTS", users_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>

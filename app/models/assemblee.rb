@@ -8,6 +8,8 @@ class Assemblee < ApplicationRecord
   belongs_to :organisation
   has_many :presences, dependent: :destroy
 
+  validates :nom, :début, :durée, presence: :true
+
   after_save :update_fin
 
   scope :ordered, -> { order(début: :desc) }
@@ -41,7 +43,7 @@ class Assemblee < ApplicationRecord
   end
 
   def horaires
-    "#{I18n.l self.try(:début), format: :short}->#{self.try(:fin).try(:hour)}h#{self.try(:fin).try(:min)}"
+    "#{self.début.strftime("%d %b")} #{self.début.hour}h#{self.début.min unless self.début.min == 0} -> #{self.fin.hour}h#{self.fin.min unless self.fin.min == 0}"
   end
 
   def users_not_signed
