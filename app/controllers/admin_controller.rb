@@ -10,15 +10,20 @@ class AdminController < ApplicationController
     @presence = Presence.new
     if assemblee = Assemblee.find_by(slug: params[:assemblee_id])
       @presence.assemblee = assemblee
-      @users_not_signed = assemblee.users_not_signed
+      if params[:user_id].present?
+        @presence.user = User.find_by(slug: params[:user_id])
+      else
+        @users_not_signed = assemblee.users_not_signed
+      end
     else 
       redirect_to root_path, alert: "Problème avec l'uuid"
     end
   end
 
   def signature_do
-    @presence = Presence.new(user_id: params[:user_id], signature: params[:signature])
+    @presence = Presence.new(signature: params[:signature])
     @presence.assemblee = Assemblee.find_by(slug: params[:assemblee_id])
+    @presence.user = User.find_by(slug: params[:user_id])
     @presence.heure = DateTime.now
 
     respond_to do |format|

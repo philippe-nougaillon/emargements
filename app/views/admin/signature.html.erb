@@ -13,10 +13,15 @@
             </ul>
           </div>
         <% end %>
-        <div class="mb-4 max-w-72">
-          <%= label_tag :user_id, "Utilisateur", style: "display: block" %>
-          <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :id, :nom_prénom), include_blank: true %>
-        </div>
+        <% if params[:user_id].blank? %>
+          <div class="mb-4 max-w-72">
+            <%= label_tag :user_id, "Participant", style: "display: block" %>
+            <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :slug, :nom_prénom), include_blank: true %>
+          </div>
+        <% else %>
+          <p class="text-xl font-bold mb-4"><%= @presence.user.nom_prénom %></p>
+          <%= hidden_field_tag :user_id, params[:user_id] %>
+        <% end %>
         <div>
           <div>
             <%= label_tag :signature, "Signature", style: "display: block" %>

@@ -41,9 +41,14 @@
     <%= form.collection_select(:user_id, @users, :id, :nom_prénom, {include_blank: true, required: true}, class:"select select-bordered select-sm w-full") %>
   </div>
 
-  <div class="mt-4">
+  <div class="mt-4" title="Envoyer automatiquement le lien au gestionnaire 10 minutes avant le début de l'assemblée ?">
     <%= form.check_box :automatique %>
-    <%= form.label :automatique, "Envoyer automatiquement le lien au gestionnaire (T-10 min.) ?" %>
+    <%= form.label :automatique, "Envoyer le lien au gestionnaire ?" %>
+  </div>
+
+  <div class="mt-4" title="Envoyer automatiquement le lien à tous les participants 10 minutes avant le début de l'assemblée ?">
+    <%= form.check_box :notifier_participants %>
+    <%= form.label :notifier_participants, "Envoyer le lien à tous les participants ?" %>
   </div>
 
   <div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_28_152717) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_04_122146) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_152717) do
     t.bigint "user_id", null: false
     t.boolean "automatique", default: false
     t.bigint "organisation_id", null: false
+    t.boolean "notifier_participants", default: false
     t.index ["organisation_id"], name: "index_assemblees_on_organisation_id"
     t.index ["slug"], name: "index_assemblees_on_slug", unique: true
     t.index ["user_id"], name: "index_assemblees_on_user_id"
