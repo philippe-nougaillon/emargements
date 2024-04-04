@@ -1,5 +1,5 @@
 <div class="flex items-center justify-between border-b mt-6 mb-2 pb-4">
-  <h1 class="text-3xl"><%= fa_icon 'envelope' %> Mail Logs</h1>
+  <h1 class="text-3xl">Mail Logs</h1>
 </div>
 <p class="mb-4">Historique des mails envoyés via MailGun, avec Statut et État consultables pendant 5 jours.</p>
 
@@ -31,10 +31,10 @@
   <table class="table table-sm">
     <thead>
       <tr>
-        <th><%= sortable :user_id do %>De<% end %></th>
-        <th><%= sortable :to do %>À<% end %></th>
-        <th><%= sortable :subject do %>Sujet<% end %></th>
-        <th><%= sortable :created_at, default: true do %>Il y a<% end %></th>
+        <th>De</th>
+        <th>À</th>
+        <th>Sujet</th>
+        <th>Il y a</th>
         <th>Statut</th>
         <th>État</th>
         <th colspan="2"></th>
