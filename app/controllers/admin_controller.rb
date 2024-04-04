@@ -28,7 +28,7 @@ class AdminController < ApplicationController
 
     respond_to do |format|
       if @presence.save
-        format.html { redirect_to admin_signature_url(assemblee_id: params[:assemblee_id]), notice: "L'émargement de #{@presence.user.nom_prénom} a été créé avec succès." }
+        format.html { redirect_to user_signed_in? ? admin_signature_url(assemblee_id: params[:assemblee_id]) : admin_signature_url(assemblee_id: params[:assemblee_id], user_id: params[:user_id]), notice: "L'émargement de #{@presence.user.nom_prénom} a été créé avec succès." }
         format.json { render :show, status: :created, location: @presence }
       else
         format.html do
