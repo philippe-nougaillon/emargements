@@ -4,8 +4,9 @@ class Assemblee < ApplicationRecord
 
   acts_as_taggable_on :tags
 
-  has_many :presences, dependent: :destroy
   belongs_to :user
+  belongs_to :organisation
+  has_many :presences, dependent: :destroy
 
   after_save :update_fin
 
@@ -22,7 +23,7 @@ class Assemblee < ApplicationRecord
   def related_users
     ids = []
     self.tags.each do |tag|
-      ids << User.tagged_with(tag).pluck(:id)
+      ids << self.organisation.users.tagged_with(tag).pluck(:id)
     end
     return ids.flatten.uniq
   end

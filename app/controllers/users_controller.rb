@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.ordered
+    @users = current_user.organisation.users.ordered
 
     @tags = @users.tag_counts_on(:tags).order(:taggings_count).reverse
 
@@ -46,6 +46,7 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    @user.organisation = current_user.organisation
 
     respond_to do |format|
       if @user.save
@@ -84,7 +85,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by(slug: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
@@ -93,6 +94,6 @@ class UsersController < ApplicationController
     end
 
     def is_user_authorized
-      authorize User
+      authorize @user ? @user : User
     end
 end

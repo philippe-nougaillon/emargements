@@ -3,7 +3,7 @@ class AdminController < ApplicationController
   before_action :is_user_authorized, except: %i[signature signature_do]
 
   def index
-    @assemblees = Assemblee.order(:début).where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today - 1.month, Date.today + 2.months)
+    @assemblees = current_user.organisation.assemblees.order(:début).where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today - 1.month, Date.today + 2.months)
   end
 
   def signature
@@ -33,6 +33,24 @@ class AdminController < ApplicationController
         format.json { render json: @presence.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def import
+
+  end
+
+  def import_do
+    users_saved = 0
+    emails = params[:content].split("\r\n")
+    emails.each_with_index do |email, index|
+      user = User.create(email: email, password: SecureRandom.hex(5), organisation_id: current_user.organisation_id)
+      user.tag_list.add(params[:groupes].split(','))
+      user.dispatch_email_to_nom_prénom
+      if user.save
+        users_saved += 1
+      end
+    end
+    redirect_to admin_index_path, notice: "#{users_saved} participants importés sur #{emails.count}"
   end
 
   private

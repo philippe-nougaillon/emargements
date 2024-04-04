@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { 
+    registrations: 'users/registrations'
+  }
 
   devise_scope :user do
     authenticated :user do
@@ -18,11 +20,14 @@ Rails.application.routes.draw do
   end
   resources :users
   resources :presences, only: %i[ index new create edit update destroy ]
+  resources :organisations, only: %i[ edit update ]
 
   namespace :admin do
     get :index
     get :signature
     post :signature_do
+    get :import
+    post :import_do
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

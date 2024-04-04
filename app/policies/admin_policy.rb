@@ -10,4 +10,12 @@ class AdminPolicy
     user.admin?
   end
 
+  def import?
+    user.admin?
+  end
+
+  def import_do?
+    import?
+  end
+
 end

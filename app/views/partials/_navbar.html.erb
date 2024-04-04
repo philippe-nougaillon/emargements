@@ -1,9 +1,13 @@
 <div class="navbar bg-white shadow sticky top-0 z-10">
   <div class="flex-1">
     <%= link_to user_signed_in? && current_user.admin? ? admin_index_path : new_presence_path, class: 'flex items-center' do %>
-      <span class="material-symbols-outlined !text-4xl">
-        history_edu
-      </span>
+      <% if user_signed_in? && current_user.organisation.logo.attached? %>
+        <%= image_tag(current_user.organisation.logo, width: 80, alt:'', class:"mr-2") %>
+      <% else %>
+        <span class="material-symbols-outlined !text-4xl">
+          history_edu
+        </span>
+      <% end %>
       <span class="font-bold pl-2 text-primary text-2xl">Émargements</span>
     <% end %>
   </div>

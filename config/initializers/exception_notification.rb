@@ -20,8 +20,8 @@ ExceptionNotification.configure do |config|
 
   # Email notifier sends notifications by email.
   config.add_notifier :email, {
-    email_prefix: '[SIGNATURE-PAD ERROR] ',
-    sender_address: %{"Signature_pad Notifier" <emargements@philnoug.com>},
+    email_prefix: '[EMARGEMENTS ERROR] ',
+    sender_address: %{"Emargements Notifier" <emargements@philnoug.com>},
     exception_recipients: %w{philippe.nougaillon@gmail.com, pierreemmanuel.dacquet@gmail.com}
   }
 

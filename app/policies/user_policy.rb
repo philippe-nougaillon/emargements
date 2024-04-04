@@ -1,17 +1,16 @@
-class UserPolicy
-  attr_reader :user
-
-  # `_record` in this example will be :admin
-  def initialize(user, _record)
-    @user = user
+class UserPolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      scope
+    end
   end
 
   def index?
-    user.admin?
+    user && user.admin?
   end
 
   def show?
-    index?
+    index? && record.organisation == user.organisation
   end
 
   def new?
@@ -23,7 +22,7 @@ class UserPolicy
   end
 
   def edit?
-    index?
+    show?
   end
 
   def update?
@@ -31,6 +30,6 @@ class UserPolicy
   end
 
   def destroy?
-    index?
+    show?
   end
 end
