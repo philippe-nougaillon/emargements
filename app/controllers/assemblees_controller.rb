@@ -97,7 +97,7 @@ class AssembleesController < ApplicationController
 
   def commencer
     mailer_response = AssembleeMailer.lien_assemblee(@assemblee).deliver_now
-    MailLog.create(user_id: current_user.id, message_id: mailer_response.message_id, to: @assemblee.user.email, subject: "Lien assemblée gestionnaire manuel")
+    MailLog.create(organisation_id: @assemblee.organisation_id, user_id: current_user.id, message_id: mailer_response.message_id, to: @assemblee.user.email, subject: "Lien assemblée gestionnaire manuel")
     redirect_to request.referrer, notice: "Lien de signature envoyée au gestionnaire."
   end
 
