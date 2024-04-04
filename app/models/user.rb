@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   scope :ordered, -> { order(:nom) }
 
-  
+  def nom_prénom
     "#{self.nom} #{self.prénom}"
   end
 
