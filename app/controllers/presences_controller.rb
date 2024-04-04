@@ -127,6 +127,6 @@ class PresencesController < ApplicationController
     end
 
     def is_user_authorized
-      authorize Presence
+      authorize @presence? @presence : Presence
     end
 end
