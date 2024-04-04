@@ -5,6 +5,7 @@ class AssembleeMailer < ApplicationMailer
       message.mailgun_options = {
         "tag" => [@assemblee.user.nom, @assemblee.user.prénom, "lien assemblée gestionnaire"]
       }
+    end
   end
 
   def lien_assemblee_participant(assemblee, user)
