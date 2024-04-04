@@ -1,14 +1,19 @@
 class AssembleeMailer < ApplicationMailer
   def lien_assemblee(assemblee)
     @assemblee = assemblee
-    mail(to: @assemblee.user.email, subject: "Émargement de l'assemblée '#{@assemblee.nom}'")
+    mail(to: @assemblee.user.email, subject: "Émargement de l'assemblée '#{@assemblee.nom}'").tap do |message|
+      message.mailgun_options = {
+        "tag" => [@assemblee.user.nom, @assemblee.user.prénom, "lien assemblée gestionnaire"]
+      }
   end
 
-  def lien_assemblee_participant(assemblee)
+  def lien_assemblee_participant(assemblee, user)
     @assemblee = assemblee
-    User.where(id: @assemblee.related_users).each do |user|
-      @user = user
-      mail(to: @user.email, subject: "Émargement de l'assemblée '#{@assemblee.nom}'")
+    @user = user
+    mail(to: @user.email, subject: "Émargement de l'assemblée '#{@assemblee.nom}'").tap do |message|
+      message.mailgun_options = {
+        "tag" => [@user.nom, @user.prénom, "lien assemblée participant"]
+      }
     end
   end
 end

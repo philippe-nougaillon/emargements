@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_04_122146) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_04_143754) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_04_122146) do
     t.index ["organisation_id"], name: "index_assemblees_on_organisation_id"
     t.index ["slug"], name: "index_assemblees_on_slug", unique: true
     t.index ["user_id"], name: "index_assemblees_on_user_id"
+  end
+
+  create_table "mail_logs", force: :cascade do |t|
+    t.string "to"
+    t.string "subject"
+    t.string "message_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "organisation_id", null: false
+    t.index ["organisation_id"], name: "index_mail_logs_on_organisation_id"
   end
 
   create_table "organisations", force: :cascade do |t|
@@ -140,6 +150,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_04_122146) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assemblees", "organisations"
   add_foreign_key "assemblees", "users"
+  add_foreign_key "mail_logs", "organisations"
   add_foreign_key "presences", "assemblees"
   add_foreign_key "presences", "users"
   add_foreign_key "taggings", "tags"

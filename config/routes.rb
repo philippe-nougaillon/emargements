@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :mail_logs
   devise_for :users, controllers: { 
     registrations: 'users/registrations'
   }

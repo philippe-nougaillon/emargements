@@ -7,6 +7,7 @@ class Organisation < ApplicationRecord
   has_many :users
   has_many :assemblees
   has_many :presences, through: :assemblees
+  has_many :mail_logs, dependent: :destroy
 
   validates :nom, presence: true
 
