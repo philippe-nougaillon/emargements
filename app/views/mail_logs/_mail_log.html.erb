@@ -13,7 +13,7 @@
     <% end %>
   </td>
   <td>
-    <% if mail_log.created_at > 5.days.ago && !status_ko %>
+    <% if false && mail_log.created_at > 5.days.ago && !status_ko %>
       <% if status = @result_opened["items"].find{|item| item["message"]["headers"]["message-id"] == mail_log.message_id } %>
         <span class="text-info">OUVERT</span>
       <% end %>
