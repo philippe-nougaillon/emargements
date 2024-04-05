@@ -39,13 +39,10 @@
     </thead>
 
     <tbody>
-      <% @mail_logs.each do |mail_log| %>
-        <% status_ko = @result_failed["items"].find{|item| item["message"]["headers"]["message-id"] == mail_log.message_id } %>
-
-        <% if params[:ko].blank? || (mail_log.created_at > 5.days.ago && status_ko) %>
-          <%= render partial: "mail_log", locals: {mail_log: mail_log, status_ko: status_ko} %>
+      <% @mail_logs.each_with_index do |mail_log, index| %>
+        <% if params[:ko].blank? || (mail_log.created_at > 5.days.ago && @status_ko[index] != nil) %>
+          <%= render partial: "mail_log", locals: {mail_log: mail_log, status_ko: @status_ko, index:} %>
         <% end %>
-
       <% end %>
     </tbody>
 
@@ -56,3 +53,5 @@
     </tfoot>
   </table>
 </div>
+
+<p class="mt-8">Affichage de <b><%= params[:ko].blank? ? @mail_logs.count : @status_ko.compact_blank.count %></b> mails sur <%= @organisation_mail_logs.count %> au total</p>

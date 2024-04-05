@@ -9,7 +9,8 @@ class MailLogsController < ApplicationController
     @result_failed = mg_client.get("#{domain}/events", {:event => 'failed'}).to_h
     @result_opened = {}.to_h
 
-    @mail_logs = current_user.organisation.mail_logs.ordered
+    @organisation_mail_logs = current_user.organisation.mail_logs
+    @mail_logs = @organisation_mail_logs.ordered
 
     unless params[:search].blank?
       @mail_logs = @mail_logs.where("LOWER(mail_logs.to) like :search", {search: "%#{params[:search]}%".downcase})
@@ -21,6 +22,12 @@ class MailLogsController < ApplicationController
 
     if params[:ko].blank?
       @result_opened = mg_client.get("#{domain}/events", {:event => 'opened'}).to_h
+    end
+
+    @status_ko = []
+
+    @mail_logs.each do |mail_log|
+      @status_ko << @result_failed["items"].find{|item| item["message"]["headers"]["message-id"] == mail_log.message_id }
     end
   end
 
