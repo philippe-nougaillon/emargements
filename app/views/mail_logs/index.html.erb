@@ -1,40 +1,37 @@
-<div class="flex items-center justify-between border-b mt-6 mb-2 pb-4">
-  <h1 class="text-3xl">Mail Logs</h1>
-</div>
+<h1 class="text-4xl font-bold mb-4">Mail Logs</h1>
+
 <p class="mb-4">Historique des mails envoyés via MailGun, avec Statut et État consultables pendant 5 jours.</p>
 
-<div class="bs-container p-4 shadow mb-4">
-  <%= form_tag request.path, method: :get do %>
-    <div class="flex flex-wrap">
+<%= form_tag request.path, method: :get do %>
+  <div class="flex flex-wrap items-end gap-4">
 
-      <div class="sm:w-1/4 pr-4">
-        <%= label_tag :search, "Destinataire" %>
-        <%= text_field_tag :search, params[:search], include_blank: true, onchange:'this.form.submit()', class:"input input-bordered input-sm w-full" %>
-      </div>
-
-      <div class="relative flex-grow max-w-full flex-1">
-        <%= label_tag :search_subject, "Sujet" %>
-        <%= select_tag :search_subject, options_for_select(@mail_logs.pluck(:subject).uniq.sort, params[:search_subject]), include_blank: true, onchange:'this.form.submit()', class:"select select-bordered select-sm w-full" %>
-      </div>
-
-      <div class="sm:w-1/4 px-4">
-        <%= label_tag :ko, "Afficher que les KO ?" %>
-        <br>
-        <%= check_box_tag :ko, 1, params[:ko], onchange:'this.form.submit()' %>
-      </div>
-      
+    <div class="w-full sm:w-1/4 pr-4">
+      <%= label_tag :search, "Destinataire" %>
+      <%= text_field_tag :search, params[:search], include_blank: true, onchange:'this.form.submit()', class:"input input-bordered input-sm w-full" %>
     </div>
-  <% end %>
-</div>
 
-<div class="overflow-x-auto">
+    <div class="relative flex-grow max-w-full flex-1">
+      <%= label_tag :search_subject, "Sujet" %>
+      <%= select_tag :search_subject, options_for_select(@mail_logs.pluck(:subject).uniq.sort, params[:search_subject]), include_blank: true, onchange:'this.form.submit()', class:"select select-bordered select-sm w-full" %>
+    </div>
+
+    <div class="sm:w-1/4 pr-4">
+      <%= label_tag :ko, "Afficher que les KO ?" %>
+      <br>
+      <%= check_box_tag :ko, 1, params[:ko], onchange:'this.form.submit()' %>
+    </div>
+    
+  </div>
+<% end %>
+
+<div class="overflow-x-auto mt-8">
   <table class="table table-sm">
-    <thead>
+    <thead class="bg-slate-100">
       <tr>
+        <th>Il y a</th>
         <th>De</th>
         <th>À</th>
         <th>Sujet</th>
-        <th>Il y a</th>
         <th>Statut</th>
         <th>État</th>
         <th colspan="2"></th>

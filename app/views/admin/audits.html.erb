@@ -1,55 +1,40 @@
-<div class="border-b mt-6 mb-2 pb-4">
-  <h1 class="text-3xl">Audit des modifications</h1>
-</div>
+<h1 class="text-4xl font-bold mb-4">Audit des modifications</h1>
 
-<div class="p-4 shadow mb-4">
-  <%= form_tag request.path, method: :get do %>
-    <div class="flex flex-wrap">
+<%= form_tag request.path, method: :get do %>
+  <div class="flex flex-wrap items-end gap-4">
 
-      <div class="sm:w-1/6 pr-4">
-        <%= label_tag :start_date, "Du" %>    
-        <%= text_field_tag :start_date, params[:start_date], type:'date', class:"input input-bordered input-sm w-full" %>
-      </div>
-
-      <div class="sm:w-1/6 pr-4">
-        <%= label_tag :end_date, "Au" %>    
-        <%= text_field_tag :end_date, params[:end_date], type:'date', class:"input input-bordered input-sm w-full", onchange:'this.form.submit()' %>
-      </div>
-
-      <div class="sm:w-1/6 px-4">
-        <%= label_tag :type, "Type" %>
-        <%= select_tag :type,
-              options_for_select(@types, params[:type]), include_blank:true, onchange:'this.form.submit()', class:"select select-bordered select-sm w-full" %>
-      </div>
-
-      <div class="sm:w-1/12 px-4">
-        <%= label_tag :action_name, "Action" %>
-        <%= select_tag :action_name,
-              options_for_select(@actions, params[:action_name]), include_blank:true, onchange:'this.form.submit()', class:"select select-bordered select-sm w-full" %>
-      </div>
-
-      <div class="sm:w-1/5 px-4">
-        <%= label_tag :search, "Rechercher" %>
-        <div class="join w-full">       
-          <%= text_field_tag :search, params[:search], class:"input input-bordered input-sm w-full join-item" %>
-          <%= submit_tag 'GO', class:"btn btn-success text-white btn-sm join-item", 'data-turbo': false %>
-        </div>
-      </div>
-
-      <% if params[:start_date].present? && params[:end_date].present? && params[:type] == 'Cour' %>
-        <div class="sm:w-2/5 px-4">
-          <br>
-          <%= check_box_tag :chgt_salle, 1, params[:chgt_salle], onchange:'this.form.submit()' %>
-          <%= label_tag :chgt_salle, "Ne voir que les changements de salle ?" %>
-        </div>
-      <% end %>    
+    <div class="w-full sm:w-1/6 pr-4">
+      <%= label_tag :start_date, "Du" %>    
+      <%= text_field_tag :start_date, params[:start_date], type:'date', class:"input input-bordered input-sm w-full" %>
     </div>
-  <% end %>
-</div>
 
-<div class="overflow-x-auto">
+    <div class="w-full sm:w-1/6 pr-4">
+      <%= label_tag :end_date, "Au" %>    
+      <%= text_field_tag :end_date, params[:end_date], type:'date', class:"input input-bordered input-sm w-full", onchange:'this.form.submit()' %>
+    </div>
+
+    <div class="w-full sm:w-1/6 pr-4">
+      <%= label_tag :type, "Type" %>
+      <%= select_tag :type,
+            options_for_select(@types, params[:type]), include_blank:true, onchange:'this.form.submit()', class:"select select-bordered select-sm w-full" %>
+    </div>
+
+    <div class="w-full sm:w-1/12 pr-4">
+      <%= label_tag :action_name, "Action" %>
+      <%= select_tag :action_name,
+            options_for_select(@actions, params[:action_name]), include_blank:true, onchange:'this.form.submit()', class:"select select-bordered select-sm w-full" %>
+    </div>
+
+    <div class="w-full sm:w-1/5 pr-4">
+      <%= label_tag :search, "Rechercher" %>      
+      <%= text_field_tag :search, params[:search], onchange:'this.form.submit()', class:"input input-bordered input-sm w-full" %>
+    </div>   
+  </div>
+<% end %>
+
+<div class="overflow-x-auto mt-8">
   <table class="table table-sm">
-    <thead class="bg-slate-100 border">
+    <thead class="bg-slate-100">
       <tr>
         <th>Date</th>
         <th>Utilisateur</th>
@@ -63,3 +48,5 @@
     <%= render partial: 'audit', collection: @audits %>
   </table>
 </div>
+
+<p class="mt-8">Affichage de <b><%= @audits.count %></b> audits sur <%= @organisation_audits.count %> au total</p>

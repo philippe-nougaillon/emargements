@@ -59,8 +59,9 @@ class AdminController < ApplicationController
   end
 
   def audits
-    @audits = Audited::Audit.where(user_id: current_user.organisation.users.pluck(:id)).order("id DESC")
-    @types  = Audited::Audit.where(user_id: current_user.organisation.users.pluck(:id)).pluck(:auditable_type).uniq.sort
+    @organisation_audits = Audited::Audit.where(user_id: current_user.organisation.users.pluck(:id))
+    @audits = @organisation_audits.order("id DESC")
+    @types  = @organisation_audits.pluck(:auditable_type).uniq.sort
     @actions= %w[update create destroy]
 
     if params[:start_date].present? && params[:end_date].present? 
