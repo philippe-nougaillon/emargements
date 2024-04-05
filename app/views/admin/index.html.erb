@@ -19,16 +19,16 @@
       </div>
     <% else %>
       <div class="flex flex-col items-center gap-4 mb-12">
-        <% if current_user.sign_in_count.zero? %>
+        <% if current_user.sign_in_count < 2 %>
           <h1 class="text-3xl font-bold">Bienvenue</h1>
         <% end %>
         <% unless current_user.organisation.step >=3 %>
           <h2>Il reste quelques étapes avant de pouvoir envoyer vos premières convocations</h2>
         <% else %>
           <h2 class="font-bold text-success text-xl text-center">
-            Bravo, la configuration est terminée.
+            Bravo, la configuration est terminée !
             <br>
-            Accédez à vos informations en utilisant les boutons ci-dessous
+            Accédez à vos informations en utilisant les boutons ci-dessous :
           </h2>
         <% end %>
         <ul class="steps steps-vertical max-w-96">

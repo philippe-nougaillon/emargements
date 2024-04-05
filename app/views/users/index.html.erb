@@ -1,6 +1,9 @@
-<div>
-  <%= link_to "Nouvel Utilisateur", new_user_path, class:'btn btn-primary btn-outline btn-lg float-end' %>
+<div class="flex flew-wrap justify-between">
   <h1 class="text-4xl font-bold mb-4">Utilisateurs</h1>
+  <div>
+    <%= link_to "Nouvel Utilisateur", new_user_path, class:'btn btn-primary btn-outline btn-lg' %>
+    <%= link_to "Import", admin_import_path, class:'btn btn-secondary btn-outline btn-lg' %>
+  </div>
 </div>
 
 <%= form_tag request.path, method: :get do %>
@@ -32,7 +35,7 @@
 </div>
 
 
-<p class="mt-8">Affichage de <b><%= @users.count %></b> utilisateurs sur <%= User.all.count %> au total</p>
+<p class="mt-8">Affichage de <b><%= @users.count %></b> utilisateurs sur <%= current_user.organisation.users.count %> au total</p>
 
 <script>
   new SlimSelect({

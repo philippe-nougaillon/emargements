@@ -38,7 +38,7 @@
 
   <div class="mt-4">
     <%= form.label :user_id, "Gestionnaire (utilisateur du groupe 'Gestionnaire')", style: "display: block" %>
-    <%= form.collection_select(:user_id, @users, :id, :nom_prénom, {include_blank: true, required: true}, class:"select select-bordered select-sm w-full") %>
+    <%= form.collection_select(:user_id, @users, :id, :nom_prénom, {}, class:"select select-bordered select-sm w-full") %>
   </div>
 
   <div class="mt-4" title="Envoyer automatiquement le lien au gestionnaire 10 minutes avant le début de l'assemblée ?">

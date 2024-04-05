@@ -5,7 +5,7 @@
 
     <div class="field my-4">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autocomplete: "email", class:'input input-sm input-bordered w-full' %>
+      <%= f.email_field :email, autocomplete: "email", class:'input input-sm input-bordered w-full', required: true %>
     </div>
 
     <div class="field">
@@ -13,12 +13,12 @@
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> caractères minimum)</em>
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", class:'input input-sm input-bordered w-full' %>
+      <%= f.password_field :password, autocomplete: "new-password", class:'input input-sm input-bordered w-full', required: true %>
     </div>
 
     <div class="field my-4">
       <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'input input-sm input-bordered w-full' %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'input input-sm input-bordered w-full', required: true %>
     </div>
 
     <div class="actions">
