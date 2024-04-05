@@ -2,6 +2,8 @@ class Assemblee < ApplicationRecord
   extend FriendlyId
 	friendly_id :slug_candidates, use: :slugged
 
+  audited
+
   acts_as_taggable_on :tags
 
   belongs_to :user

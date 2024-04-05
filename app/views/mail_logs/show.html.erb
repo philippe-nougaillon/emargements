@@ -1,15 +1,40 @@
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+<p class="mb-4">
+  <strong>Il y a :</strong>
+  <%= time_ago_in_words @mail_log.created_at %>
+</p>
+
+<p class="mb-4">
+  <strong>Destinataire :</strong>
+  <%= @mail_log.to %>
+</p>
+
+<p class="mb-4">
+  <strong>Sujet :</strong>
+  <%= @mail_log.subject %>
+</p>
+
+<p class="mb-4">
+  <strong>Date :</strong>
+  <%= l @mail_log.created_at %>
+</p>
+
+<p class="mb-4">
+  <strong>ID du message :</strong>
+  <%= @mail_log.message_id %>
+</p>
+
+<% if @mail_log.created_at > 5.days.ago %>
+  <p class="mb-4">
+    <strong>Statut :</strong>
+    <% if status = @result["items"].find{|item| item["message"]["headers"]["message-id"] == @mail_log.message_id } %>
+      <span class="text-error">
+        <%= JSON.pretty_generate(status) %>
+      </span>
+
+    <% else %>
+      <span class="text-success">OK</span>
     <% end %>
+  </p>
+<% end %>
 
-    <%= render @mail_log %>
-
-    <%= link_to "Edit this mail_log", edit_mail_log_path(@mail_log), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this mail_log", mail_log_path(@mail_log), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-    </div>
-    <%= link_to "Back to mail_logs", mail_logs_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  </div>
-</div>
+<%= link_to 'Retour', mail_logs_path, class: 'text-primary hover:underline' %>

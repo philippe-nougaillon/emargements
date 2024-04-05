@@ -2,6 +2,8 @@ class Organisation < ApplicationRecord
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
+  audited
+
   has_one_attached :logo
 
   has_many :users

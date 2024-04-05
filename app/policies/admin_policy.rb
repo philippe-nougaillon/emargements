@@ -18,4 +18,8 @@ class AdminPolicy
     import?
   end
 
+  def audits?
+  index?
+  end
+
 end

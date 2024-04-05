@@ -58,6 +58,29 @@ class AdminController < ApplicationController
     redirect_to admin_index_path, notice: "#{users_saved} participants importés sur #{emails.count}"
   end
 
+  def audits
+    @audits = Audited::Audit.where(user_id: current_user.organisation.users.pluck(:id)).order("id DESC")
+    @types  = Audited::Audit.where(user_id: current_user.organisation.users.pluck(:id)).pluck(:auditable_type).uniq.sort
+    @actions= %w[update create destroy]
+
+    if params[:start_date].present? && params[:end_date].present? 
+      @audits = @audits.where("created_at BETWEEN (?) AND (?)", params[:start_date], params[:end_date])
+    end
+
+    if params[:type].present?
+      @audits = @audits.where(auditable_type: params[:type])
+    end
+
+    if params[:action_name].present?
+      @audits = @audits.where(action: params[:action_name])
+    end
+
+    if params[:search].present?
+      @audits = @audits.where("audited_changes ILIKE ?", "%#{params[:search]}%")
+    end
+
+  end
+
   private
 
   def is_user_authorized
