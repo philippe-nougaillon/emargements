@@ -27,8 +27,6 @@
         <% else %>
           <h2 class="font-bold text-success text-xl text-center">
             Bravo, la configuration est terminée !
-            <br>
-            Accédez à vos informations en utilisant les boutons ci-dessous :
           </h2>
         <% end %>
         <ul class="steps steps-vertical max-w-96">
@@ -45,6 +43,11 @@
             <p>Configuration terminée</p>
           </li>
         </ul>
+        <% if current_user.organisation.step >=3 %>
+          <h2 class="font-bold text-success text-xl text-center">
+            Accédez à vos informations en utilisant les boutons ci-dessous :
+          </h2>
+        <% end %>
       </div>
     <% end %>
   </div>
