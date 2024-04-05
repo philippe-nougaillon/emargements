@@ -99,6 +99,10 @@ module AdminHelper
       if User.exists?(audit.auditable_id)
         user_path(User.find(audit.auditable_id))
       end
+    when "Assemblee"
+      if Assemblee.exists?(audit.auditable_id)
+        assemblee_path(Assemblee.find(audit.auditable_id))
+      end
     when "MailLog"
       if MailLog.exists?(audit.auditable_id)
         mail_log_path(MailLog.find(audit.auditable_id))

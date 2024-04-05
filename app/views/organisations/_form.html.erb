@@ -13,21 +13,21 @@
 
   <div class="my-5">
     <%= form.label :nom %>
-    <%= form.text_field :nom, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true, autofocus: true, placeholder: 'ex: CESER Grand-Est' %>
+    <%= form.text_field :nom, class: "input input-bordered input-sm w-full", required: true, autofocus: true, placeholder: 'ex: CESER Grand-Est' %>
   </div>
 
   <div class="my-5">
     <%= form.label :logo %>
-    <%= form.file_field :logo, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.file_field :logo, class: "file-input file-input-bordered file-input-sm file-input-primary w-full" %>
   </div>
 
   <div class="my-5">
     <%= form.label :adresse %>
-    <%= form.text_area :adresse, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.text_area :adresse, rows: 4, class: "textarea textarea-bordered textarea-sm w-full" %>
   </div>
 
 
   <div class="inline">
-    <%= form.submit "Enregister", class: "btn btn-sm btn-primary btn-outline" %>
+    <%= form.submit "Enregister", class: "btn btn-sm btn-primary btn-outline mb-4" %>
   </div>
 <% end %>
