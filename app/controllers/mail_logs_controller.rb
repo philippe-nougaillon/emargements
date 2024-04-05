@@ -17,6 +17,10 @@ class MailLogsController < ApplicationController
     unless params[:search_subject].blank?
       @mail_logs = @mail_logs.where(subject: params[:search_subject])
     end
+
+    if params[:ko].blank?
+      @result_opened = mg_client.get("#{domain}/events", {:event => 'opened'}).to_h
+    end
   end
 
   # GET /mail_logs/1 or /mail_logs/1.json
