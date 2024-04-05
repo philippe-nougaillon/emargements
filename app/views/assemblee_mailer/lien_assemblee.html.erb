@@ -1,3 +1,6 @@
 Bonjour <%= @assemblee.user.prénom %>,
 <br><br>
 Voici le lien de l'assemblée : <%= link_to admin_signature_url(assemblee_id: @assemblee.slug), admin_signature_url(assemblee_id: @assemblee.slug), class: "text-primary hover:underline" %>
+
+<br><br>
+<%= raw @assemblee.qrcode(admin_signature_url(assemblee_id: @assemblee.slug)) %>
