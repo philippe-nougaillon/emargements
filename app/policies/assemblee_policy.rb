@@ -1,17 +1,16 @@
-class AssembleePolicy
-  attr_reader :user
-
-  # `_record` in this example will be :admin
-  def initialize(user, _record)
-    @user = user
+class AssembleePolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      scope
+    end
   end
 
   def index?
-    user.admin?
+    user && user.admin?
   end
 
   def show?
-    index?
+    index? && record.organisation.users.include?(user)
   end
 
   def new?
@@ -23,7 +22,7 @@ class AssembleePolicy
   end
 
   def edit?
-    index?
+    show?
   end
 
   def update?
@@ -31,10 +30,10 @@ class AssembleePolicy
   end
 
   def destroy?
-    index?
+    show?
   end
 
   def commencer?
-    index?
+    show?
   end
 end

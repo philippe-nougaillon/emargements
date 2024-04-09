@@ -10,8 +10,10 @@ class AssembleePdf
     users = User.where(id: assemblee.related_users)
     users.ordered.each_with_index do |user, index|
       start_new_page unless index == 0
-      image "#{@image_path}/ceser.png", :width => 150
-      move_down @margin_down * 4
+      if assemblee.organisation.logo.attached?
+        image StringIO.open(assemblee.organisation.logo.download), :height => 100
+        move_down @margin_down * 2
+      end
       text "<b>CONVOCATION</b>", inline_format: true, size: 16, align: :center
       move_down @margin_down * 4
       text "Bonjour #{user.prénom_nom},"

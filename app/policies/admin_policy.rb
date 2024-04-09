@@ -7,7 +7,19 @@ class AdminPolicy
   end
 
   def index?
-    user.admin?
+    user && user.admin?
+  end
+
+  def import?
+    user && user.admin?
+  end
+
+  def import_do?
+    import?
+  end
+
+  def audits?
+  index?
   end
 
 end

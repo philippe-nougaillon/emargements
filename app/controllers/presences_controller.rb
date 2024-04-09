@@ -4,11 +4,11 @@ class PresencesController < ApplicationController
 
   # GET /presences or /presences.json
   def index
-    @presences = Presence.ordered
-    @assemblees = Assemblee.all.order(:nom)
+    @presences = current_user.organisation.presences.ordered
+    @assemblees = current_user.organisation.assemblees.order(:nom)
 
-    users = User.all
-    @tags = User.all.tag_counts_on(:tags).order(:taggings_count).reverse
+    users = current_user.organisation.users
+    @tags = users.tag_counts_on(:tags).order(:taggings_count).reverse
 
     unless params[:tags].blank?
       users = users.tagged_with(params[:tags].reject(&:blank?))
@@ -127,6 +127,6 @@ class PresencesController < ApplicationController
     end
 
     def is_user_authorized
-      authorize Presence
+      authorize @presence? @presence : Presence
     end
 end

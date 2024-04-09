@@ -1,17 +1,16 @@
-class PresencePolicy
-  attr_reader :user
-
-  # `_record` in this example will be :admin
-  def initialize(user, _record)
-    @user = user
+class PresencePolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      scope
+    end
   end
 
   def index?
-    user.admin?
+    user && user.admin?
   end
 
   def show?
-    index?
+    index? && record.assemblee.organisation.users.include?(user)
   end
 
   def new?
@@ -23,7 +22,7 @@ class PresencePolicy
   end
 
   def edit?
-    index?
+    show?
   end
 
   def update?
@@ -31,14 +30,6 @@ class PresencePolicy
   end
 
   def destroy?
-    index?
-  end
-
-  def signature_admin?
-    user && user.admin?
-  end
-
-  def signature_admin_do?
-    signature_admin?
+    show?
   end
 end

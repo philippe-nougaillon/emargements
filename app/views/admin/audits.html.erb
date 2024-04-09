@@ -1,0 +1,52 @@
+<h1 class="text-4xl font-bold mb-4">Audit des modifications</h1>
+
+<%= form_tag request.path, method: :get do %>
+  <div class="flex flex-wrap items-end gap-4">
+
+    <div class="w-full sm:w-1/6 pr-4">
+      <%= label_tag :start_date, "Du" %>    
+      <%= text_field_tag :start_date, params[:start_date], type:'date', class:"input input-bordered input-sm w-full" %>
+    </div>
+
+    <div class="w-full sm:w-1/6 pr-4">
+      <%= label_tag :end_date, "Au" %>    
+      <%= text_field_tag :end_date, params[:end_date], type:'date', class:"input input-bordered input-sm w-full", onchange:'this.form.submit()' %>
+    </div>
+
+    <div class="w-full sm:w-1/6 pr-4">
+      <%= label_tag :type, "Type" %>
+      <%= select_tag :type,
+            options_for_select(@types, params[:type]), include_blank:true, onchange:'this.form.submit()', class:"select select-bordered select-sm w-full" %>
+    </div>
+
+    <div class="w-full sm:w-1/12 pr-4">
+      <%= label_tag :action_name, "Action" %>
+      <%= select_tag :action_name,
+            options_for_select(@actions, params[:action_name]), include_blank:true, onchange:'this.form.submit()', class:"select select-bordered select-sm w-full" %>
+    </div>
+
+    <div class="w-full sm:w-1/5 pr-4">
+      <%= label_tag :search, "Rechercher" %>      
+      <%= text_field_tag :search, params[:search], onchange:'this.form.submit()', class:"input input-bordered input-sm w-full" %>
+    </div>   
+  </div>
+<% end %>
+
+<div class="overflow-x-auto mt-8">
+  <table class="table table-sm">
+    <thead class="bg-slate-100">
+      <tr>
+        <th>Date</th>
+        <th>Utilisateur</th>
+        <th>Type</th>
+        <th>Id</th>
+        <th>Action</th>
+        <th>Modifications</th>
+      </tr>
+    </thead>
+
+    <%= render partial: 'audit', collection: @audits %>
+  </table>
+</div>
+
+<p class="mt-8">Affichage de <b><%= @audits.count %></b> audits sur <%= @organisation_audits.count %> au total</p>

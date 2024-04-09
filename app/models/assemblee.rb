@@ -2,10 +2,15 @@ class Assemblee < ApplicationRecord
   extend FriendlyId
 	friendly_id :slug_candidates, use: :slugged
 
+  audited
+
   acts_as_taggable_on :tags
 
-  has_many :presences, dependent: :destroy
   belongs_to :user
+  belongs_to :organisation
+  has_many :presences, dependent: :destroy
+
+  validates :nom, :début, :durée, presence: :true
 
   after_save :update_fin
 
@@ -22,7 +27,7 @@ class Assemblee < ApplicationRecord
   def related_users
     ids = []
     self.tags.each do |tag|
-      ids << User.tagged_with(tag).pluck(:id)
+      ids << self.organisation.users.tagged_with(tag).pluck(:id)
     end
     return ids.flatten.uniq
   end
@@ -40,7 +45,7 @@ class Assemblee < ApplicationRecord
   end
 
   def horaires
-    "#{I18n.l self.try(:début), format: :short}->#{self.try(:fin).try(:hour)}h#{self.try(:fin).try(:min)}"
+    "#{self.début.strftime("%d %b")} #{self.début.hour}h#{self.début.min unless self.début.min == 0} -> #{self.fin.hour}h#{self.fin.min unless self.fin.min == 0}"
   end
 
   def users_not_signed

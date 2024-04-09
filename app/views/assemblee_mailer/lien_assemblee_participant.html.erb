@@ -1,0 +1,8 @@
+Bonjour <%= @user.prénom %>,
+<br><br>
+Voici le lien de l'assemblée : <%= link_to admin_signature_url(assemblee_id: @assemblee.slug), admin_signature_url(assemblee_id: @assemblee.slug, user_id: @user.slug), class: "text-primary hover:underline" %>
+
+<br><br>
+<%= @assemblee.user.nom_prénom %>,
+<br>
+<%= @assemblee.organisation.nom %>

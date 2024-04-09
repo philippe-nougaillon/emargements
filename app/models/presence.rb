@@ -1,4 +1,6 @@
 class Presence < ApplicationRecord
+  audited
+
   belongs_to :user
   belongs_to :assemblee
 

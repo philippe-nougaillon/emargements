@@ -14,4 +14,9 @@
     </p>
   </div>
   <img src=<%= presence.signature %> style="padding: 10px; height:125px">
+  <%= button_to presence, method: :delete, data: {turbo_confirm: "Êtes-vous certain(e) de vouloir supprimer cet émargement ?" }, class:'text-base-300 hover:text-error float-end' do %>
+    <span class="material-symbols-outlined">
+      delete
+    </span>
+  <% end %>
 </div>

@@ -1,0 +1,22 @@
+<div id="<%= dom_id organisation %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Nom:</strong>
+    <%= organisation.nom %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Adresse:</strong>
+    <%= organisation.adresse %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Logo:</strong>
+    <%= link_to organisation.logo.filename, organisation.logo if organisation.logo.attached? %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Voir", organisation, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Modifier", edit_organisation_path(organisation), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

@@ -1,0 +1,23 @@
+<div class="mx-auto md:w-2/3 w-full">
+  <h1 class="text-4xl font-bold mb-6">Importer les participants</h1>
+
+  <%= form_tag({action: "import_do", method: :post}, multipart: true) do %>
+    <div>
+      <%= label_tag :content, "Adresses emails à importer" %>
+      <%= text_area_tag :content, nil, rows: 7, class:"textarea textarea-bordered textarea-sm w-full shadow", required: true, placeholder: "annette.bonvoisin@orange.fr\r\njacques.boulanger@free.fr" %>
+      <label>
+        <span class="label-text-alt">Les adresses électroniques (emails) doivent être séparées par un retour à la ligne</span>
+      </label>
+    </div>
+    
+    <div class="mt-4">
+      <%= label_tag :groupes, "Groupes" %>
+      <%= text_field_tag :groupes, nil, class:"input input-bordered input-sm w-full shadow", placeholder: "ex: Santé, Mobilité, Territoires, Général" %>
+      <div class="label">
+        <span class="label-text-alt">Séparez les différents groupes par une virgule</span>
+      </div>
+    </div>
+
+    <%= submit_tag "Lancer l'importation", class: "btn btn-primary btn-outline my-4", 'data-turbo': false %>
+  <% end %>
+</div>

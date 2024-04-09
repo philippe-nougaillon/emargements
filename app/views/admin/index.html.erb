@@ -1,27 +1,69 @@
 <div class="overflow-x-auto">
   <div class="flex justify-center mt-12">
-    <% if @assemblees.any? %>
-      <ul class="timeline">
-        <% @assemblees.each_with_index do |assemblee, index| %>
-          <% started = (assemblee.début < DateTime.now) %>
-          <% finished = (assemblee.fin < DateTime.now) %>
-          <li>
-            <hr class="<%= 'bg-primary' if started || assemblee == Assemblee.current %>"/>
-            <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.even? %>
-            <div class="timeline-middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 <%= 'text-primary' if started || assemblee == Assemblee.current %>"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg></div>
-            <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.odd? %>
-            <hr class="<%= 'bg-primary' if finished %>"/>
-          </li>
-        <% end %>
-      </ul>
+    <% if current_user.organisation.step >= 4 %>
+      <div class="flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-8">Chronologie des assemblées</h1>
+        <ul class="timeline mb-24">
+          <% @assemblees.each_with_index do |assemblee, index| %>
+            <% started = (assemblee.début < DateTime.now) %>
+            <% finished = (assemblee.fin < DateTime.now) %>
+            <li>
+              <hr class="<%= 'bg-primary' if started || assemblee == Assemblee.current %>"/>
+              <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.even? %>
+              <div class="timeline-middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 <%= 'text-primary' if started || assemblee == Assemblee.current %>"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg></div>
+              <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.odd? %>
+              <hr class="<%= 'bg-primary' if finished %>"/>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     <% else %>
-      <%= link_to "Nouvelle Assemblée", new_assemblee_path, class:'btn btn-primary btn-outline btn-lg float-end' %>
+      <div class="flex flex-col items-center gap-4 mb-12">
+        <% if current_user.sign_in_count < 2 %>
+          <h1 class="text-3xl font-bold">Bienvenue</h1>
+        <% end %>
+        <% unless current_user.organisation.step >=3 %>
+          <h2>Il reste quelques étapes avant de pouvoir envoyer vos premières convocations</h2>
+        <% else %>
+          <h2 class="font-bold text-success text-xl text-center">
+            Bravo, la configuration est terminée !
+          </h2>
+        <% end %>
+        <ul class="steps steps-vertical max-w-96">
+          <li class="step <%= 'step-primary' if current_user.organisation.step >= 1 %> text-xl" data-content="<%= current_user.organisation.step >= 1 ? '✓' : '1' %>">
+            <%= link_to "Modifier mon organisation", edit_organisation_path(current_user.organisation), class:'text-primary underline' %>
+          </li>
+          <li class="step <%= 'step-primary' if current_user.organisation.step >= 2 %> text-xl" data-content="<%= current_user.organisation.step >= 2 ? '✓' : '2' %>">
+            <%= link_to_if current_user.organisation.step >= 1, "Importer les participants", admin_import_path, class:'text-primary underline' %>
+          </li>
+          <li class="step <%= 'step-primary' if current_user.organisation.step >= 3 %> text-xl" data-content="<%= current_user.organisation.step >= 3 ? '✓' : '3' %>">
+            <%= link_to_if current_user.organisation.step >= 2, "Créer une nouvelle assemblée", new_assemblee_path, class:'text-primary underline' %>
+          </li>
+          <li class="step <%= 'step-primary' if current_user.organisation.step >= 3 %> text-xl" data-content="<%= current_user.organisation.step >= 3 ? '★' : '4' %>">
+            <p>Configuration terminée</p>
+          </li>
+        </ul>
+        <% if current_user.organisation.step >=3 %>
+          <h2 class="font-bold text-success text-xl text-center">
+            Accédez à vos informations en utilisant les boutons ci-dessous :
+          </h2>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
 
-<div class="flex flex-col items-center gap-8 mt-24">
-  <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg flex-1 max-w-xl w-full' %>
-  <%= link_to "UTILISATEURS", users_path, class: 'btn btn-outline btn-primary btn-lg flex-1 max-w-xl w-full' %>
-  <%= link_to "ÉMARGEMENTS", presences_path, class: 'btn btn-outline btn-primary btn-lg flex-1 max-w-xl w-full' %>
-</div>
+<% if current_user.organisation.step >= 3 %>
+  <div class="flex flex-wrap gap-8">
+    <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+    <%= link_to "ÉMARGEMENTS", presences_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+  </div>
+  <div class="flex flex-wrap gap-8 my-8">
+    <%= link_to "UTILISATEURS / PARTICIPANTS", users_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+    <%= link_to "ORGANISATION", edit_organisation_path(current_user.organisation), class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+  </div>
+  <div class="flex flex-wrap gap-8 mb-8">
+    <%= link_to "MAIL LOGS", mail_logs_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+    <%= link_to "AUDIT TRAIL", admin_audits_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+  </div>
+<% end %>

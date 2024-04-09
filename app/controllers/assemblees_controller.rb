@@ -4,7 +4,7 @@ class AssembleesController < ApplicationController
 
   # GET /assemblees or /assemblees.json
   def index
-    @assemblees = Assemblee.ordered
+    @assemblees = current_user.organisation.assemblees.ordered
 
     unless params[:search].blank?
       @assemblees = @assemblees.where("nom ILIKE :search OR adresse ILIKE :search", {search: "%#{params[:search]}%"})
@@ -36,24 +36,31 @@ class AssembleesController < ApplicationController
   # GET /assemblees/new
   def new
     @assemblee = Assemblee.new
+    @tags = current_user.organisation.users.tag_counts_on(:tags).order(:name)
+    @users = current_user.organisation.users.tagged_with("Gestionnaire")
+
+    @assemblee.début = DateTime.now.change(min: 0, sec: 0) + 1.hour
     @assemblee.durée = 2
-    @assemblee.début = DateTime.now.change(sec: 0)
-    @tags = User.tag_counts_on(:tags).order(:name)
   end
 
   # GET /assemblees/1/edit
   def edit
-    @tags = User.tag_counts_on(:tags).order(:name)
+    @tags = current_user.organisation.users.tag_counts_on(:tags).order(:name)
+    @users = current_user.organisation.users.tagged_with("Gestionnaire")
   end
 
   # POST /assemblees or /assemblees.json
   def create
     @assemblee = Assemblee.new(assemblee_params)
     @assemblee.tag_list.add(params[:assemblee][:tags])
+    @assemblee.organisation = current_user.organisation
 
     respond_to do |format|
       if @assemblee.save
-        format.html { redirect_to assemblees_url, notice: "Assemblée créée avec succès." }
+        format.html do 
+          redirect_to current_user.organisation.step < 4 ? admin_index_path : assemblees_url
+          flash[:notice] = "Assemblée créée avec succès."
+        end
         format.json { render :show, status: :created, location: @assemblee }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -89,8 +96,9 @@ class AssembleesController < ApplicationController
   end
 
   def commencer
-    AssembleeMailer.lien_assemblee(@assemblee).deliver_now
-    redirect_to request.referrer, notice: "Lien de signature envoyée au gestionnaire."
+    mailer_response = AssembleeMailer.lien_assemblee(@assemblee).deliver_now
+    MailLog.create(organisation_id: @assemblee.organisation_id, user_id: current_user.id, message_id: mailer_response.message_id, to: @assemblee.user.email, subject: "Lien assemblée gestionnaire manuel")
+    redirect_to request.referrer, notice: "Lien de signature envoyé au gestionnaire."
   end
 
   private
@@ -101,10 +109,10 @@ class AssembleesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def assemblee_params
-      params.require(:assemblee).permit(:nom, :début, :durée, :adresse, :user_id, :tag_list, :automatique)
+      params.require(:assemblee).permit(:nom, :début, :durée, :adresse, :user_id, :tag_list, :automatique, :notifier_participants)
     end
 
     def is_user_authorized
-      authorize Assemblee
+      authorize @assemblee ? @assemblee : Assemblee
     end
 end
