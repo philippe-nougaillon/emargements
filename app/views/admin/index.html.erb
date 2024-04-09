@@ -24,10 +24,6 @@
         <% end %>
         <% unless current_user.organisation.step >=3 %>
           <h2>Il reste quelques étapes avant de pouvoir envoyer vos premières convocations</h2>
-        <% else %>
-          <h2 class="font-bold text-success text-xl text-center">
-            Bravo, la configuration est terminée !
-          </h2>
         <% end %>
         <ul class="steps steps-vertical max-w-96">
           <li class="step <%= 'step-primary' if current_user.organisation.step >= 1 %> text-xl" data-content="<%= current_user.organisation.step >= 1 ? '✓' : '1' %>">
@@ -45,7 +41,7 @@
         </ul>
         <% if current_user.organisation.step >=3 %>
           <h2 class="font-bold text-success text-xl text-center">
-            Accédez à vos informations en utilisant les boutons ci-dessous :
+            Bravo, la configuration est terminée ! Accédez à vos informations en utilisant les boutons ci-dessous :
           </h2>
         <% end %>
       </div>
