@@ -13,7 +13,8 @@ class User < ApplicationRecord
           :validatable,
           :trackable,
           :timeoutable,
-          :registerable
+          :registerable,
+          :confirmable
 
   acts_as_taggable_on :tags
 
