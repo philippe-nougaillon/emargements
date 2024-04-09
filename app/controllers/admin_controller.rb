@@ -55,7 +55,7 @@ class AdminController < ApplicationController
         users_saved += 1
       end
     end
-    redirect_to admin_index_path, notice: "#{users_saved} participants importés sur #{emails.count}"
+    redirect_to admin_index_path, notice: "#{users_saved} participant(s) importé(s) sur #{emails.count}"
   end
 
   def audits
