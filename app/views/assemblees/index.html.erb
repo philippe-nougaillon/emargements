@@ -17,10 +17,10 @@
   </div>
 <% end %>
 
-<div id="assemblees" class="mt-8">
-  <% @assemblees.each do |assemblee| %>
-    <%= render assemblee %>
-  <% end %>
+<div class="divider"></div>
+
+<div id="assemblees">
+  <%= render @assemblees %>
 </div>
 
 <p class="mt-8">Affichage de <b><%= pluralize(@assemblees.count, 'assemblée') %></b> sur <%= current_user.organisation.assemblees.count %> au total</p>

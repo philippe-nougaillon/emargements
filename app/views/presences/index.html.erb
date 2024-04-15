@@ -16,9 +16,11 @@
   </div>
 <% end %>
 
-<div id="presences" class="flex flex-wrap gap-4 justify-around mt-8 mb-12">
-  <%= turbo_stream_from "presences" %>
+<div class="divider"></div>
+
+<div id="presences" class="flex flex-wrap gap-4 mb-12">
   <%= render @presences %>
+  <%= turbo_stream_from "presences" %>
 </div>
 
 <p class="mt-8">
