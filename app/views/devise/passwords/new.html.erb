@@ -1,17 +1,20 @@
-<div class="flex flex-col justify-center items-center h-screen">
-  <h1 class="text-2xl font-bold mb-4">Mot de passe oublié</h1>
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+<div class="flex flex-col justify-center h-screen max-w-72 mx-auto">
+  <h1 class="text-2xl font-bold border-b border-gray-400 pb-4 w-full text-center mb-4">Mot de passe oublié</h1>
 
-    <div class="field mb-4">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'input input-sm input-bordered w-full' %>
-    </div>
+  <div class="w-full">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="actions">
-      <%= f.submit "Changer de mot de passe", class: 'btn btn-outline btn-primary btn-lg w-full my-4' %>
-    </div>
-  <% end %>
+      <div class="field my-4">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'input input-sm input-bordered w-full' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Changer de mot de passe", class: 'btn btn-outline btn-primary btn-lg w-full mt-4 mb-8' %>
+      </div>
+    <% end %>
+  </div>
 
   <%= render "devise/shared/links" %>
 </div>
