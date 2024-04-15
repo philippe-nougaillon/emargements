@@ -8,14 +8,9 @@
       <p>Envoi automatique du lien à tous les participants avant le début de l'assemblée</p>
       <p>Propositions d'itinéraires sur les convocations, avec plusieurs modalités de transport et les bilans carbone</p>
       <p>Enlève des convocations le lien d'auto-promotion</p>
-      <div class="flex flex-wrap mt-8 justify-around">
-        <div id="paypal-container-RLKRFJG5SD4M6"></div>
-        <script>
-          paypal.HostedButtons({
-            hostedButtonId: "RLKRFJG5SD4M6",
-          }).render("#paypal-container-RLKRFJG5SD4M6")
-        </script>
-        <%= image_tag "Compte PREMIUM-qrcode.png", class: "h-full" %>
+      <div class="flex flex-wrap mt-8 justify-around items-center">
+        <%= link_to "Payer avec PayPal", "https://www.paypal.com/ncp/payment/RLKRFJG5SD4M6", class: 'btn btn-primary btn-outline btn-lg hover:!text-white' %>
+        <%= image_tag "Compte PREMIUM-qrcode.png" %>
       </div>
     </div>
   </div>
