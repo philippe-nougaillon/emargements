@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     get :import
     post :import_do
     get :audits
+    get :premium
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

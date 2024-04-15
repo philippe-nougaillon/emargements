@@ -82,6 +82,10 @@ class AdminController < ApplicationController
 
   end
 
+  def premium
+    
+  end
+
   private
 
   def is_user_authorized
