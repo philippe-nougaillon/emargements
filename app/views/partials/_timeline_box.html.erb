@@ -3,5 +3,17 @@
     <b><%= assemblee.nom.humanize %></b>
     <br>
     <%= assemblee.horaires %>
+    <br>
+    <p class="min-h-4 font-black">
+      <% if assemblee.début > DateTime.now %>
+        <span class="text-warning">
+          Commence dans <%= time_ago_in_words assemblee.début %>
+        </span>
+      <% elsif ((assemblee.début + assemblee.durée.to_f.hours) - Time.current).positive? %>
+        <span class="text-error">
+          Se termine dans <%= time_ago_in_words assemblee.fin %>
+        </span>
+      <% end %>
+    </p>
   <% end %>
 </div>
