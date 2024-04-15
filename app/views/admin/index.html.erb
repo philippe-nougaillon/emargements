@@ -27,7 +27,7 @@
         <% end %>
         <ul class="steps steps-vertical max-w-96">
           <li class="step <%= 'step-primary' if current_user.organisation.step >= 1 %> text-xl" data-content="<%= current_user.organisation.step >= 1 ? '✓' : '1' %>">
-            <%= link_to "Modifier mon organisation", edit_organisation_path(current_user.organisation), class:'text-primary underline' %>
+            <%= link_to "Renommer mon organisation", edit_organisation_path(current_user.organisation), class:'text-primary underline' %>
           </li>
           <li class="step <%= 'step-primary' if current_user.organisation.step >= 2 %> text-xl" data-content="<%= current_user.organisation.step >= 2 ? '✓' : '2' %>">
             <%= link_to_if current_user.organisation.step >= 1, "Importer les participants", admin_import_path, class:'text-primary underline' %>
@@ -41,7 +41,7 @@
         </ul>
         <% if current_user.organisation.step >=3 %>
           <h2 class="font-bold text-success text-xl text-center">
-            Bravo, la configuration est terminée ! Accédez à vos informations en utilisant les boutons ci-dessous :
+            Bravo, votre première assemblée est prête ! Accédez à vos informations en utilisant les boutons ci-dessous :
           </h2>
         <% end %>
       </div>
@@ -51,15 +51,15 @@
 
 <% if current_user.organisation.step >= 3 %>
   <div class="flex flex-wrap gap-8">
-    <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
-    <%= link_to "ÉMARGEMENTS", presences_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+    <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
+    <%= link_to "ÉMARGEMENTS", presences_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
   </div>
   <div class="flex flex-wrap gap-8 my-8">
-    <%= link_to "UTILISATEURS / PARTICIPANTS", users_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
-    <%= link_to "ORGANISATION", edit_organisation_path(current_user.organisation), class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+    <%= link_to "UTILISATEURS / PARTICIPANTS", users_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
+    <%= link_to "ORGANISATION", edit_organisation_path(current_user.organisation), class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
   </div>
   <div class="flex flex-wrap gap-8 mb-8">
-    <%= link_to "MAIL LOGS", mail_logs_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
-    <%= link_to "AUDIT TRAIL", admin_audits_path, class: 'btn btn-outline btn-primary btn-lg flex-1' %>
+    <%= link_to "MAIL LOGS", mail_logs_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
+    <%= link_to "AUDIT TRAIL", admin_audits_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
   </div>
 <% end %>
