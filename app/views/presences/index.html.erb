@@ -19,8 +19,8 @@
 <div class="divider"></div>
 
 <div id="presences" class="flex flex-wrap gap-4 mb-12">
+  <%= turbo_stream_from "presences_#{current_user.organisation.slug}" %>
   <%= render @presences %>
-  <%= turbo_stream_from "presences" %>
 </div>
 
 <p class="mt-8">

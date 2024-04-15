@@ -10,7 +10,7 @@ class Presence < ApplicationRecord
 
   scope :ordered, -> { order(heure: :desc) }
 
-  after_create_commit -> { broadcast_prepend_to "presences", 
+  after_create_commit -> { broadcast_prepend_to "presences_#{self.assemblee.organisation.slug}", 
                                                 partial: "presences/presence", 
                                                 locals: { presence: self }, 
                                                 target: "presences" }
