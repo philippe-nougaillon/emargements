@@ -1,18 +1,20 @@
-<div class="flex flex-col justify-center items-center h-screen">
-  <h1 class="text-2xl font-bold mb-4">Renvoyer les instructions de confirmation</h1>
+<div class="flex flex-col justify-center h-screen max-w-72 mx-auto">
+  <h1 class="text-2xl font-bold border-b border-gray-400 pb-4 w-full text-center mb-4">Renvoyer les instructions de confirmation</h1>
 
-  <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="w-full">
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class:'input input-sm input-bordered w-full', required: true %>
-    </div>
+      <div class="field my-4">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class:'input input-sm input-bordered w-full', required: true %>
+      </div>
 
-    <div class="actions">
-      <%= f.submit "Envoyer à nouveau les instructions", class: 'btn btn-outline btn-primary btn-lg w-full my-4' %>
-    </div>
-  <% end %>
+      <div class="actions">
+        <%= f.submit "Envoyer les instructions", class: 'btn btn-outline btn-primary btn-lg w-full mt-4 mb-8' %>
+      </div>
+    <% end %>
+  </div>
 
   <%= render "devise/shared/links" %>
 </div>
