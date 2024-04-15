@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     authenticated :user do
-      root 'presences#new', as: :authenticated_root
+      root 'admin#index', as: :authenticated_root
     end
   
     unauthenticated do

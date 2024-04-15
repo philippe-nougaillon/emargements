@@ -95,6 +95,7 @@ class AssembleesController < ApplicationController
     end
   end
 
+  # TODO: renommer la route
   def commencer
     mailer_response = AssembleeMailer.lien_assemblee(@assemblee).deliver_now
     MailLog.create(organisation_id: @assemblee.organisation_id, user_id: current_user.id, message_id: mailer_response.message_id, to: @assemblee.user.email, subject: "Lien assemblée gestionnaire manuel")

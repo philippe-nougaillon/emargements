@@ -58,8 +58,10 @@
     <%= link_to "UTILISATEURS / PARTICIPANTS", users_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
     <%= link_to "ORGANISATION", edit_organisation_path(current_user.organisation), class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
   </div>
-  <div class="flex flex-wrap gap-8 mb-8">
-    <%= link_to "MAIL LOGS", mail_logs_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
-    <%= link_to "AUDIT TRAIL", admin_audits_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
-  </div>
+  <% if current_user.premium? %>
+    <div class="flex flex-wrap gap-8 mb-8">
+      <%= link_to "MAIL LOGS", mail_logs_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
+      <%= link_to "AUDIT TRAIL", admin_audits_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
+    </div>
+  <% end %>
 <% end %>

@@ -1,13 +1,12 @@
 <li>
   <p class="!p-1.5">
     <%= current_user.email %>
-    (<%= current_user.organisation.nom %>
+    (<%= current_user.organisation.nom %>)
     <% if current_user.organisation.premium %>
-      <span class="material-symbols-outlined">
+      <span class="material-symbols-outlined text-warning">
         star
       </span>
     <% end %>
-    )
   </p>
 </li>
 <% unless current_user.premium? %>
