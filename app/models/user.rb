@@ -43,6 +43,10 @@ class User < ApplicationRecord
     end
   end
 
+  def premium?
+    self.organisation.premium?
+  end
+
   private
   def slug_candidates
     [SecureRandom.uuid]

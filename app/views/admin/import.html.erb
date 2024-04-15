@@ -9,9 +9,11 @@
         <span class="label-text-alt">Les adresses doivent être séparées par un retour à la ligne.</span>
       </label>
       <br>
-      <span class="label-text-alt">
-        Import limité à 50 adresses, passez au <%= link_to "Compte PREMIUM", admin_premium_path, class: 'text-primary hover:underline' %> pour avoir un nombre d'utilisateurs illimité.
-      </span>
+      <% unless current_user.organisation.premium %>
+        <span class="label-text-alt">
+          Import limité à 50 adresses, passez au <%= link_to "Compte PREMIUM", admin_premium_path, class: 'text-primary hover:underline' %> pour avoir un nombre d'utilisateurs illimité.
+        </span>
+      <% end %>
     </div>
     
     <div class="mt-4">
