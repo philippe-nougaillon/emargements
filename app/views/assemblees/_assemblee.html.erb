@@ -5,7 +5,7 @@
         <%= assemblee.nom.humanize %>
       </p>
       <p>
-        <%= l(assemblee.début, format: :long) %>
+        <%= assemblee.horaires_long %>
         <% if assemblee.début > DateTime.now %>
           <p class="text-warning font-black">
             (commence dans <%= time_ago_in_words assemblee.début %>)

@@ -48,6 +48,10 @@ class Assemblee < ApplicationRecord
     "#{self.début.strftime("%d %b")} #{self.début.hour}h#{self.début.min unless self.début.min == 0} -> #{self.fin.hour}h#{self.fin.min unless self.fin.min == 0}"
   end
 
+  def horaires_long
+    "#{I18n.l(self.début, format: :custom2)} #{self.début.hour}h#{self.début.min unless self.début.min == 0} -> #{self.fin.hour}h#{self.fin.min unless self.fin.min == 0}"
+  end
+
   def users_not_signed
     User.where(id: self.related_users).where.not(id: Presence.where(assemblee_id: self.id).pluck(:user_id)).ordered
   end
