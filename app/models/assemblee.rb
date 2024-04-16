@@ -56,6 +56,27 @@ class Assemblee < ApplicationRecord
     User.where(id: self.related_users).where.not(id: Presence.where(assemblee_id: self.id).pluck(:user_id)).ordered
   end
 
+  def self.generate_ical(assemblees)
+    require 'icalendar'
+    
+    calendar = Icalendar::Calendar.new
+
+    calendar.timezone do |t|
+      t.tzid = "Europe/Paris"
+    end
+    
+    assemblees.each do | a |
+      event = Icalendar::Event.new
+      event.dtstart = a.début.strftime("%Y%m%dT%H%M%S")
+      event.dtend = a.fin.strftime("%Y%m%dT%H%M%S")
+      event.summary = a.nom
+      event.description = a.tag_list.join(', ')
+      event.location = a.adresse
+      calendar.add_event(event)
+    end  
+    return calendar
+  end
+
   private
 
   def update_fin

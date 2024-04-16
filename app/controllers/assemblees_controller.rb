@@ -26,6 +26,18 @@ class AssembleesController < ApplicationController
         @assemblees = @assemblees.where("DATE(début) = ?", params[:debut])
       end
     end
+
+    respond_to do |format|
+      format.html
+
+      format.ics do
+        @calendar = Assemblee.generate_ical(@assemblees)
+        filename = "Export_iCalendar_#{Date.today.to_s}"
+        response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.ics"'
+        headers['Content-Type'] = "text/calendar; charset=UTF-8"
+        render plain: @calendar.to_ical
+      end
+    end
   end
 
   # GET /assemblees/1 or /assemblees/1.json
