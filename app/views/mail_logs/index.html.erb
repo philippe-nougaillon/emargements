@@ -1,6 +1,6 @@
 <h1 class="text-4xl font-bold mb-4">Mail Logs</h1>
 
-<p class="mb-4">Historique des mails envoyés via MailGun, avec Statut et État consultables pendant 5 jours.</p>
+<p class="mb-4">Historique des mails envoyés via MailGun, avec Statut (OK = acheminé) et État (OUVERT = lu) consultables pendant 5 jours.</p>
 
 <%= form_tag request.path, method: :get do %>
   <div class="flex flex-wrap items-end gap-4">
@@ -10,7 +10,7 @@
       <%= text_field_tag :search, params[:search], include_blank: true, onchange:'this.form.submit()', class:"input input-bordered input-sm w-full" %>
     </div>
 
-    <div class="relative flex-grow max-w-full flex-1">
+    <div class="relative max-w-full">
       <%= label_tag :search_subject, "Sujet" %>
       <%= select_tag :search_subject, options_for_select(@mail_logs.pluck(:subject).uniq.sort, params[:search_subject]), include_blank: true, onchange:'this.form.submit()', class:"select select-bordered select-sm w-full" %>
     </div>
