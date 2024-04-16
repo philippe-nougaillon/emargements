@@ -48,9 +48,11 @@ class AdminController < ApplicationController
     users_saved = 0
     emails = params[:content].split("\r\n")
     emails.each_with_index do |email, index|
-      user = User.create(email: email, password: SecureRandom.hex(5), organisation_id: current_user.organisation_id)
+      unless user = User.find_by(email: email, organisation_id: current_user.organisation_id)
+        user = User.create(email: email, password: SecureRandom.hex(5), organisation_id: current_user.organisation_id)
+        user.dispatch_email_to_nom_prénom
+      end
       user.tag_list.add(params[:groupes].split(','))
-      user.dispatch_email_to_nom_prénom
       if user.save
         users_saved += 1
       end
