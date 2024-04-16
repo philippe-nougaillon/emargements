@@ -39,7 +39,7 @@
 </div>
 
 
-<p class="mt-8">Affichage de <b><%= pluralize(@users.count, 'utilisateur') %></b> sur <%= current_user.organisation.users.count %> au total</p>
+<p class="mt-8">Affichage de <b><%= pluralize(@users.count, 'utilisateur', plural: 'utilisateurs') %></b> sur <%= current_user.organisation.users.count %> au total</p>
 
 <script>
   new SlimSelect({
