@@ -21,11 +21,8 @@
       <%= label_tag :assemblee_id, "Assemblée" %>
       <%= select_tag :assemblee_id, options_from_collection_for_select(@assemblees, :id, :nom, params[:assemblee_id]), include_blank: true, onchange: 'this.form.submit()' %>
     </div>
-    <div>
-      <%= label_tag :admin, "Admin" %>
-      <br>
-      <%= check_box_tag :admin, params[:admin], params[:admin], class: 'checkbox', onchange: 'this.form.submit()' %>
-    </div>
+    <%# label_tag :admin, "Admin" %>
+    <%# check_box_tag :admin, params[:admin], params[:admin], class: 'checkbox', onchange: 'this.form.submit()' %>
     <div>
       <%= render TagCloudComponent.new(tags: @tags) %>
     </div>
