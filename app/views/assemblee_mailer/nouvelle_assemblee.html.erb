@@ -1,0 +1,8 @@
+<h1>Nouvelle assemblée !</h1>
+
+<p>Nom Organisation : <%= @assemblee.organisation.nom %></p>
+<p>Nom Assemblée : <%= @assemblee.nom %></p>
+<p>Début : <%= I18n.l(@assemblee.début, format: :long) %></p>
+<p>Durée : <%= @assemblee.durée %></p>
+<p>Adresse : <%= @assemblee.adresse %></p>
+<p>Email Gestionnaire : <%= @assemblee.user.email %></p>

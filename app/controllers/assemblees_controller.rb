@@ -57,6 +57,7 @@ class AssembleesController < ApplicationController
 
     respond_to do |format|
       if @assemblee.save
+        Events.instance.publish('assemblee.created', payload: {assemblee_id: @assemblee.id})
         format.html do 
           redirect_to current_user.organisation.step < 4 ? admin_index_path : assemblees_url
           flash[:notice] = "Assemblée créée avec succès."
