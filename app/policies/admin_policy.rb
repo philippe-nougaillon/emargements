@@ -11,7 +11,7 @@ class AdminPolicy
   end
 
   def import?
-    index? && (user.organisation.premium || user.organisation.users.count < 14)
+    index? && (user.organisation.premium || user.organisation.users.count < 50)
   end
 
   def import_do?
