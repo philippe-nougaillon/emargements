@@ -8,4 +8,8 @@ class AssembleeMailerPreview < ActionMailer::Preview
   def lien_assemblee_participant
     AssembleeMailer.lien_assemblee_participant(Assemblee.first, User.first)
   end
+
+  def nouvelle_assemblee
+    AssembleeMailer.nouvelle_assemblee(Assemblee.first)
+  end
 end
