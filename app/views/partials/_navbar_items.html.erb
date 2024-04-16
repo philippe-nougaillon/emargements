@@ -3,9 +3,11 @@
     <%= current_user.email %>
     (<%= current_user.organisation.nom %>)
     <% if current_user.organisation.premium %>
-      <span class="material-symbols-outlined text-warning">
-        star
-      </span>
+      <%= link_to admin_premium_path do %>
+        <span class="material-symbols-outlined text-warning">
+          star
+        </span>
+      <% end %>
     <% end %>
   </p>
 </li>
