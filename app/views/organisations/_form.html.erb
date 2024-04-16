@@ -19,15 +19,26 @@
   <div class="my-5">
     <%= form.label :logo %>
     <%= form.file_field :logo, class: "file-input file-input-bordered file-input-sm file-input-primary w-full" %>
+    <div class="label">
+      <span class="label-text-alt">Un logo embellira vos communications (convocation, email, ...)</span>
+    </div>
   </div>
 
   <div class="my-5">
     <%= form.label :adresse %>
     <%= form.text_area :adresse, rows: 4, class: "textarea textarea-bordered textarea-sm w-full" %>
+    <div class="label">
+      <span class="label-text-alt">
+        Pour voir des propositions d'itinéraires sur les convocations,
+        avec plusieurs modalités de transport et les bilans carbone. 
+        (Compte PREMIUM)
+        </span>
+    </div>
   </div>
-
 
   <div class="inline">
-    <%= form.submit "Enregister", class: "btn btn-sm btn-primary btn-outline mb-4" %>
+    <%= form.submit "Enregistrer", class: "btn btn-primary btn-outline mb-4" %>
+    <%= link_to "Retour", admin_index_path, class: "btn btn-sm" %>
   </div>
+
 <% end %>

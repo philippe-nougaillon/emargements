@@ -23,12 +23,6 @@ class MailLogsController < ApplicationController
     if params[:ko].blank?
       @result_opened = mg_client.get("#{domain}/events", {:event => 'opened'}).to_h
     end
-
-    @status_ko = []
-
-    @mail_logs.each do |mail_log|
-      @status_ko << @result_failed["items"].find{|item| item["message"]["headers"]["message-id"] == mail_log.message_id }
-    end
   end
 
   # GET /mail_logs/1 or /mail_logs/1.json

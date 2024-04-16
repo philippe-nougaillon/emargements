@@ -1,11 +1,8 @@
-<h1 class="text-4xl font-bold mb-6">Nouvelle Assemblée</h1>
+<div class="mx-auto md:w-1/4 w-full">
 
-<div class="max-w-96 md:max-w-lg">
-  <%= render "form", assemblee: @assemblee %>
-</div>
+  <h1 class="text-4xl font-bold mb-6">Nouvelle Assemblée</h1>
 
-<br>
-
-<div>
-  <%= link_to "Retour", assemblees_path, class:'btn btn-sm' %>
+  <div class="max-w-96 md:max-w-lg">
+    <%= render "form", assemblee: @assemblee %>
+  </div>
 </div>

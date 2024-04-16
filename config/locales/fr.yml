@@ -218,4 +218,5 @@ fr:
       long: "%A %d %B %Y %Hh%M"
       short: "%d %b %Hh%M"
       custom: "%d/%m/%Y %Hh%M"
+      custom2: "%A %d %B %Y"
     pm: pm

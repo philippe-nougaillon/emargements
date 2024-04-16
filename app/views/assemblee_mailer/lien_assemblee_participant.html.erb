@@ -1,3 +1,8 @@
+<% if @user.organisation.logo.attached? %>
+  <%= image_tag(@user.organisation.logo, width: 200) %>
+  <br><br>
+<% end %>
+
 Bonjour <%= @user.prénom %>,
 <br><br>
 Voici le lien de l'assemblée : <%= link_to admin_signature_url(assemblee_id: @assemblee.slug), admin_signature_url(assemblee_id: @assemblee.slug, user_id: @user.slug), class: "text-primary hover:underline" %>

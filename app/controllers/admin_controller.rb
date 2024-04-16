@@ -48,14 +48,16 @@ class AdminController < ApplicationController
     users_saved = 0
     emails = params[:content].split("\r\n")
     emails.each_with_index do |email, index|
-      user = User.create(email: email, password: SecureRandom.hex(5), organisation_id: current_user.organisation_id)
+      unless user = User.find_by(email: email, organisation_id: current_user.organisation_id)
+        user = User.create(email: email, password: SecureRandom.hex(5), organisation_id: current_user.organisation_id)
+        user.dispatch_email_to_nom_prénom
+      end
       user.tag_list.add(params[:groupes].split(','))
-      user.dispatch_email_to_nom_prénom
       if user.save
         users_saved += 1
       end
     end
-    redirect_to admin_index_path, notice: "#{users_saved} participants importés sur #{emails.count}"
+    redirect_to admin_index_path, notice: "#{users_saved} participant(s) importé(s) sur #{emails.count}"
   end
 
   def audits
@@ -80,6 +82,12 @@ class AdminController < ApplicationController
       @audits = @audits.where("audited_changes ILIKE ?", "%#{params[:search]}%")
     end
 
+  end
+
+  def premium
+    if params[:alert].present?
+      flash.alert = "Le quotat gratuit d'utilisateurs est atteint. Passez au PREMIUM pour avoir un nombre d'utilisateurs illimité"
+    end
   end
 
   private

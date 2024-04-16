@@ -1,6 +1,5 @@
-<div>
-  <h1 class="text-4xl font-bold mb-4">Liste des émargements</h1>
-</div>
+<h1 class="text-4xl font-bold mb-4">Liste des émargements</h1>
+
 <%= form_tag request.path, method: :get do %>
   <div class="flex flex-wrap items-end gap-4">
     <div class="max-w-72">
@@ -17,13 +16,16 @@
   </div>
 <% end %>
 
-<div id="presences" class="flex flex-wrap gap-4 justify-around mt-8 mb-12">
-  <% @presences.each do |presence| %>
-    <%= render presence %>
-  <% end %>
+<div class="divider"></div>
+
+<div id="presences" class="flex flex-wrap gap-4 mb-12">
+  <%= turbo_stream_from "presences_#{current_user.organisation.slug}" %>
+  <%= render @presences %>
 </div>
 
-<p class="mt-8">Affichage de <b><%= @presences.count %></b> émargements</p>
+<p class="mt-8">
+  Affichage de <b><%= pluralize(@presences.count, 'émargement', plural: 'émargements') %></b>
+</p>
 
 <%= link_to presences_path(params.merge(format: :xls)), class: "text-success hover:underline" do %>
   Exporter vers Excel

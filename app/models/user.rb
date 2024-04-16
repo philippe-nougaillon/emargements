@@ -13,7 +13,8 @@ class User < ApplicationRecord
           :validatable,
           :trackable,
           :timeoutable,
-          :registerable
+          :registerable,
+          :confirmable
 
   acts_as_taggable_on :tags
 
@@ -40,6 +41,10 @@ class User < ApplicationRecord
     else
       self.nom = nom_prénom
     end
+  end
+
+  def premium?
+    self.organisation.premium?
   end
 
   private

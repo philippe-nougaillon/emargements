@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-theme="corporate" lang="fr">
   <head>
-    <title>Émargements v2</title>
+    <title>Émargements v2.2</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -24,7 +24,7 @@
 
   <body>
     <%= render "partials/navbar" %>
-    <main class="p-4">
+    <main class="py-4 px-4 md:px-12">
       <%= render "partials/notification" %>
       <%= yield %>
     </main>

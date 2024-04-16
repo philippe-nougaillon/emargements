@@ -11,7 +11,7 @@ class AdminPolicy
   end
 
   def import?
-    user && user.admin?
+    index? && (user.organisation.premium || user.organisation.users.count < 50)
   end
 
   def import_do?
@@ -19,7 +19,11 @@ class AdminPolicy
   end
 
   def audits?
-  index?
+    index? && user.premium?
+  end
+
+  def premium?
+    index?
   end
 
 end

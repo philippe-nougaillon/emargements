@@ -25,9 +25,9 @@ class UsersController < ApplicationController
       @users = @users.where("nom ILIKE :search OR prénom ILIKE :search OR email ILIKE :search", {search: "%#{params[:search]}%"})
     end
 
-    if params[:admin] == "on"
-      @users = @users.where(admin: true)
-    end
+    # if params[:admin] == "on"
+    #   @users = @users.where(admin: true)
+    # end
   end
 
   # GET /users/1 or /users/1.json

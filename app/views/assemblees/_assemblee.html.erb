@@ -5,8 +5,16 @@
         <%= assemblee.nom.humanize %>
       </p>
       <p>
-        <%= l(assemblee.début, format: :long) %>
-        <%= "(dans #{time_ago_in_words assemblee.début})" if assemblee.début > DateTime.now %>
+        <%= assemblee.horaires_long %>
+        <% if assemblee.début > DateTime.now %>
+          <p class="text-warning font-black">
+            (commence dans <%= time_ago_in_words assemblee.début %>)
+          </p>
+        <% elsif ((assemblee.début + assemblee.durée.to_f.hours) - Time.current).positive? %>
+          <p class="text-error font-black">
+            (se termine dans <%= time_ago_in_words assemblee.fin %>)
+          </p>
+        <% end %>
       </p>
       <p class="mt-4">
         Groupes : <% assemblee.tags.each do |tag| %>

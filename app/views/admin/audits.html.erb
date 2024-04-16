@@ -49,4 +49,4 @@
   </table>
 </div>
 
-<p class="mt-8">Affichage de <b><%= @audits.count %></b> audits sur <%= @organisation_audits.count %> au total</p>
+<p class="mt-8">Affichage de <b><%= pluralize(@audits.count, 'audit', plural: 'audits') %></b> sur <%= @organisation_audits.count %> au total</p>
