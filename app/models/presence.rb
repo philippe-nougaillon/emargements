@@ -20,5 +20,14 @@ class Presence < ApplicationRecord
       self.errors.add :erreur, ": Le délai imparti a expiré !" 
     end
   end
+
+  def check_chevauchement
+    assemblees = Assemblee.where(organisation_id: self.assemblee.organisation_id).where("(assemblees.début BETWEEN :debut AND :fin) OR (assemblees.fin BETWEEN :debut AND :fin) OR (:debut BETWEEN assemblees.début AND assemblees.fin)", {debut: self.assemblee.début, fin: self.assemblee.fin})
+    if assemblees.joins(:presences).where('presences.user_id': self.user_id).count >= 2
+      return true
+    else
+      return false
+    end
+  end
   
 end
