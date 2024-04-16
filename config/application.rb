@@ -49,5 +49,11 @@ module SignaturePlanning
     config.active_record.encryption.support_unencrypted_data = true
 
     config.active_record.use_yaml_unsafe_load = true
+
+    # Mission Control's controllers will extend the host app's ApplicationController.
+    # If no authentication is enforced, /jobs will be available to everyone.
+    # You might want to implement some kind of authentication for this in your app. 
+    # To make this easier, you can specify a different controller as the base class
+    config.mission_control.jobs.base_controller_class = "MissionControlAdminController"
   end
 end
