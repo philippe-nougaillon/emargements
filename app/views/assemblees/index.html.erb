@@ -10,9 +10,18 @@
       <%= text_field_tag :search, params[:search], include_blank:true, onchange:'this.form.submit()', class: 'input input-bordered input-sm w-full', placeholder: 'Nom/Adresse' %>
     </div>
 
-    <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5">
-      <%= label_tag :date %>
-      <%= date_field_tag :date, params[:date], onchange: 'this.form.submit()', class: 'input input-bordered input-sm w-full' %>
+    <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/6">
+      <%= label_tag :debut, 'Du' %>
+      <%= date_field_tag :debut, params[:debut], onchange: 'this.form.submit()', class: 'input input-bordered input-sm w-full' %>
+    </div>
+
+    <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/6">
+      <%= label_tag :fin, 'Fin' %>
+      <%= date_field_tag :fin, params[:fin], onchange: 'this.form.submit()', class: 'input input-bordered input-sm w-full' %>
+    </div>
+
+    <div>
+      <%= render TagCloudComponent.new(tags: @tags) %>
     </div>
   </div>
 <% end %>
