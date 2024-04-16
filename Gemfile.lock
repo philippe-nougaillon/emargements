@@ -135,12 +135,17 @@ GEM
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.0, < 2)
     erubi (1.12.0)
+    et-orbi (1.2.11)
+      tzinfo
     exception_notification (4.5.0)
       actionmailer (>= 5.2, < 8)
       activesupport (>= 5.2, < 8)
     ffi (1.16.3)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
+    fugit (1.9.0)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
     http-accept (1.7.0)
@@ -216,6 +221,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.3.1)
       activesupport (>= 3.0.0)
+    raabro (1.4.0)
     racc (1.7.3)
     rack (3.0.8)
     rack-session (2.0.0)
@@ -282,6 +288,12 @@ GEM
     ruby-vips (2.2.1)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
+    solid_queue (0.3.0)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      concurrent-ruby (~> 1.2.2)
+      fugit (~> 1.9.0)
+      railties (>= 7.1)
     spreadsheet (1.3.1)
       bigdecimal
       ruby-ole
@@ -351,6 +363,7 @@ DEPENDENCIES
   rails (~> 7.1.2)
   redis (>= 4.0.1)
   rqrcode (~> 2.2)
+  solid_queue (~> 0.3.0)
   spreadsheet (~> 1.3)
   sprockets-rails
   stimulus-rails
