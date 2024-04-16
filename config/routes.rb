@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # Mount Mission Control Job's engine where you wish to have it accessible
+  mount MissionControl::Jobs::Engine, at: "/jobs"
+
   resources :assemblees do
     member do
       get :commencer

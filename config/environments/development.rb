@@ -9,7 +9,7 @@ Rails.application.configure do
   config.enable_reloading = true
 
   # Do not eager load code on boot.
-  config.eager_load = false
+  config.eager_load = true
 
   # Show full error reports.
   config.consider_all_requests_local = true
@@ -58,6 +58,9 @@ Rails.application.configure do
 
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
+
+  # set Solid Queue as your Active Job's queue backend
+  config.active_job.queue_adapter = :solid_queue
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
