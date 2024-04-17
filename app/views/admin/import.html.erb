@@ -11,7 +11,7 @@
       <br>
       <% unless current_user.organisation.premium %>
         <span class="label-text-alt">
-          Import limité à 50 adresses, passez au <%= link_to "Compte PREMIUM", admin_premium_path, class: 'text-primary hover:underline' %> pour avoir un nombre d'utilisateurs illimité.
+          Le nombre de participants dans l'organisation est limité à 50. Passez au <%= link_to "Compte PREMIUM", admin_premium_path, class: 'text-primary hover:underline' %> pour être en illimité.
         </span>
       <% end %>
     </div>
@@ -30,7 +30,7 @@
     </div>
 
     <%= submit_tag "Lancer l'importation", class: "btn btn-primary btn-outline my-4", 'data-turbo': false %>
-    <%= link_to "Retour", users_path, class: "btn ml-2" %>
+    <%= link_to "Retour", root_path, class: "btn ml-2" %>
   <% end %>
 
 </div>

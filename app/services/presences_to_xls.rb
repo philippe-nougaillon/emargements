@@ -14,7 +14,7 @@ class PresencesToXls < ApplicationService
       sheet = book.create_worksheet name: @presences.name
       bold = Spreadsheet::Format.new :weight => :bold, :size => 11
 
-      headers = %w{nom_utilisateur prénom_utilisateur tags_utilisateur id_assemblée date_assemblée nom_assemblée date_signature chevauchement_assemblée}
+      headers = %w{nom_participant prénom_participant tags_participant id_assemblée date_assemblée nom_assemblée date_signature chevauchement_assemblée}
 
       sheet.row(0).concat headers
       sheet.row(0).default_format = bold

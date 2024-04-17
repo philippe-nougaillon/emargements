@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "Utilisateur créé avec succès." }
+        format.html { redirect_to user_url(@user), notice: "Participant créé avec succès." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "Utilisateur modifié avec succès." }
+        format.html { redirect_to user_url(@user), notice: "Participant modifié avec succès." }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
     @user.destroy!
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "Utilisateur supprimé avec succès." }
+      format.html { redirect_to users_url, notice: "Participant supprimé avec succès." }
       format.json { head :no_content }
     end
   end

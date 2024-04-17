@@ -34,6 +34,8 @@
 
 <p class="mt-8">Affichage de <%= pluralize(@assemblees.count, 'assemblée', plural: 'assemblées') %> sur <%= current_user.organisation.assemblees.count %> au total</p>
 
-<%= link_to assemblees_path(params.merge(format: :ics)), class: "text-primary hover:underline" do %>
-  Exporter au format iCal vers votre calendrier personnel (Google Agenda, Apple Calendar, Outlook, ...)
+<% if @assemblees.any? %>
+  <%= link_to assemblees_path(params.merge(format: :ics)), class: "text-primary hover:underline" do %>
+    Exporter au format iCal vers votre calendrier personnel (Google Agenda, Apple Calendar, Outlook, ...)
+  <% end %>
 <% end %>

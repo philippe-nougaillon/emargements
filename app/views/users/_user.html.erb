@@ -1,5 +1,5 @@
 <div id="<%= dom_id user %>" class="mt-4 pb-4 border-b border-gray-200">
-  <%= link_to user_path(user), class:'text-2xl' do %>
+  <%= link_to user_path(user), class:'text-2xl font-bold' do %>
     <%= user.nom_prénom %>
     <% if user.admin %>
       <span class="material-symbols-outlined text-warning">
@@ -7,9 +7,10 @@
       </span>
     <% end %>
   <% end %>
-  <p>
+  <p class="mt-4">
+    Groupes :
     <% user.tags.each do |tag| %>
-      <%= link_to(tag.name.humanize, users_path(tag:tag.name), class: 'badge') %>
+      <span class="badge"><%= tag.name.humanize %></span>
     <% end %>
   </p>
   <p class="mt-4">
@@ -17,7 +18,7 @@
   </p>
   <div class="flex gap-4 mt-6">
     <%= link_to "Modifier", edit_user_path(user), class:'btn btn-primary btn-outline btn-sm' %>
-    <%= button_to user, method: :delete, data:{turbo_confirm: "Êtes-vous certain(e) de vouloir supprimer cet utilisateur ?"}, class:'btn btn-error btn-outline btn-sm', disabled: user.presences.any? do %>
+    <%= button_to user, method: :delete, data:{turbo_confirm: "Êtes-vous certain(e) de vouloir supprimer ce participant ?"}, class:'btn btn-error btn-outline btn-sm', disabled: user.presences.any? do %>
       <span class="material-symbols-outlined">
         delete
       </span>
