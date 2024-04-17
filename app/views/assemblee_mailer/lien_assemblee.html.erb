@@ -7,9 +7,8 @@ Bonjour <%= @assemblee.user.prénom %>,
 Voici le lien de l'assemblée : <%= link_to admin_signature_url(assemblee_id: @assemblee.slug), admin_signature_url(assemblee_id: @assemblee.slug), class: "text-primary hover:underline" %>
 
 <% unless @assemblee.organisation.premium? %>
-  <br><br>
-  <div style="display: flex; flex-direction: column; align-items: center; width: fit-content">
-    <%= image_tag "logo_signature.png", width: 50 %>
-    <u><a href='https://emargements.philnoug.com/'>Convocation réalisée gratuitement</a></u>
+  <br><br><br><br>
+  Convocation réalisée gracieusement par 
+  <u><a href='https://emargements.philnoug.com/'>emargements.philnoug.com</a></u>
   </div>
 <% end %>
