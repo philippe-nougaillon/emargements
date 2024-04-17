@@ -81,6 +81,7 @@ class AssembleesController < ApplicationController
     @assemblee = Assemblee.new(assemblee_params)
     @assemblee.tag_list.add(params[:assemblee][:tags])
     @assemblee.organisation = current_user.organisation
+    @assemblee.user = current_user
 
     respond_to do |format|
       if @assemblee.save

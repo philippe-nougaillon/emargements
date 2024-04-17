@@ -24,7 +24,7 @@
 </div>
 
 <p class="mt-8">
-  Affichage de <b><%= pluralize(@presences.count, 'émargement', plural: 'émargements') %></b>
+  Affichage de <%= pluralize(@presences.count, 'émargement', plural: 'émargements') %>
 </p>
 
 <%= link_to presences_path(params.merge(format: :xls)), class: "text-success hover:underline" do %>

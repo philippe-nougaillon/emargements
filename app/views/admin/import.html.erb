@@ -1,9 +1,9 @@
 <div class="mx-auto md:w-1/4 w-full">
-  <h1 class="text-4xl font-bold mb-6">Importer Participants</h1>
+  <h1 class="text-4xl font-bold text-nowrap mb-6">Importer des Participants</h1>
 
   <%= form_tag({action: "import_do", method: :post}, multipart: true) do %>
     <div>
-      <%= label_tag :content, "Adresses emails à importer" %>
+      <%= label_tag :content, "Adresses emails des participants à créer" %>
       <%= text_area_tag :content, nil, rows: 7, class:"textarea textarea-bordered textarea-sm w-full shadow", required: true, placeholder: "annette.bonvoisin@orange.fr\r\njacques.boulanger@free.fr" %>
       <label>
         <span class="label-text-alt">Les adresses doivent être séparées par un retour à la ligne.</span>
@@ -17,10 +17,15 @@
     </div>
     
     <div class="mt-4">
-      <%= label_tag :groupes, "Groupes" %>
+      <%= label_tag :groupes, "Associer ces participants à des groupes d'intérêt" %>
       <%= text_field_tag :groupes, nil, class:"input input-bordered input-sm w-full shadow", placeholder: "ex: Santé, Mobilité, Territoires, Général" %>
       <div class="label">
-        <span class="label-text-alt">Séparez les différents groupes par une virgule</span>
+        <span class="label-text-alt">
+          Pour associer ces participants à des groupes d'intérêt, existants ou non.
+
+          <br>
+          Séparez les différents groupes par une virgule.
+        </span>
       </div>
     </div>
 

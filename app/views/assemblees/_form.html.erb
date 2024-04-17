@@ -13,11 +13,11 @@
 
   <div>
     <%= form.label :nom, style: "display: block" %>
-    <%= form.text_field :nom, class: 'input input-bordered input-sm w-full', required: true, placeholder: 'Commission Mobilité' %>
+    <%= form.text_field :nom, class: 'input input-bordered input-sm w-full', required: true, placeholder: 'ex: Commission Mobilité' %>
   </div>
 
   <div class="mt-4">
-    <%= form.label :tags, "Groupes", style: "display: block" %>
+    <%= form.label :tags, "Groupes d'intérêt", style: "display: block" %>
     <%= form.select :tags, options_from_collection_for_select(@tags, :name, :name, assemblee.tags.map(&:name)), multiple: true %>
   </div>
 
@@ -36,14 +36,9 @@
     <%= form.text_area :adresse, class: 'textarea textarea-bordered textarea-sm w-full' %>
   </div>
 
-  <div class="mt-4">
-    <%= form.label :user_id, "Gestionnaire (utilisateur du groupe 'Gestionnaire')", style: "display: block" %>
-    <%= form.collection_select(:user_id, @users, :id, :nom_prénom, {}, class:"select select-bordered select-sm w-full") %>
-  </div>
-
   <div class="mt-4" title="Envoyer automatiquement le lien au gestionnaire 10 minutes avant le début de l'assemblée ?">
     <%= form.check_box :automatique %>
-    <%= form.label :automatique, "Envoyer le lien au gestionnaire ?" %>
+    <%= form.label :automatique, "Envoyer le lien au gestionnaire ? (Vous)" %>
   </div>
 
   <div class="mt-4" title="Envoyer automatiquement le lien à tous les participants 10 minutes avant le début de l'assemblée ?">

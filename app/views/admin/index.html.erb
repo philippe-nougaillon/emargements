@@ -3,7 +3,7 @@
     <% if current_user.organisation.step >= 4 %>
       <div class="flex flex-col items-center">
         <h1 class="text-3xl font-bold mb-8">Chronologie des assemblées</h1>
-        <ul class="timeline mb-24">
+        <ul class="timeline mb-16">
           <% @assemblees.each_with_index do |assemblee, index| %>
             <% started = (assemblee.début < DateTime.now) %>
             <% finished = (assemblee.fin < DateTime.now) %>
@@ -25,12 +25,12 @@
         <% unless current_user.organisation.step >=3 %>
           <h2>Il reste quelques étapes avant de pouvoir envoyer vos premières convocations</h2>
         <% end %>
-        <ul class="steps steps-vertical max-w-96">
+        <ul class="steps">
           <li class="step <%= 'step-primary' if current_user.organisation.step >= 1 %> text-xl" data-content="<%= current_user.organisation.step >= 1 ? '✓' : '1' %>">
             <%= link_to "Renommer mon organisation", edit_organisation_path(current_user.organisation), class:'text-primary underline' %>
           </li>
           <li class="step <%= 'step-primary' if current_user.organisation.step >= 2 %> text-xl" data-content="<%= current_user.organisation.step >= 2 ? '✓' : '2' %>">
-            <%= link_to_if current_user.organisation.step >= 1, "Importer les participants", admin_import_path, class:'text-primary underline' %>
+            <%= link_to_if current_user.organisation.step >= 1, "Importer des participants", admin_import_path, class:'text-primary underline' %>
           </li>
           <li class="step <%= 'step-primary' if current_user.organisation.step >= 3 %> text-xl" data-content="<%= current_user.organisation.step >= 3 ? '✓' : '3' %>">
             <%= link_to_if current_user.organisation.step >= 2, "Créer une nouvelle assemblée", new_assemblee_path, class:'text-primary underline' %>
@@ -40,8 +40,12 @@
           </li>
         </ul>
         <% if current_user.organisation.step >=3 %>
-          <h2 class="font-bold text-success text-xl text-center">
-            Bravo, votre première assemblée est prête ! Accédez à vos informations en utilisant les boutons ci-dessous :
+          <h2 class="font-bold text-success text-xl text-center mt-8">
+            Bravo, votre première assemblée est prête !
+            <br><br>
+            Pour générer les convocations, cliquez sur "Assemblées" puis sur "Générer..."
+            <br>
+            Pour recevoir le lien public vers la feuille d'émargement des présences, cliquez sur "Assemblées" puis sur "Envoyer..."
           </h2>
         <% end %>
       </div>
