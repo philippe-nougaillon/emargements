@@ -6,6 +6,23 @@
   <%= link_to "S'inscrire", new_registration_path(resource_name), class: 'btn btn-outline btn-secondary w-full mb-4' %>
 <% end %>
 
+<%- if devise_mapping.omniauthable? %>
+  <div class="divider">OU</div>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= form_for "Login",
+      url: omniauth_authorize_path(resource_name, provider),
+      method: :post,
+      data: {turbo: "false"} do |f| %>
+        <div class="mb-4">
+          <button type="submit" style="color: #444;border-radius: 5px;border: thin solid #888;box-shadow: 1px 1px 1px grey;white-space: nowrap; width: 100%" class="btn py-2">
+            <%= image_tag "Google__G__logo.svg" %>
+            <span class="ms-2">Continuer avec Google</span>
+          </button>
+        </div>
+    <% end %>
+  <% end %>
+<% end %>
+
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <%= link_to "J'ai oublié mon mot de passe", new_password_path(resource_name), class: 'text-primary hover:underline' %>
 <% end %>
@@ -16,10 +33,4 @@
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), class: 'text-primary hover:underline' %>
-<% end %>
-
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %>
-  <% end %>
 <% end %>
