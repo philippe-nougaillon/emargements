@@ -38,6 +38,7 @@ class User < ApplicationRecord
 
   def dispatch_email_to_nom_prénom
     nom_prénom = self.email.split('@').first
+    # TODO : remplacer par nom, prenom = n.split('.')
     if nom_prénom.include?('.')
       self.prénom, self.nom = nom_prénom.split('.')
     else
@@ -69,6 +70,7 @@ class User < ApplicationRecord
         # uncomment the line below to skip the confirmation emails.
         user.skip_confirmation!
 
+        # TODO : pourquoi ici ?
         user.save
 
         user.organisation = Organisation.create(nom: "Mon_organisation")
@@ -81,6 +83,7 @@ class User < ApplicationRecord
   end
 
   private
+
   def slug_candidates
     [SecureRandom.uuid]
   end
