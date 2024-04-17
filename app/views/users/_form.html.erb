@@ -28,7 +28,7 @@
 
   <div class="mt-4">
     <%= form.label :adresse, style: "display: block" %>
-    <%= form.text_field :adresse, class: 'input input-bordered input-sm w-full' %>
+    <%= form.text_area :adresse, class: 'textarea textarea-bordered textarea-sm w-full', rows: 4 %>
   </div>
 
   <div class="mt-4">
@@ -48,6 +48,6 @@
   <% end %>
 
   <div class="inline">
-    <%= form.submit class: "btn btn-primary btn-outline btn-sm my-4" %>
+    <%= form.submit "Enregistrer", class: "btn btn-primary btn-outline btn-sm my-4" %>
   </div>
 <% end %>
