@@ -94,3 +94,9 @@ gem "aws-sdk-s3", require: false
 gem "audited", "~> 5.5"
 
 gem "dry-events", "~> 1.0"
+
+gem "solid_queue", "~> 0.3.0"
+
+gem "mission_control-jobs", "~> 0.2.1"
+
+gem "icalendar", "~> 2.10"

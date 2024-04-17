@@ -20,7 +20,7 @@ class Organisation < ApplicationRecord
       1
     elsif !self.assemblees.any?
       2
-    elsif self.assemblees.count == 1 && self.presences.count.zero?
+    elsif self.assemblees.count == 1 && self.mail_logs.count.zero?
       3
     else
       4

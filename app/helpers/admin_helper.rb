@@ -42,7 +42,7 @@ module AdminHelper
             pretty_changes << "#{key} changé de '#{User.find(ids.first).nom_prénom if ids.first}' à '#{User.find(ids.last).nom_prénom if ids.last}'"
           end 
         else
-          pretty_changes << "Utilisateur supprimé"
+          pretty_changes << "Participant supprimé"
         end
       when 'Debut' 
         if audit.audited_changes['debut'].class.name == 'Array'
@@ -70,7 +70,7 @@ module AdminHelper
         end
       when 'Discarded at'
         if audit.action == 'update'
-          pretty_changes << "Utilisateur #{c.last.first.nil? ? 'désactivé' : 'activé'}"
+          pretty_changes << "Participant #{c.last.first.nil? ? 'désactivé' : 'activé'}"
         end
       when 'Signature'
         if audit.action == 'update'

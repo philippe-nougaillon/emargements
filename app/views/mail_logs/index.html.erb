@@ -57,5 +57,5 @@
 </div>
 
 <% unless params[:ko].present? %>
-  <p class="mt-8">Affichage de <b><%= pluralize(@mail_logs.count, 'mail', plural: 'mails') %></b> sur <%= @organisation_mail_logs.count %> au total</p>
+  <p class="mt-8">Affichage de <%= pluralize(@mail_logs.count, 'mail', plural: 'mails') %> sur <%= @organisation_mail_logs.count %> au total</p>
 <% end %>

@@ -86,7 +86,7 @@ class AdminController < ApplicationController
 
   def premium
     if params[:alert].present?
-      flash.alert = "Le quotat gratuit d'utilisateurs est atteint. Passez au PREMIUM pour avoir un nombre d'utilisateurs illimité"
+      flash.alert = "Le quotat gratuit de participants est atteint. Passez au PREMIUM pour être en illimité"
     end
   end
 

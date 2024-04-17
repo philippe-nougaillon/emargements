@@ -47,6 +47,10 @@ class User < ApplicationRecord
     self.organisation.premium?
   end
 
+  def super_admin?
+    %w[philippe.nougaillon@gmail.com pierreemmanuel.dacquet@gmail.com].include?(self.email)
+  end
+
   private
   def slug_candidates
     [SecureRandom.uuid]

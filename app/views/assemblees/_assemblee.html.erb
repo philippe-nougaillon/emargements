@@ -18,7 +18,7 @@
       </p>
       <p class="mt-4">
         Groupes : <% assemblee.tags.each do |tag| %>
-          <%= link_to(tag.name.humanize, assemblees_path(tag:tag.name), class: 'badge !text-white') %>
+          <span class="badge"><%= tag.name.humanize %></span>
         <% end %>
       </p>
 

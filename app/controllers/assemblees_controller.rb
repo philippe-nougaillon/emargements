@@ -6,12 +6,37 @@ class AssembleesController < ApplicationController
   def index
     @assemblees = current_user.organisation.assemblees.ordered
 
-    unless params[:search].blank?
+    @tags = @assemblees.tag_counts_on(:tags).order(:taggings_count).reverse
+
+    if params[:search].present?
       @assemblees = @assemblees.where("nom ILIKE :search OR adresse ILIKE :search", {search: "%#{params[:search]}%"})
     end
 
-    unless params[:date].blank?
-      @assemblees = @assemblees.where("DATE(début) = ?", params[:date])
+    if params[:tags].present?
+      @assemblees = @assemblees.tagged_with(params[:tags].reject(&:blank?))
+      session[:tags] = params[:tags]
+    else
+      session[:tags] = params[:tags] = []
+    end
+
+    if params[:debut].present?
+      if params[:fin].present?
+        @assemblees = @assemblees.where("DATE(début) BETWEEN ? AND ?", params[:debut], params[:fin])
+      else
+        @assemblees = @assemblees.where("DATE(début) = ?", params[:debut])
+      end
+    end
+
+    respond_to do |format|
+      format.html
+
+      format.ics do
+        @calendar = Assemblee.generate_ical(@assemblees)
+        filename = "Export_iCalendar_#{Date.today.to_s}"
+        response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.ics"'
+        headers['Content-Type'] = "text/calendar; charset=UTF-8"
+        render plain: @calendar.to_ical
+      end
     end
   end
 
@@ -36,6 +61,8 @@ class AssembleesController < ApplicationController
   # GET /assemblees/new
   def new
     @assemblee = Assemblee.new
+
+    # TODO regrouper le code new & edit + placer dans le model user 
     @tags = current_user.organisation.users.tag_counts_on(:tags).order(:name)
     @users = current_user.organisation.users.tagged_with("Gestionnaire")
 
@@ -54,10 +81,13 @@ class AssembleesController < ApplicationController
     @assemblee = Assemblee.new(assemblee_params)
     @assemblee.tag_list.add(params[:assemblee][:tags])
     @assemblee.organisation = current_user.organisation
+    @assemblee.user = current_user
 
     respond_to do |format|
       if @assemblee.save
-        Events.instance.publish('assemblee.created', payload: {assemblee_id: @assemblee.id})
+        unless Rails.env.development?
+          Events.instance.publish('assemblee.created', payload: {assemblee_id: @assemblee.id})
+        end
         format.html do 
           redirect_to current_user.organisation.step < 4 ? admin_index_path : assemblees_url
           flash[:notice] = "Assemblée créée avec succès."
@@ -98,8 +128,10 @@ class AssembleesController < ApplicationController
 
   # TODO: renommer la route
   def commencer
+    # TODO : A placer dans un Job
     mailer_response = AssembleeMailer.lien_assemblee(@assemblee).deliver_now
     MailLog.create(organisation_id: @assemblee.organisation_id, user_id: current_user.id, message_id: mailer_response.message_id, to: @assemblee.user.email, subject: "Lien assemblée gestionnaire manuel")
+
     redirect_to assemblees_path, notice: "Lien de signature envoyé au gestionnaire."
   end
 

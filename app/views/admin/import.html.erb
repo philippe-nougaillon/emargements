@@ -1,9 +1,9 @@
 <div class="mx-auto md:w-1/4 w-full">
-  <h1 class="text-4xl font-bold mb-6">Importer Participants</h1>
+  <h1 class="text-4xl font-bold text-nowrap mb-6">Importer des Participants</h1>
 
   <%= form_tag({action: "import_do", method: :post}, multipart: true) do %>
     <div>
-      <%= label_tag :content, "Adresses emails à importer" %>
+      <%= label_tag :content, "Adresses emails des participants à créer" %>
       <%= text_area_tag :content, nil, rows: 7, class:"textarea textarea-bordered textarea-sm w-full shadow", required: true, placeholder: "annette.bonvoisin@orange.fr\r\njacques.boulanger@free.fr" %>
       <label>
         <span class="label-text-alt">Les adresses doivent être séparées par un retour à la ligne.</span>
@@ -11,21 +11,26 @@
       <br>
       <% unless current_user.organisation.premium %>
         <span class="label-text-alt">
-          Import limité à 50 adresses, passez au <%= link_to "Compte PREMIUM", admin_premium_path, class: 'text-primary hover:underline' %> pour avoir un nombre d'utilisateurs illimité.
+          Le nombre de participants dans l'organisation est limité à 50. Passez au <%= link_to "Compte PREMIUM", admin_premium_path, class: 'text-primary hover:underline' %> pour être en illimité.
         </span>
       <% end %>
     </div>
     
     <div class="mt-4">
-      <%= label_tag :groupes, "Groupes" %>
+      <%= label_tag :groupes, "Associer ces participants à des groupes d'intérêt" %>
       <%= text_field_tag :groupes, nil, class:"input input-bordered input-sm w-full shadow", placeholder: "ex: Santé, Mobilité, Territoires, Général" %>
       <div class="label">
-        <span class="label-text-alt">Séparez les différents groupes par une virgule</span>
+        <span class="label-text-alt">
+          Pour associer ces participants à des groupes d'intérêt, existants ou non.
+
+          <br>
+          Séparez les différents groupes par une virgule.
+        </span>
       </div>
     </div>
 
     <%= submit_tag "Lancer l'importation", class: "btn btn-primary btn-outline my-4", 'data-turbo': false %>
-    <%= link_to "Retour", users_path, class: "btn ml-2" %>
+    <%= link_to "Retour", root_path, class: "btn ml-2" %>
   <% end %>
 
 </div>
