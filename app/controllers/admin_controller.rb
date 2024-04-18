@@ -41,23 +41,12 @@ class AdminController < ApplicationController
   end
 
   def import
-
   end
 
   def import_do
-    users_saved = 0
     emails = params[:content].split("\r\n")
-    emails.each_with_index do |email, index|
-      unless user = User.find_by(email: email, organisation_id: current_user.organisation_id)
-        user = User.create(email: email, password: SecureRandom.hex(5), organisation_id: current_user.organisation_id)
-        user.dispatch_email_to_nom_prénom
-      end
-      user.tag_list.add(params[:groupes].split(','))
-      if user.save
-        users_saved += 1
-      end
-    end
-    redirect_to admin_index_path, notice: "#{users_saved} participant(s) importé(s) sur #{emails.count}"
+    users_imported = ImportUsers.new(emails, current_user.organisation_id, params[:groupes]).call
+    redirect_to root_path, notice: "#{users_imported} participant(s) importé(s) sur #{emails.count}"
   end
 
   def audits

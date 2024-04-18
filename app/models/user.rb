@@ -5,7 +5,7 @@ class User < ApplicationRecord
   audited
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, and :omniauthable
+  # :lockable
 
   devise  :database_authenticatable,
           :recoverable,
@@ -14,7 +14,9 @@ class User < ApplicationRecord
           :trackable,
           :timeoutable,
           :registerable,
-          :confirmable
+          :confirmable,
+          :omniauthable,
+          omniauth_providers: [:google_oauth2]
 
   acts_as_taggable_on :tags
 
@@ -36,11 +38,7 @@ class User < ApplicationRecord
 
   def dispatch_email_to_nom_prénom
     nom_prénom = self.email.split('@').first
-    if nom_prénom.include?('.')
-      self.prénom, self.nom = nom_prénom.split('.')
-    else
-      self.nom = nom_prénom
-    end
+    self.nom, self.prénom = nom_prénom.split('.')
   end
 
   def premium?
@@ -51,7 +49,35 @@ class User < ApplicationRecord
     %w[philippe.nougaillon@gmail.com pierreemmanuel.dacquet@gmail.com].include?(self.email)
   end
 
+  def self.from_omniauth(auth)
+    require "open-uri"
+
+    if user = User.find_by(email: auth.info.email)
+      user
+    else
+      find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0, 20]
+        user.password_confirmation = user.password
+        user.nom = auth.info.last_name   # assuming the user model has a name
+        user.prénom = auth.info.first_name   # assuming the user model has a name
+        user.organisation = Organisation.create(nom: "Mon_organisation")
+        user.admin = true
+        user.tag_list.add("Gestionnaire")
+
+        # If you are using confirmable and the provider(s) you use validate emails, 
+        # uncomment the line below to skip the confirmation emails.
+        user.skip_confirmation!
+
+        user.save
+
+        user
+      end
+    end
+  end
+
   private
+
   def slug_candidates
     [SecureRandom.uuid]
   end

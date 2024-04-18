@@ -25,7 +25,6 @@ class Organisation < ApplicationRecord
     else
       4
     end
-
   end
 
   private
