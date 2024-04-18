@@ -38,12 +38,7 @@ class User < ApplicationRecord
 
   def dispatch_email_to_nom_prénom
     nom_prénom = self.email.split('@').first
-    # TODO : remplacer par nom, prenom = n.split('.')
-    if nom_prénom.include?('.')
-      self.prénom, self.nom = nom_prénom.split('.')
-    else
-      self.nom = nom_prénom
-    end
+    self.nom, self.prénom = nom_prénom.split('.')
   end
 
   def premium?
@@ -66,16 +61,15 @@ class User < ApplicationRecord
         user.password_confirmation = user.password
         user.nom = auth.info.last_name   # assuming the user model has a name
         user.prénom = auth.info.first_name   # assuming the user model has a name
+        user.organisation = Organisation.create(nom: "Mon_organisation")
+        user.admin = true
+        user.tag_list.add("Gestionnaire")
+
         # If you are using confirmable and the provider(s) you use validate emails, 
         # uncomment the line below to skip the confirmation emails.
         user.skip_confirmation!
 
-        # TODO : pourquoi ici ?
         user.save
-
-        user.organisation = Organisation.create(nom: "Mon_organisation")
-        user.admin = true
-        user.tag_list.add("Gestionnaire")
 
         user
       end

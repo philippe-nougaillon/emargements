@@ -33,7 +33,7 @@ class AssembleePolicy < ApplicationPolicy
     show?
   end
 
-  def commencer?
+  def envoyer_lien_gestionnaire?
     show?
   end
 end

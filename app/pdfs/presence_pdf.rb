@@ -8,18 +8,15 @@ class PresencePdf
 
   def rapport(presences, assemblee)
     text "Feuille d'émargement", size: 36, align: :center
-    # TODO : try ?
-    text "#{assemblee.try(:nom)}", size: 36, align: :center
+    text assemblee.nom, size: 36, align: :center
     move_down @margin_down
 
     presences.each_with_index do |presence, index|
       start_new_page if (index%4 == 3)
 
-      # TODO : "#{??}"
-
-      text "#{presence.user.nom_prénom}", size: 20
+      text presence.user.nom_prénom, size: 20
       text "Le #{I18n.l presence.heure, format: :long}"
-      text "#{presence.assemblee.nom.humanize}", size: 16
+      text presence.assemblee.nom.humanize, size: 16
   
       svg Base64.decode64(presence.signature.split(',')[1]), width: 200
       move_down @margin_down

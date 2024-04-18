@@ -19,11 +19,11 @@ Rails.application.routes.draw do
 
   resources :assemblees do
     member do
-      get :commencer
+      get :envoyer_lien_gestionnaire
     end
   end
   resources :users
-  resources :presences, only: %i[ index new create edit update destroy ]
+  resources :presences, only: %i[ index destroy ]
   resources :organisations, only: %i[ edit update ]
   resources :mail_logs, only: %i[ index show ]
 

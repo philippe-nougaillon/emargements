@@ -16,11 +16,6 @@ class Assemblee < ApplicationRecord
 
   scope :ordered, -> { order(début: :desc) }
 
-  def self.current
-    # TODO : limiter à l'organisation !
-    Assemblee.where("NOW() BETWEEN assemblees.début AND assemblees.fin").first
-  end
-
   def in_progress?
     (self.début < DateTime.now) && (self.fin > DateTime.now)
   end
@@ -34,15 +29,12 @@ class Assemblee < ApplicationRecord
   end
 
   def qrcode(url)
-    # TODO : optim en une ligne
-    qrcode = RQRCode::QRCode.new(url)
-    qrcode_svg = qrcode.as_svg(
+    RQRCode::QRCode.new(url).as_svg(
                 color: "000",
                 shape_rendering: "crispEdges",
                 module_size: 3,
                 standalone: true,
-                use_path: true,
-          )
+                use_path: true)
   end
 
   def horaires
@@ -54,30 +46,10 @@ class Assemblee < ApplicationRecord
   end
 
   def users_not_signed
-    # TODO : à quoi ça sert ?
-    User.where(id: self.related_users).where.not(id: Presence.where(assemblee_id: self.id).pluck(:user_id)).ordered
-  end
-
-  # TODO : dans un service ?
-  def self.generate_ical(assemblees)
-    require 'icalendar'
-    
-    calendar = Icalendar::Calendar.new
-
-    calendar.timezone do |t|
-      t.tzid = "Europe/Paris"
-    end
-    
-    assemblees.each do | a |
-      event = Icalendar::Event.new
-      event.dtstart = a.début.strftime("%Y%m%dT%H%M%S")
-      event.dtend = a.fin.strftime("%Y%m%dT%H%M%S")
-      event.summary = a.nom
-      event.description = a.tag_list.join(', ')
-      event.location = a.adresse
-      calendar.add_event(event)
-    end  
-    return calendar
+    # Liste des utilisateurs des groupes de l'assemblée qui n'ont pas signé
+    User.where(id: self.related_users)
+        .where.not(id: self.presences.pluck(:user_id))
+        .ordered
   end
 
   private

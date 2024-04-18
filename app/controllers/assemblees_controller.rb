@@ -1,6 +1,7 @@
 class AssembleesController < ApplicationController
-  before_action :set_assemblee, only: %i[ show edit update destroy commencer ]
+  before_action :set_assemblee, only: %i[ show edit update destroy envoyer_lien_gestionnaire ]
   before_action :is_user_authorized
+  before_action :set_tags, only: %i[ new edit ]
 
   # GET /assemblees or /assemblees.json
   def index
@@ -15,7 +16,6 @@ class AssembleesController < ApplicationController
       @assemblees = @assemblees.tagged_with(params[:tags].reject(&:blank?))
       session[:tags] = params[:tags]
     else
-      # TODO : mettre en début de fonction
       session[:tags] = params[:tags] = []
     end
 
@@ -31,12 +31,10 @@ class AssembleesController < ApplicationController
       format.html
 
       format.ics do
-        # TODO : Faire un service ? variable globale ??
-        @calendar = Assemblee.generate_ical(@assemblees)
         filename = "Export_iCalendar_#{Date.today.to_s}"
         response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.ics"'
         headers['Content-Type'] = "text/calendar; charset=UTF-8"
-        render plain: @calendar.to_ical
+        render plain: AssembleesToIcalendar.new(@assemblees).call
       end
     end
   end
@@ -44,12 +42,9 @@ class AssembleesController < ApplicationController
   # GET /assemblees/1 or /assemblees/1.json
   def show
     respond_to do |format|
-      format.html do 
-        # TODO : vide ?
-      end
+      format.html
 
       format.pdf do
-        # TODO : mettre dans un Service ?
         pdf = AssembleePdf.new
         pdf.convocation(@assemblee)
 
@@ -65,22 +60,12 @@ class AssembleesController < ApplicationController
   def new
     @assemblee = Assemblee.new
 
-    # TODO regrouper le code new & edit + placer dans le model user 
-    @tags = current_user.organisation.users.tag_counts_on(:tags).order(:name)
-    
-    # TODO : utile ?
-    @users = current_user.organisation.users.tagged_with("Gestionnaire")
-
     @assemblee.début = DateTime.now.change(min: 0, sec: 0) + 1.hour
     @assemblee.durée = 2
   end
 
   # GET /assemblees/1/edit
   def edit
-    @tags = current_user.organisation.users.tag_counts_on(:tags).order(:name)
-    
-    # TODO : utile ?
-    @users = current_user.organisation.users.tagged_with("Gestionnaire")
   end
 
   # POST /assemblees or /assemblees.json
@@ -111,9 +96,7 @@ class AssembleesController < ApplicationController
   def update
     respond_to do |format|
       if @assemblee.update(assemblee_params)
-        # TODO : optim ? + utiliser assemblee_params 
-        @assemblee.tags.delete_all
-        @assemblee.tag_list.add(params[:assemblee][:tags])
+        @assemblee.tag_list = params[:assemblee][:tags]
         @assemblee.save
         format.html { redirect_to assemblees_url, notice: "Assemblée modifiée avec succès." }
         format.json { render :show, status: :ok, location: @assemblee }
@@ -134,8 +117,7 @@ class AssembleesController < ApplicationController
     end
   end
 
-  # TODO: renommer la route
-  def commencer
+  def envoyer_lien_gestionnaire
     # TODO : A placer dans un Job
     mailer_response = AssembleeMailer.lien_assemblee(@assemblee).deliver_now
     MailLog.create(organisation_id: @assemblee.organisation_id, user_id: current_user.id, message_id: mailer_response.message_id, to: @assemblee.user.email, subject: "Lien assemblée gestionnaire manuel")
@@ -148,6 +130,10 @@ class AssembleesController < ApplicationController
     def set_assemblee
       @assemblee = Assemblee.find_by(slug: params[:id])
     end
+    
+    def set_tags
+      @tags = current_user.organisation.users.tag_counts_on(:tags).order(:name)
+    end
 
     # Only allow a list of trusted parameters through.
     def assemblee_params
@@ -157,4 +143,5 @@ class AssembleesController < ApplicationController
     def is_user_authorized
       authorize @assemblee ? @assemblee : Assemblee
     end
+
 end

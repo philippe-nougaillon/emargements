@@ -63,8 +63,6 @@ class PresencesController < ApplicationController
   # GET /presences/new
   def new
     @presence = Presence.new
-    @presence.assemblee = Assemblee.current
-    @assemblée_future = Assemblee.where("NOW() < assemblees.début").order(:début).first
   end
 
   # GET /presences/1/edit
@@ -74,7 +72,6 @@ class PresencesController < ApplicationController
   # POST /presences or /presences.json
   def create
     @presence = Presence.new(presence_params)
-    @presence.assemblee = Assemblee.current
     @presence.heure = DateTime.now
     @presence.user = current_user
 
