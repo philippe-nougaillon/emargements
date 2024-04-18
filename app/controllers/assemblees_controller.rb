@@ -118,10 +118,7 @@ class AssembleesController < ApplicationController
   end
 
   def envoyer_lien_gestionnaire
-    # TODO : A placer dans un Job
-    mailer_response = AssembleeMailer.lien_assemblee(@assemblee).deliver_now
-    MailLog.create(organisation_id: @assemblee.organisation_id, user_id: current_user.id, message_id: mailer_response.message_id, to: @assemblee.user.email, subject: "Lien assemblée gestionnaire manuel")
-
+    EnvoyerLienSignatureCollectiveJob.perform_later(@assemblee, current_user.id)
     redirect_to assemblees_path, notice: "Lien de signature envoyé au gestionnaire."
   end
 
