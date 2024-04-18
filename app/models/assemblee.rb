@@ -38,7 +38,7 @@ class Assemblee < ApplicationRecord
   end
 
   def horaires
-    "#{self.début.strftime("%d %b")} #{self.début.hour}h#{self.début.min unless self.début.min == 0} -> #{self.fin.hour}h#{self.fin.min unless self.fin.min == 0}"
+    "#{ I18n.l(self.début, format: "%d %b") } #{self.début.hour}h#{self.début.min unless self.début.min == 0} -> #{self.fin.hour}h#{self.fin.min unless self.fin.min == 0}"
   end
 
   def horaires_long
