@@ -35,6 +35,8 @@
           <%= image_tag "Compte PREMIUM-qrcode.png" %>
           <%= link_to "Payer avec PayPal", "https://www.paypal.com/ncp/payment/RLKRFJG5SD4M6", class: 'btn btn-primary btn-outline btn-lg hover:!text-white' %>
         </div>
+      <% else %>
+        <%= link_to "Un problème ? Nous contacter...", "https://www.philnoug.com/contact", class: 'mt-8 underline' %>
       <% end %>
 
     </div>
