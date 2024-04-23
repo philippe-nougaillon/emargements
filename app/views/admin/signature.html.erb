@@ -1,4 +1,4 @@
-<h1 class="text-4xl font-bold"><%= @presence.assemblee.nom.humanize %></h1>
+<h1 class="text-4xl font-bold"><%= page_title!(@presence.assemblee.nom.humanize) %></h1>
 <h2 class="text-2xl mb-6"><%= @presence.assemblee.horaires %></h2>
 
 <%= form_tag({action: "signature_do", method: :post}) do %>

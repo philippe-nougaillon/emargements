@@ -1,6 +1,6 @@
 <div class="mb-4">
   <%= link_to "Nouvelle Assemblée", new_assemblee_path, class:'btn btn-primary btn-outline btn-lg float-end hover:shadow-xl hover:!text-white' %>
-  <h1 class="text-4xl font-bold">Assemblées</h1>
+  <h1 class="text-4xl font-bold"><%= page_title!("Assemblées") %></h1>
 </div>
 
 <%= form_tag request.path, method: :get do %>
@@ -35,7 +35,7 @@
 <p class="mt-8">Affichage de <%= pluralize(@assemblees.count, 'assemblée', plural: 'assemblées') %> sur <%= current_user.organisation.assemblees.count %> au total</p>
 
 <% if @assemblees.any? %>
-  <%= link_to assemblees_path(params.merge(format: :ics)), class: "text-primary hover:underline" do %>
+  <%= link_to url_for(params.permit!.merge(format: :ics)), class: "text-primary hover:underline" do %>
     Exporter au format iCal vers votre calendrier personnel (Google Agenda, Apple Calendar, Outlook, ...)
   <% end %>
 <% end %>
