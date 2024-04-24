@@ -63,7 +63,7 @@ class User < ApplicationRecord
         user.prénom = auth.info.first_name   # assuming the user model has a name
         user.organisation = Organisation.create(nom: "Mon_organisation")
         user.admin = true
-        user.tag_list.add("Gestionnaire")
+        # user.tag_list.add("Gestionnaire")
 
         # If you are using confirmable and the provider(s) you use validate emails, 
         # uncomment the line below to skip the confirmation emails.
