@@ -44,9 +44,9 @@ class AdminController < ApplicationController
   end
 
   def import_do
-    emails = params[:content].split("\r\n")
-    users_imported = ImportUsers.new(emails, current_user.organisation_id, params[:groupes]).call
-    redirect_to root_path, notice: "#{users_imported} participant(s) importé(s) sur #{emails.count}"
+    users_infos = params[:content].split("\r\n")
+    users_imported = ImportUsers.new(users_infos, current_user.organisation_id, params[:groupes]).call
+    redirect_to root_path, notice: "#{users_imported} participant(s) importé(s) sur #{users_infos.count}"
   end
 
   def audits
