@@ -14,7 +14,7 @@ class PresencesToXls < ApplicationService
       sheet = book.create_worksheet name: @presences.name
       bold = Spreadsheet::Format.new :weight => :bold, :size => 11
 
-      headers = %w{nom_participant prénom_participant tags_participant id_assemblée date_assemblée nom_assemblée date_signature chevauchement_assemblée}
+      headers = %w{nom_participant prénom_participant groupes_participant id_assemblée date_assemblée nom_assemblée groupes_assemblée date_signature conflit_assemblées conflit_signatures}
 
       sheet.row(0).concat headers
       sheet.row(0).default_format = bold
@@ -22,6 +22,7 @@ class PresencesToXls < ApplicationService
       index = 1
 
       @presences.each do |presence|
+        assemblee_conflit, signature_conflit = presence.check_conflit
         fields_to_export = [
           presence.user.nom,
           presence.user.prénom,
@@ -29,8 +30,10 @@ class PresencesToXls < ApplicationService
           presence.assemblee.id,
           I18n.l(presence.assemblee.début),
           presence.assemblee.nom,
+          presence.assemblee.tag_list.join(', '),
           I18n.l(presence.created_at),
-          presence.check_chevauchement ? "CHEVAUCHEMENT!!!" : ""
+          assemblee_conflit ? "#{Assemblee.where(id: assemblee_conflit).where.not(id: presence.assemblee_id).pluck(:nom)}" : '',
+          signature_conflit ? 'CONFLIT DE CANARD !!!' : ''
         ]
         sheet.row(index).replace fields_to_export
         index += 1
