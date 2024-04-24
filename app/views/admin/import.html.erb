@@ -4,9 +4,16 @@
   <%= form_tag({action: "import_do", method: :post}, multipart: true) do %>
     <div>
       <%= label_tag :content, "Adresses emails des participants à créer" %>
-      <%= text_area_tag :content, nil, rows: 7, class:"textarea textarea-bordered textarea-sm w-full shadow", required: true, placeholder: "annette.bonvoisin@orange.fr\r\njacques.boulanger@free.fr" %>
+      <%= text_area_tag :content, nil, 
+                        rows: 7, 
+                        class:"textarea textarea-bordered textarea-sm w-full shadow", 
+                        required: true, 
+                        placeholder: "annette.bonvoisin@orange.fr\r\njacques.boulanger@free.fr\r\nla_moustache@gmail.com;KATHERINE;Philippe" %>
       <label>
-        <span class="label-text-alt">Les adresses doivent être séparées par un retour à la ligne.</span>
+        <span class="label-text-alt">
+          Les adresses doivent être séparées par un retour à la ligne, et peuvent être suivies du nom et du prénom, séparés par un ;
+
+        </span>
       </label>
       <br>
       <% unless current_user.organisation.premium %>
