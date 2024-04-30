@@ -1,4 +1,5 @@
 import { Application } from "@hotwired/stimulus"
+import "custom/companion"
 
 const application = Application.start()
 
