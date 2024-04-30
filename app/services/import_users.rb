@@ -11,7 +11,7 @@ class ImportUsers < ApplicationService
     def call
       users_saved = 0
       @users_infos.each_with_index do |user_infos, index|
-        email, nom, prénom = user_infos.tr(' ','').split(';')
+        email, nom, prénom = user_infos.tr(' ','').split(/[;,]/)
         unless user = User.find_by(email: email, organisation_id: @organisation_id)
           user = User.create(email: email, password: SecureRandom.hex(5), organisation_id: @organisation_id)
           if nom || prénom
