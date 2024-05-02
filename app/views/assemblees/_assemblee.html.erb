@@ -18,7 +18,7 @@
       </p>
       <p class="mt-4">
         Groupes : <% assemblee.tags.each do |tag| %>
-          <span class="badge"><%= tag.name.humanize %></span>
+          <span class="badge"><%= link_to tag.name.humanize, users_path(tags: [tag.name]), class: "hover:underline" %></span>
         <% end %>
       </p>
 
