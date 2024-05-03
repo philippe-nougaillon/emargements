@@ -19,6 +19,7 @@ class ImportUsers < ApplicationService
           else
             user.dispatch_email_to_nom_prénom
           end
+          user.skip_confirmation!
         else
           user.nom = nom if user.nom != nom
           user.prénom = prénom if user.prénom != prénom

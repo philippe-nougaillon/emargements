@@ -43,7 +43,7 @@
 
   <div class="mt-4" title="Envoyer automatiquement le lien individuel à tous les participants 10 minutes avant le début de l'assemblée ?">
     <%= form.check_box :notifier_participants, disabled: !current_user.premium? %>
-    <%= form.label :notifier_participants, "Envoyer le lien individuel à tous les participants ?", class: "#{'text-base-300' unless current_user.premium? }" %>
+    <%= form.label :notifier_participants, "Envoyer le lien individuel aux participants ?", class: "#{'text-base-300' unless current_user.premium? }" %>
     <% unless current_user.premium? %>
       <p class="label-text-alt">
         passez au <%= link_to "Compte PREMIUM", admin_premium_path, class: 'text-primary hover:underline', data_turbo: false %> pour envoyer un lien unique à chaque participant
