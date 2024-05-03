@@ -25,7 +25,11 @@
           </div>
 
           <div id="signature-container" class="pr-8">
-            <canvas id="signature-pad" class="signature-pad border border-slate-300" width=600 height=300></canvas>
+            <% if request.variant.include?(:phone) %>
+              <canvas id="signature-pad" class="signature-pad border border-slate-300" width=300 height=150></canvas>
+            <% else %>
+              <canvas id="signature-pad" class="signature-pad border border-slate-300" width=600 height=300></canvas>
+            <% end %>
 
             <% if ((@presence.assemblee.début + @presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
               <p class="mt-2">
