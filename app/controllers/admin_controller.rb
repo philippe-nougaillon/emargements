@@ -29,7 +29,7 @@ class AdminController < ApplicationController
       else
         format.html do
           @users_not_signed = @presence.assemblee.users_not_signed
-          render :signature, status: :unprocessable_entity
+          render :signature_collective, status: :unprocessable_entity
         end
         format.json { render json: @presence.errors, status: :unprocessable_entity }
       end
@@ -58,8 +58,7 @@ class AdminController < ApplicationController
         format.json { render :show, status: :created, location: @presence }
       else
         format.html do
-          @users_not_signed = @presence.assemblee.users_not_signed
-          render :signature, status: :unprocessable_entity
+          render :signature_individuelle, status: :unprocessable_entity
         end
         format.json { render json: @presence.errors, status: :unprocessable_entity }
       end
