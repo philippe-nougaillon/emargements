@@ -1,10 +1,10 @@
-<h1 class="text-4xl font-bold"><%= page_title!(@presence.assemblee.nom.humanize) %></h1>
-<h2 class="text-2xl mb-6"><%= @presence.assemblee.horaires %></h2>
+<h1 class="text-3xl sm:text-4xl font-bold"><%= page_title!(@presence.assemblee.nom.humanize) %></h1>
+<h2 class="text-xl sm:text-2xl mb-6">Assemblée du <%= l @presence.assemblee.début.to_date %></h2>
 
 <%= form_tag({action: "signature_collective_do", method: :post}) do %>
   <% if @presence.assemblee.in_progress? %>
     <%= hidden_field_tag :assemblee_id, params[:assemblee_id] %>
-    <div class="flex flex-wrap gap-24">
+    <div class="flex flex-wrap gap-8 sm:gap-24">
       <div class="flex-1 flex flex-col">
         <% if @presence.errors.any? %>
           <div style="color: red">
@@ -13,7 +13,7 @@
             </ul>
           </div>
         <% end %>
-        <div class="mb-4 max-w-72">
+        <div class="mb-4 w-full sm:max-w-96">
           <%= label_tag :user_id, "Participant", style: "display: block" %>
           <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :slug, :nom_prénom), include_blank: true %>
         </div>
@@ -24,11 +24,11 @@
             <%= text_field_tag :signature, "", style:'display: none' %>
           </div>
 
-          <div id="signature-container" class="pr-8">
+          <div id="signature-container" class="sm:pr-8">
             <% if request.variant.include?(:phone) %>
-              <canvas id="signature-pad" class="signature-pad border border-slate-300" width=300 height=150></canvas>
+              <canvas id="signature-pad" class="signature-pad border-t border-t-slate-200" width=300 height=150></canvas>
             <% else %>
-              <canvas id="signature-pad" class="signature-pad border border-slate-300" width=600 height=300></canvas>
+              <canvas id="signature-pad" class="signature-pad border-t border-t-slate-200" width=600 height=300></canvas>
             <% end %>
 
             <% if ((@presence.assemblee.début + @presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
@@ -38,9 +38,13 @@
               </p>
             <% end %>
 
-            <div class="flex gap-4 mt-4">
-              <button id="save" class="btn btn-primary btn-outline btn-lg">Enregistrer</button>
-              <a id="clear" class="btn btn-lg">Effacer</a>
+            <div class="flex flex-wrap gap-4 mt-4">
+              <button id="save" class="btn btn-primary btn-outline btn-lg">Enregistrer émargement</button>
+              <div id="clear" class="btn btn-lg btn-outline">
+                <span class="material-symbols-outlined">
+                  ink_eraser
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -57,7 +61,7 @@
   <% elsif @presence.assemblee.début > DateTime.now %>
     <p>L'assemblée n'a pas encore commencé. Elle commencera le <%= l @presence.assemblee.début.to_date %> à <%= @presence.assemblee.début.strftime("%H:%M") %></p>
   <% else %>
-    <p>L'assemblée est terminée. Vous ne pouvez plus signer.</p>
+    <p>Cette assemblée est maintenant terminée.</p>
   <% end %>
 <% end %>
 
@@ -89,7 +93,7 @@
       searchPlaceholder: 'Recherche',
       searchText: 'Pas de résultat',
       searchingText: 'Recherche...',
-      placeholderText: 'Tout le monde a signé !',
+      placeholderText: 'Choisissez votre nom dans la liste',
       allowDeselect: true,
     }
   })
