@@ -29,8 +29,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get :index
-    get :signature
-    post :signature_do
+    get :signature_collective
+    post :signature_collective_do
+    get :signature_individuelle
+    post :signature_individuelle_do
     get :import
     post :import_do
     get :audits

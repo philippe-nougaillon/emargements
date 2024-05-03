@@ -49,8 +49,8 @@
 
     <% if assemblee.in_progress? %>
       <div class="self-end">
-        <%= raw assemblee.qrcode(admin_signature_url(assemblee_id: assemblee.slug)) %>
-        <%= link_to "Signer (Émargement)", admin_signature_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm mt-4', target: '_blank' %>
+        <%= raw assemblee.qrcode(admin_signature_collective_url(assemblee_id: assemblee.slug)) %>
+        <%= link_to "Signer (Émargement)", admin_signature_collective_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm mt-4', target: '_blank' %>
       </div>
     <% end %>
 

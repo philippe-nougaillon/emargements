@@ -1,7 +1,7 @@
 <h1 class="text-4xl font-bold"><%= page_title!(@presence.assemblee.nom.humanize) %></h1>
 <h2 class="text-2xl mb-6"><%= @presence.assemblee.horaires %></h2>
 
-<%= form_tag({action: "signature_do", method: :post}) do %>
+<%= form_tag({action: "signature_collective_do", method: :post}) do %>
   <% if @presence.assemblee.in_progress? %>
     <%= hidden_field_tag :assemblee_id, params[:assemblee_id] %>
     <div class="flex flex-wrap gap-24">
@@ -13,42 +13,33 @@
             </ul>
           </div>
         <% end %>
-        <% if params[:user_id].blank? %>
-          <div class="mb-4 max-w-72">
-            <%= label_tag :user_id, "Participant", style: "display: block" %>
-            <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :slug, :nom_prénom), include_blank: true %>
-          </div>
-        <% else %>
-          <p class="text-xl font-bold mb-4"><%= @presence.user.nom_prénom %></p>
-          <%= hidden_field_tag :user_id, params[:user_id] %>
-        <% end %>
+        <div class="mb-4 max-w-72">
+          <%= label_tag :user_id, "Participant", style: "display: block" %>
+          <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :slug, :nom_prénom), include_blank: true %>
+        </div>
 
-        <% if params[:user_id].blank? || @presence.assemblee.users_not_signed.include?(@presence.user) %>
+        <div>
           <div>
-            <div>
-              <%= label_tag :signature, "Signature", style: "display: block" %>
-              <%= text_field_tag :signature, "", style:'display: none' %>
-            </div>
+            <%= label_tag :signature, "Signature", style: "display: block" %>
+            <%= text_field_tag :signature, "", style:'display: none' %>
+          </div>
 
-            <div id="signature-container" class="pr-8">
-              <canvas id="signature-pad" class="signature-pad border border-slate-300" width=600 height=300></canvas>
+          <div id="signature-container" class="pr-8">
+            <canvas id="signature-pad" class="signature-pad border border-slate-300" width=600 height=300></canvas>
 
-              <% if ((@presence.assemblee.début + @presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
-                <p class="mt-2">
-                  Temps restant :
-                  <%= time_ago_in_words @presence.assemblee.fin %>
-                </p>
-              <% end %>
+            <% if ((@presence.assemblee.début + @presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
+              <p class="mt-2">
+                Temps restant :
+                <%= time_ago_in_words @presence.assemblee.fin %>
+              </p>
+            <% end %>
 
-              <div class="flex gap-4 mt-4">
-                <button id="save" class="btn btn-primary btn-outline btn-lg">Enregistrer</button>
-                <a id="clear" class="btn btn-lg">Effacer</a>
-              </div>
+            <div class="flex gap-4 mt-4">
+              <button id="save" class="btn btn-primary btn-outline btn-lg">Enregistrer</button>
+              <a id="clear" class="btn btn-lg">Effacer</a>
             </div>
           </div>
-        <% else %>
-          Vous avez signé à <%= @presence.assemblee.presences.find_by(user_id: @presence.user).created_at.strftime("%H:%M") %>
-        <% end %>
+        </div>
       </div>
 
       <div class="flex-1">
