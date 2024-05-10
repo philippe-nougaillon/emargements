@@ -104,6 +104,26 @@ class AdminController < ApplicationController
     end
   end
 
+  def create_new_participant
+    @user = User.new
+  end
+
+  def create_new_participant_do
+    @user = User.new(params.require(:user).permit(:nom, :prénom, :email, :adresse, :tag_list, :password))
+    @user.organisation = current_user.organisation
+    @user.skip_confirmation!
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to users_url, notice: "Participant créé avec succès." }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { render :create_new_participant, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def is_user_authorized
