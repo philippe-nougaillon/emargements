@@ -1,1 +1,1 @@
-PageTitleHelper.options[:app] = 'Émargements v2.5'
+PageTitleHelper.options[:app] = 'Émargements v2.6'
