@@ -1,0 +1,87 @@
+<h2 class="text-xl sm:text-2xl">Émargement assemblée du <%= l @presence.assemblee.début.to_date, format: :short %></h2>
+<h1 class="text-2xl sm:text-4xl font-bold text-primary mb-6"><%= page_title!(@presence.assemblee.nom.humanize) %></h1>
+
+<%= form_tag({action: "signature_individuelle_do", method: :post}) do %>
+  <% if @presence.assemblee.in_progress? %>
+    <%= hidden_field_tag :assemblee_id, params[:assemblee_id] %>
+    <div class="flex flex-wrap gap-8 sm:gap-24">
+      <div class="flex-1 flex flex-col">
+        <p class="text-xl font-bold mb-4"><%= @presence.user.nom_prénom %></p>
+        <%= hidden_field_tag :user_id, params[:user_id] %>
+
+        <% if @presence.assemblee.users_not_signed.include?(@presence.user) %>
+          <div>
+            <div>
+              <%= label_tag :signature, "Signature", style: "display: block" %>
+              <%= text_field_tag :signature, "", style:'display: none' %>
+            </div>
+
+            <div id="signature-container" class="sm:pr-8">
+              <% if request.variant.include?(:phone) %>
+                <canvas id="signature-pad" class="signature-pad" width=300 height=150></canvas>
+              <% else %>
+                <canvas id="signature-pad" class="signature-pad" width=600 height=300></canvas>
+              <% end %>
+
+              <% if ((@presence.assemblee.début + @presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
+                <p class="mt-2">
+                  Temps restant :
+                  <%= time_ago_in_words @presence.assemblee.fin %>
+                </p>
+              <% end %>
+
+              <div class="flex gap-4 mt-4">
+                <button id="save" class="btn btn-primary btn-outline btn-lg">Enregistrer</button>
+                <div id="clear" class="btn btn-lg btn-outline">
+                  <span class="material-symbols-outlined">
+                    ink_eraser
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          Vous avez signé à <%= @presence.assemblee.presences.find_by(user_id: @presence.user).created_at.strftime("%H:%M") %>
+        <% end %>
+      </div>
+    </div>
+  <% elsif @presence.assemblee.début > DateTime.now %>
+    <p>L'assemblée n'a pas encore commencé. Elle commencera le <%= l @presence.assemblee.début.to_date %> à <%= @presence.assemblee.début.strftime("%H:%M") %></p>
+  <% else %>
+    <p>Cette assemblée est maintenant terminée.</p>
+  <% end %>
+<% end %>
+
+<script>
+  var signaturePad = new SignaturePad(document.getElementById('signature-pad'));
+  var signatureField = document.getElementById('signature');
+  var saveButton = document.getElementById('save');
+  var cancelButton = document.getElementById('clear');
+
+  console.log(signaturePad);
+  console.log(signatureField);
+
+  saveButton.addEventListener('click', function (event) {
+    if (signaturePad.isEmpty()){
+      event.preventDefault();
+    } else {
+      signatureField.setAttribute('value', signaturePad.toDataURL("image/svg+xml"));
+    }
+  });
+
+  cancelButton.addEventListener('click', function (event) {
+    signaturePad.clear();
+  });
+
+  // slimselect
+  new SlimSelect({
+    select: '#user_id',
+    settings: {
+      searchPlaceholder: 'Recherche',
+      searchText: 'Pas de résultat',
+      searchingText: 'Recherche...',
+      placeholderText: 'Tout le monde a signé !',
+      allowDeselect: true,
+    }
+  })
+</script>

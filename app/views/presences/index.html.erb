@@ -1,4 +1,4 @@
-<h1 class="text-4xl font-bold mb-4">Liste des émargements</h1>
+<h1 class="text-4xl font-bold mb-4"><%= page_title!("Liste des émargements") %></h1>
 
 <%= form_tag request.path, method: :get do %>
   <div class="flex flex-wrap items-end gap-4">
@@ -27,12 +27,14 @@
   Affichage de <%= pluralize(@presences.count, 'émargement', plural: 'émargements') %>
 </p>
 
-<%= link_to presences_path(params.merge(format: :xls)), class: "text-success hover:underline" do %>
+<%= link_to url_for(params.permit!.merge(format: :xls)), class: "text-success hover:underline" do %>
   Exporter vers Excel
 <% end %>
-|
-<%= link_to presences_path(params.merge(format: :pdf)), class: "text-error hover:underline mb-12" do %>
-  Exporter vers PDF
+<% if params[:assemblee_id].present? %>
+  |
+  <%= link_to url_for(params.permit!.merge(format: :pdf)), class: "text-error hover:underline mb-12" do %>
+    Exporter vers PDF
+  <% end %>
 <% end %>
 
 <script>

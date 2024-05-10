@@ -1,26 +1,44 @@
-<h1 class="text-4xl font-bold mb-4 text-center">Compte PREMIUM</h1>
+<h1 class="text-4xl font-bold mb-4 text-center">
+  <%= page_title!("Compte PREMIUM") %>
+</h1>
 
 <div class="flex flex-wrap justify-center">
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body">
       <h2 class="text-center font-black text-2xl mb-8">
-        Vos avantages
         <% if current_user.premium? && current_user.organisation.expiration_premium %>
-          <br>
-          <span class="text-sm text-gray-500">jusqu'au <%= l current_user.organisation.expiration_premium, format: :custom2 %></span>
+          <span class="text-gray-500">
+            Vos avantages jusqu'au 
+            <%= l current_user.organisation.expiration_premium, format: :custom2 %>
+          </span>
+        <% else %>
+          Les avantages du compte PREMIUM :
         <% end %>
       </h2>
-      <p>Nombre de participants illimité</p>
-      <p>Envoi automatique du lien à tous les participants avant le début de l'assemblée</p>
-      <p>Enlève des convocations le lien d'auto-promotion</p>
-      <p>Historique des mails envoyés, avec Statut (OK = acheminé) et État (OUVERT = lu) consultables pendant 5 jours</p>
-      <p>Audit trail : Journal des modifications de données (connexions, signatures, participants, ...)</p>
-      <p>Propositions d'itinéraires sur les convocations, avec plusieurs modalités de transport et les bilans carbone (à venir)</p>
 
+      <p>
+        <span class="badge badge-primary badge-xs"></span> 
+        Nombre illimité de participants 
+      </p>
+      <p>
+        <span class="badge badge-primary badge-xs"></span> 
+        Envoi automatique du lien pour signer à tous les participants, avant le début de l'assemblée
+      </p>
+      <p>
+        <span class="badge badge-primary badge-xs"></span> 
+        Accès au MailLog (historique des mails envoyés, avec Statut et État (Ok = acheminé, Ouvert = vu) consultables pendant 5 jours)
+      </p>
+      <p>
+        <span class="badge badge-primary badge-xs"></span> 
+        Accès à l'Audit Trail (journal des modifications de données (connexions, signatures, participants, ...))
+      </p>
+      <p>
+        <span class="badge badge-primary badge-xs"></span> 
+        Enlève le lien d'auto-promotion visible sur les convocations
+      </p>
+   
       <% unless current_user.premium? %>
-        <div class="flex flex-wrap mt-8 justify-around items-center gap-8">
-          <%= link_to "Payer avec PayPal", "https://www.paypal.com/ncp/payment/RLKRFJG5SD4M6", class: 'btn btn-primary btn-outline btn-lg hover:!text-white' %>
-          <%= image_tag "Compte PREMIUM-qrcode.png" %>
+        <div class="flex flex-wrap mt-8 justify-around items-center">
           <p>
             <%= link_to "Philippe NOUGAILLON (Consulting IT)", "https://www.philnoug.com/", class: 'underline' %>
             <br><br>
@@ -30,10 +48,13 @@
             93370 Montfermeil<br>
             Siret : 384 396 719 00047
           </p>
+          <%= image_tag "Compte PREMIUM-qrcode.png" %>
+          <%= link_to "Payer avec PayPal", "https://www.paypal.com/ncp/payment/RLKRFJG5SD4M6", class: 'btn btn-primary btn-outline btn-lg hover:!text-white' %>
         </div>
       <% end %>
 
+      <%= link_to "Un problème ? Nous contacter...", "https://www.philnoug.com/contact", class: 'mt-12 underline' %>
+
     </div>
   </div>
-
 </div>

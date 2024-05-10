@@ -1,11 +1,11 @@
-<div class="flex flex-col justify-center items-center h-screen">
-  <h1 class="text-2xl font-bold mb-4">Changer de mot de passe</h1>
+<div class="flex flex-col justify-center h-screen max-w-72 mx-auto">
+  <h1 class="text-2xl font-bold border-b border-gray-400 pb-4 w-full text-center mb-4"><%= page_title!("Changer de mot de passe") %></h1>
 
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <%= f.hidden_field :reset_password_token %>
   
-    <div class="field">
+    <div class="field my-4">
       <%= f.label :password, "Nouveau mot de passe" %><br />
       <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> caractères minimum)</em><br />
@@ -13,7 +13,7 @@
       <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class:'input input-sm input-bordered w-full', required: true %>
     </div>
   
-    <div class="field">
+    <div class="field my-4">
       <%= f.label :password_confirmation, "Confirmez le mot de passe" %><br />
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'input input-sm input-bordered w-full', required: true %>
     </div>

@@ -21,10 +21,10 @@ class Presence < ApplicationRecord
     end
   end
 
-  def check_chevauchement
-    # Check si un participant a signé sur deux assemblées qui ont lieu en même temps 
-    assemblees = self.assemblee.organisation.assemblees.where("(assemblees.début BETWEEN :debut AND :fin) OR (assemblees.fin BETWEEN :debut AND :fin) OR (:debut BETWEEN assemblees.début AND assemblees.fin)", {debut: self.assemblee.début, fin: self.assemblee.fin})
-    return (assemblees.joins(:presences).where('presences.user_id': self.user_id).count > 1)
+  def check_conflit
+    # Check si des assemblées se passent au même moment, et si un participant a signé sur deux de ces assemblées 
+    assemblees = self.assemblee.organisation.assemblees.tagged_with(self.user.tags, any: true).where("(assemblees.début BETWEEN :debut AND :fin) OR (assemblees.fin BETWEEN :debut AND :fin) OR (:debut BETWEEN assemblees.début AND assemblees.fin)", {debut: self.assemblee.début, fin: self.assemblee.fin})
+    return [((assemblees.count > 1)? assemblees.pluck(:id) : false) , (assemblees.joins(:presences).where('presences.user_id': self.user_id).count > 1)]
   end
   
 end

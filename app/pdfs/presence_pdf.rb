@@ -16,7 +16,6 @@ class PresencePdf
 
       text presence.user.nom_prénom, size: 20
       text "Le #{I18n.l presence.heure, format: :long}"
-      text presence.assemblee.nom.humanize, size: 16
   
       svg Base64.decode64(presence.signature.split(',')[1]), width: 200
       move_down @margin_down

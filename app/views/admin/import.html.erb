@@ -1,12 +1,20 @@
 <div class="mx-auto md:w-1/4 w-full">
-  <h1 class="text-4xl font-bold text-nowrap mb-6">Importer des Participants</h1>
+  <h1 class="text-4xl font-bold text-nowrap mb-6"><%= page_title!("Importer des Participants") %></h1>
 
   <%= form_tag({action: "import_do", method: :post}, multipart: true) do %>
     <div>
       <%= label_tag :content, "Adresses emails des participants à créer" %>
-      <%= text_area_tag :content, nil, rows: 7, class:"textarea textarea-bordered textarea-sm w-full shadow", required: true, placeholder: "annette.bonvoisin@orange.fr\r\njacques.boulanger@free.fr" %>
+      <%= text_area_tag :content, nil, 
+                        rows: 7, 
+                        class:"textarea textarea-bordered textarea-sm w-full shadow", 
+                        required: true, 
+                        placeholder: "annette.bonvoisin@orange.fr\r\njacques.boulanger@free.fr\r\nla_moustache@gmail.com;KATHERINE;Philippe" %>
       <label>
-        <span class="label-text-alt">Les adresses doivent être séparées par un retour à la ligne.</span>
+        <span class="label-text-alt">
+          Les adresses doivent être séparées par un retour à la ligne. Elles peuvent être suivies du nom et du prénom, séparés par une virgule ou un point-virgule.
+          <br>
+          Un message sera envoyé à chaque participant afin de confirmer son adresse email.
+        </span>
       </label>
       <br>
       <% unless current_user.organisation.premium %>

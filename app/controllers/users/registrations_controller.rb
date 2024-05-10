@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # Associer l'utilisateur à une organisation
     @user.organisation = Organisation.create(nom: "Mon_organisation")
     @user.admin = true
-    @user.tag_list.add("Gestionnaire")
+    # @user.tag_list.add("Gestionnaire")
     @user.dispatch_email_to_nom_prénom
     @user.save
   end

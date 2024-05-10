@@ -1,5 +1,5 @@
 <div class="flex flex-col justify-center h-screen max-w-72 mx-auto">
-  <h1 class="text-2xl font-bold border-b border-gray-400 pb-4 w-full text-center mb-4">Connexion</h1>
+  <h1 class="text-2xl font-bold border-b border-gray-400 pb-4 w-full text-center mb-4"><%= page_title!("Connexion") %></h1>
 
   <div class="w-full mt-4">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
