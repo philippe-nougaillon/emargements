@@ -1,10 +1,10 @@
-<h1 class="text-4xl font-bold text-primary mb-6"><%= page_title!("Nouveau Participant") %></h1>
+<h1 class="text-4xl font-bold text-primary mb-6"><%= page_title!("Ajouter un Administrateur") %></h1>
 
 <div class="max-w-96">
-  <%= form_with(model: @user, class: "contents", url: "create_new_participant_do", html: { autocomplete: "off" }) do |form| %>
+  <%= form_with(model: @user, class: "contents", url: "create_new_admin_do", html: { autocomplete: "off" }) do |form| %>
     <% if @user.errors.any? %>
       <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-        <h2><%= pluralize(@user.errors.count, "erreur") %> empêche(nt) ce participant d'être enregistré :</h2>
+        <h2><%= pluralize(@user.errors.count, "erreur") %> empêche(nt) cet administrateur d'être enregistré :</h2>
 
         <ul>
           <% @user.errors.each do |error| %>
@@ -27,16 +27,6 @@
     <div class="mt-4">
       <%= form.label :email, style: "display: block" %>
       <%= form.email_field :email, class: 'input input-bordered input-sm w-full', required: true %>
-    </div>
-
-    <div class="mt-4">
-      <%= form.label :adresse, style: "display: block" %>
-      <%= form.text_area :adresse, class: 'textarea textarea-bordered textarea-sm w-full', rows: 2 %>
-    </div>
-
-    <div class="mt-4">
-      <%= form.label :tag_list, "Groupes", style: "display: block" %>
-      <%= form.text_field :tag_list, value: @user.tag_list.join(', '), class: 'input input-bordered input-sm w-full' %>
     </div>
 
     <div class="mt-4">

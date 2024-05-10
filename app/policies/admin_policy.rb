@@ -26,12 +26,12 @@ class AdminPolicy
     index?
   end
 
-  def create_new_participant?
+  def create_new_admin?
     index?
   end
 
-  def create_new_participant_do?
-    create_new_participant?
+  def create_new_admin_do?
+    create_new_admin?
   end
 
 end

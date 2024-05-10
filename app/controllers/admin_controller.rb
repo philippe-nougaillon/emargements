@@ -104,13 +104,14 @@ class AdminController < ApplicationController
     end
   end
 
-  def create_new_participant
+  def create_new_admin
     @user = User.new
   end
 
-  def create_new_participant_do
-    @user = User.new(params.require(:user).permit(:nom, :prénom, :email, :adresse, :tag_list, :password))
+  def create_new_admin_do
+    @user = User.new(params.require(:user).permit(:nom, :prénom, :email, :password))
     @user.organisation = current_user.organisation
+    @user.admin = true
     @user.skip_confirmation!
 
     respond_to do |format|
@@ -118,7 +119,7 @@ class AdminController < ApplicationController
         format.html { redirect_to users_url, notice: "Participant créé avec succès." }
         format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :create_new_participant, status: :unprocessable_entity }
+        format.html { render :create_new_admin, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

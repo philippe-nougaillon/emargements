@@ -1,7 +1,7 @@
 <div class="flex flew-wrap justify-between">
   <h1 class="text-4xl font-bold mb-4"><%= page_title!("Participants") %></h1>
   <div>
-    <%= link_to "Nouveau Participant", admin_create_new_participant_path, class:'btn btn-primary btn-outline btn-lg hover:shadow-xl hover:!text-white' %>
+    <%= link_to "Ajouter Administrateur", admin_create_new_admin_path, class:'btn btn-primary btn-outline btn-lg hover:shadow-xl hover:!text-white' %>
     <% if policy(:admin).import? %>
       <%= link_to "Importer", admin_import_path, class:'btn btn-primary btn-outline btn-lg' %>
     <% else %>
