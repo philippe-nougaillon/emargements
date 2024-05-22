@@ -2,22 +2,29 @@
 
 ## Application Web de gestion de Feuilles de présences numériques
 
-Importer vos participants
 
-Envoyer vos convocations (automatiquement ou manuellement)
+### Fonctionnement :
+
+Importer vos participants par thématique (Ex: Santé, Mobilité, etc.)
+
+Créer une assemblée autour d'une ou plusieurs thématiques
+
+Envoyer vos convocations (automatiquement ou manuellement) à l'ensemble des participants liés aux thématiques de l'assemblée. 
 
 Chaque participant recoit la convocation et peux justifier de sa présence en y apposant sa signature manuscrite.
 
-Une information claire et partagée entre les parties prenantes et les services 
+### Points clés :
 
-Une référence unique et sur tous les supports (PC/Smartphone)
+* Une information claire et partagée entre les parties prenantes et les services 
 
-## Fonctionnalités 
+* Une référence unique sur les émargements et sur tous les supports (PC/Smartphone)
 
 + Recherche et filtres 
-+ Import/Export Excel 
++ Import rapide des participants
+* Export Excel des émargements 
 + Notification par email automatique 
 + Audit trail des modifications (Activité de la base de données)
++ Les données relative à la signature manuscrite sont chiffrées directement dans la base de données.
 
 # Installer l'application avec Docker
 
