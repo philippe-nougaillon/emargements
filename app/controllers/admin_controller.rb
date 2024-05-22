@@ -4,6 +4,7 @@ class AdminController < ApplicationController
 
   def index
     @assemblees = current_user.organisation.assemblees.order(:début).where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today - 1.month, Date.today + 2.months)
+    @current_step = current_user.organisation.step
   end
 
   def signature_collective
