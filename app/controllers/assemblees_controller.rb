@@ -1,7 +1,7 @@
 class AssembleesController < ApplicationController
   before_action :set_assemblee, only: %i[ show edit update destroy envoyer_lien_gestionnaire ]
   before_action :is_user_authorized
-  before_action :set_tags, only: %i[ new edit ]
+  before_action :set_tags, only: %i[ new edit import ]
 
   # GET /assemblees or /assemblees.json
   def index
@@ -120,6 +120,15 @@ class AssembleesController < ApplicationController
   def envoyer_lien_gestionnaire
     EnvoyerLienSignatureCollectiveJob.perform_later(@assemblee, current_user.id)
     redirect_to assemblees_path, notice: "Lien de signature envoyé au gestionnaire."
+  end
+
+  def import
+  end
+
+  def import_do
+    assemblees_infos = params[:assemblees].split("\r\n")
+    assemblees_imported = ImportAssemblees.new(assemblees_infos, current_user, params[:groupes]).call
+    redirect_to assemblees_path, notice: "#{assemblees_imported} assemblée(s) importé(s) sur #{assemblees_infos.count}"
   end
 
   private
