@@ -1,5 +1,5 @@
 <h1 class="text-4xl font-bold mb-4 text-center">
-  <%= page_title!("Compte PREMIUM") %>
+  <%= page_title!("Offre PREMIUM") %>
 </h1>
 
 <div class="flex flex-wrap justify-center">
@@ -18,19 +18,11 @@
 
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        Nombre illimité de participants 
+        Le nombre de participants passe de 50 à illimité 
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        Envoi automatique du lien pour signer à tous les participants, avant le début de l'assemblée
-      </p>
-      <p>
-        <span class="badge badge-primary badge-xs"></span> 
-        Accès au MailLog (historique des mails envoyés, avec Statut et État (Ok = acheminé, Ouvert = vu) consultables pendant 5 jours)
-      </p>
-      <p>
-        <span class="badge badge-primary badge-xs"></span> 
-        Accès à l'Audit Trail (journal des modifications de données (connexions, signatures, participants, ...))
+        Accès à l'Audit Trail (journal des modifications des données (connexions, signatures, participants, ...))
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
@@ -52,9 +44,7 @@
           <%= link_to "Payer avec PayPal", "https://www.paypal.com/ncp/payment/RLKRFJG5SD4M6", class: 'btn btn-primary btn-outline btn-lg hover:!text-white' %>
         </div>
       <% end %>
-
-      <%= link_to "Un problème ? Nous contacter...", "https://www.philnoug.com/contact", class: 'mt-12 underline' %>
-
+      <%= link_to "Un problème ? Nous contacter !", "https://www.philnoug.com/contact?objet=Émargements", class: 'mt-12 underline' %>
     </div>
   </div>
 </div>
