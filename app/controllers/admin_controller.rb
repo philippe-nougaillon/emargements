@@ -67,6 +67,7 @@ class AdminController < ApplicationController
   end
 
   def import
+    @tags = current_user.organisation.tags
   end
 
   def import_do

@@ -138,7 +138,7 @@ class AssembleesController < ApplicationController
     end
     
     def set_tags
-      @tags = current_user.organisation.users.tag_counts_on(:tags).order(:name)
+      @tags = current_user.organisation.tags
     end
 
     # Only allow a list of trusted parameters through.
