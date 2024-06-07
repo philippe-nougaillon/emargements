@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     get :premium
     get :create_new_admin
     post :create_new_admin_do
+    get :create_new_participant
+    post :create_new_participant_do
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

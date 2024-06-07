@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[signature_collective signature_collective_do signature_individuelle signature_individuelle_do]
   before_action :is_user_authorized, except: %i[signature_collective signature_collective_do signature_individuelle signature_individuelle_do]
+  before_action :set_tags, only: %i[ import create_new_participant ]
 
   def index
     @assemblees = current_user.organisation.assemblees.order(:début).where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today - 1.month, Date.today + 2.months)
@@ -67,7 +68,6 @@ class AdminController < ApplicationController
   end
 
   def import
-    @tags = current_user.organisation.tags
   end
 
   def import_do
@@ -118,6 +118,28 @@ class AdminController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        format.html { redirect_to users_url, notice: "Administrateur créé avec succès." }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { render :create_new_admin, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def create_new_participant
+    @user = User.new
+  end
+
+  def create_new_participant_do
+    @user = User.new(params.require(:user).permit(:nom, :prénom, :email))
+    @user.tag_list.add(params[:user][:tags])
+    @user.password = SecureRandom.hex(5)
+    @user.organisation = current_user.organisation
+    @user.skip_confirmation!
+
+    respond_to do |format|
+      if @user.save
         format.html { redirect_to users_url, notice: "Participant créé avec succès." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -131,5 +153,9 @@ class AdminController < ApplicationController
 
   def is_user_authorized
     authorize :admin
+  end
+
+  def set_tags
+    @tags = current_user.organisation.tags
   end
 end
