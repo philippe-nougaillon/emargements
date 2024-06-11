@@ -15,6 +15,12 @@ class Presence < ApplicationRecord
                                                 locals: { presence: self }, 
                                                 target: "presences" }
 
+  after_create_commit -> { broadcast_prepend_to "presences_count_#{self.assemblee.organisation.slug}", 
+                                                partial: "presences/presences_count", 
+                                                locals: { presences_count: self.assemblee.presences.count }, 
+                                                target: "presences" }
+
+
   def check_heure
     if !(Time.current > self.assemblee.début - 10.minutes && Time.current < (self.assemblee.début + self.assemblee.durée.to_f.hours))
       self.errors.add :erreur, ": Le délai imparti a expiré !" 

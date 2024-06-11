@@ -23,7 +23,8 @@
   <%= render @presences %>
 </div>
 
-<p class="mt-8">
+<p class="mt-8 mb-2">
+  <%= turbo_stream_from "presences_count_#{current_user.organisation.slug}" %>
   Affichage de <%= pluralize(@presences.count, 'émargement', plural: 'émargements') %>
 </p>
 

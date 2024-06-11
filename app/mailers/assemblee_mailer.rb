@@ -1,4 +1,5 @@
 class AssembleeMailer < ApplicationMailer
+  
   def lien_assemblee(assemblee)
     @assemblee = assemblee
     mail(to: @assemblee.user.email, subject: "Émargement de l'assemblée '#{@assemblee.nom}'").tap do |message|
@@ -22,4 +23,5 @@ class AssembleeMailer < ApplicationMailer
     @assemblee = Assemblee.find(assemblee_id)
     mail(to: "philippe.nougaillon@gmail.com, pierreemmanuel.dacquet@gmail.com", subject: "Nouvelle assemblée : '#{@assemblee.nom}'")
   end
+  
 end
