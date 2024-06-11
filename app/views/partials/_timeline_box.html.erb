@@ -1,9 +1,16 @@
-<div class="timeline-<%= start ? 'start' : 'end' %> timeline-box">
+<div class="timeline-<%= start ? 'start' : 'end' %> timeline-box hover:underline">
   <%= link_to assemblee_path(assemblee) do %>
     <b><%= assemblee.nom.humanize %></b>
     <br>
     <%= assemblee.horaires %>
     <br>
+
+    <p class="">
+      <% assemblee.tags.each do |tag| %>
+        <span class="badge"><%= tag.name.humanize %></span>
+      <% end %>
+    </p>
+
     <p class="min-h-4 font-black">
       <% if assemblee.début > DateTime.now %>
         <span class="text-warning">

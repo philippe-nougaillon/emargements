@@ -1,7 +1,9 @@
 <li>
-  <p class="!p-1.5">
+  <p>
     <%= current_user.email %>
+
     (<%= current_user.organisation.nom %>)
+
     <% if current_user.organisation.premium %>
       <%= link_to admin_premium_path do %>
         <span class="material-symbols-outlined text-warning">
@@ -11,14 +13,16 @@
     <% end %>
   </p>
 </li>
+
 <% unless current_user.premium? %>
   <li>
     <%= link_to "OFFRE PREMIUM", admin_premium_path, class: 'btn btn-outline btn-primary btn-sm' %>
   </li>
 <% end %>
+
 <li>
   <%= button_to destroy_user_session_path, method: :delete, title: "Fermer la session de #{current_user.email}", form_class: '!p-0', class:'h-full' do %>
-    <span class="btn btn-ghost btn-sm font-normal">
+    <span class="btn btn-light btn-sm">
       Déconnexion
     </span>
   <% end %> 

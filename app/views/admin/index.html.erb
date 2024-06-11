@@ -1,9 +1,9 @@
 <div class="overflow-x-auto">
-  <div class="flex justify-center mt-12">
+  <div class="flex justify-center mt-4">
     <% if @current_step >= 4 %>
       <div class="flex flex-col items-center">
         <h1 class="text-3xl font-bold mb-8">Chronologie des assemblées</h1>
-        <ul class="timeline mb-16">
+        <ul class="timeline mb-8">
           <% @assemblees.each_with_index do |assemblee, index| %>
             <% started = (assemblee.début < DateTime.now) %>
             <% finished = (assemblee.fin < DateTime.now) %>
@@ -58,7 +58,7 @@
     <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
     <%= link_to "ORGANISATION", edit_organisation_path(current_user.organisation), class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
   </div>
-  <div class="flex flex-wrap gap-8 my-8">
+  <div class="flex flex-wrap gap-8 my-4">
     <%= link_to "PARTICIPANTS", users_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
     <%= link_to "MAIL LOGS", mail_logs_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
   </div>
