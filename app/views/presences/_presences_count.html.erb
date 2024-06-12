@@ -1,5 +1,4 @@
-<%= pluralize(presences_count, 'émargement', plural: 'émargements') %>
-au total 
-<br>
-(temps réel, au <%= l DateTime.now  %>)
-<br><br>
+<div id="presences_count" class="mt-8 mb-2">
+    Affichage de <%= pluralize(presences_count, 'émargement', plural: 'émargements') %>
+    au total (<%= l DateTime.now  %>)
+</div>
