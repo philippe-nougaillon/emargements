@@ -13,9 +13,6 @@
         <div class="flex-1 flex flex-col">
           <% if @presence.errors.any? %>
             <div style="color: red">
-              <ul>
-                <li>Veuillez choisir un nom dans la liste</li>
-              </ul>
               <%= @presence.errors.full_messages %>
             </div>
           <% end %>

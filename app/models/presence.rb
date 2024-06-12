@@ -4,6 +4,7 @@ class Presence < ApplicationRecord
   belongs_to :user
   belongs_to :assemblee
 
+  validates :user_id, uniqueness: {scope: :assemblee_id, message: "Une seule signature par assemblée !" } 
   validate :check_heure
 
   encrypts :signature
