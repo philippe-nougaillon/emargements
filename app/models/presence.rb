@@ -15,10 +15,10 @@ class Presence < ApplicationRecord
                                                 locals: { presence: self }, 
                                                 target: "presences" }
 
-  after_create_commit -> { broadcast_prepend_to "presences_count_#{self.assemblee.organisation.slug}", 
+  after_create_commit -> { broadcast_replace_to "presences_count_#{self.assemblee.organisation.slug}", 
                                                 partial: "presences/presences_count", 
                                                 locals: { presences_count: self.assemblee.presences.count }, 
-                                                target: "presences" }
+                                                target: "presences_count" }
 
 
   def check_heure

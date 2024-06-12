@@ -23,14 +23,15 @@
   <%= render @presences %>
 </div>
 
-<p class="mt-8 mb-2">
-  <%= turbo_stream_from "presences_count_#{current_user.organisation.slug}" %>
+<div id="presences_count" class="mt-8 mb-2">
   Affichage de <%= pluralize(@presences.count, 'émargement', plural: 'émargements') %>
-</p>
+  <%= turbo_stream_from "presences_count_#{current_user.organisation.slug}" %>
+</div>  
 
 <%= link_to url_for(params.permit!.merge(format: :xls)), class: "text-success hover:underline" do %>
   Exporter vers Excel
 <% end %>
+
 <% if params[:assemblee_id].present? %>
   |
   <%= link_to url_for(params.permit!.merge(format: :pdf)), class: "text-error hover:underline mb-12" do %>
