@@ -28,7 +28,7 @@
 
   <div class="mt-4">
     <%= form.label :durée, "Durée (h)", style: "display: block" %>
-    <%= form.number_field :durée, class: 'input input-bordered input-sm w-full' %>
+    <%= form.number_field :durée, step: :any , class: 'input input-bordered input-sm w-full' %>
   </div>
 
   <div class="mt-4">
@@ -36,19 +36,14 @@
     <%= form.text_area :adresse, class: 'textarea textarea-bordered textarea-sm w-full' %>
   </div>
 
-  <div class="mt-4" title="Envoyer automatiquement le lien collectif au gestionnaire 10 minutes avant le début de l'assemblée ?">
+  <div class="mt-4" title="Envoyer automatiquement le lien collectif à l'administrateur de l'assemblée (généralement son créateur) 10 minutes avant le début de l'assemblée ?">
     <%= form.check_box :automatique %>
-    <%= form.label :automatique, "Envoyer le lien collectif au gestionnaire ? (Vous)" %>
+    <%= form.label :automatique, "Envoyer le lien collectif à l'administrateur de l'assemblée ? " %>
   </div>
 
   <div class="mt-4" title="Envoyer automatiquement le lien individuel à tous les participants 10 minutes avant le début de l'assemblée ?">
-    <%= form.check_box :notifier_participants, disabled: !current_user.premium? %>
-    <%= form.label :notifier_participants, "Envoyer le lien individuel aux participants ?", class: "#{'text-base-300' unless current_user.premium? }" %>
-    <% unless current_user.premium? %>
-      <p class="label-text-alt">
-        passez au <%= link_to "Compte PREMIUM", admin_premium_path, class: 'text-primary hover:underline', data_turbo: false %> pour envoyer un lien unique à chaque participant
-      </p>
-    <% end %>
+    <%= form.check_box :notifier_participants %>
+    <%= form.label :notifier_participants, "Envoyer le lien individuel aux participants ?" %>
   </div>
 
   <div>
@@ -67,6 +62,11 @@
       searchingText: 'Recherche...',
       placeholderText: 'Choisissez un ou plusieurs groupes',
       allowDeselect: true,
+    },
+    events: {
+      addable: function (value) {
+        return value
+      }
     }
   })
 </script>

@@ -1,6 +1,9 @@
-<div class="mb-4">
-  <%= link_to "Nouvelle Assemblée", new_assemblee_path, class:'btn btn-primary btn-outline btn-lg float-end hover:shadow-xl hover:!text-white' %>
+<div class="flex flex-wrap justify-between">
   <h1 class="text-4xl font-bold"><%= page_title!("Assemblées") %></h1>
+  <div>
+    <%= link_to "Nouvelle Assemblée", new_assemblee_path, class:'btn btn-primary btn-outline btn-lg hover:shadow-xl hover:!text-white' %>
+    <%= link_to "Importer", import_assemblees_path, class:'btn btn-primary btn-outline btn-lg' %>
+  </div>
 </div>
 
 <%= form_tag request.path, method: :get do %>
@@ -32,10 +35,10 @@
   <%= render @assemblees %>
 </div>
 
-<p class="mt-8">Affichage de <%= pluralize(@assemblees.count, 'assemblée', plural: 'assemblées') %> sur <%= current_user.organisation.assemblees.count %> au total</p>
+<p class="mt-8 mb-2">Affichage de <%= pluralize(@assemblees.count, 'assemblée', plural: 'assemblées') %> sur <%= current_user.organisation.assemblees.count %> au total</p>
 
 <% if @assemblees.any? %>
   <%= link_to url_for(params.permit!.merge(format: :ics)), class: "text-primary hover:underline" do %>
-    Exporter au format iCal vers votre calendrier personnel (Google Agenda, Apple Calendar, Outlook, ...)
+    Exporter les assemblées vers votre calendrier personnel (Google Agenda, Apple Calendar, Outlook, ...)
   <% end %>
 <% end %>

@@ -4,6 +4,7 @@ class Presence < ApplicationRecord
   belongs_to :user
   belongs_to :assemblee
 
+  validates :user_id, uniqueness: {scope: :assemblee_id, message: "Une seule signature par assemblée !" } 
   validate :check_heure
 
   encrypts :signature
@@ -15,8 +16,14 @@ class Presence < ApplicationRecord
                                                 locals: { presence: self }, 
                                                 target: "presences" }
 
+  after_create_commit -> { broadcast_replace_to "presences_count_#{self.assemblee.organisation.slug}", 
+                                                partial: "presences/presences_count", 
+                                                locals: { presences_count: self.assemblee.presences.count }, 
+                                                target: "presences_count" }
+
+
   def check_heure
-    if !(Time.current > self.assemblee.début && Time.current < (self.assemblee.début + self.assemblee.durée.to_f.hours))
+    if !(Time.current > self.assemblee.début - 10.minutes && Time.current < (self.assemblee.début + self.assemblee.durée.to_f.hours))
       self.errors.add :erreur, ": Le délai imparti a expiré !" 
     end
   end

@@ -33,7 +33,7 @@
 
   <div class="mt-4">
     <%= form.label :tag_list, "Groupes", style: "display: block" %>
-    <%= form.text_field :tag_list, value: user.tag_list.join(', '), class: 'input input-bordered input-sm w-full' %>
+    <%= form.select :tag_list, options_from_collection_for_select(@tags, :name, :name, user.tags.map(&:name)), multiple: true %>
   </div>
 
   <% if user.new_record? %>
@@ -51,3 +51,22 @@
     <%= form.submit "Enregistrer", class: "btn btn-primary btn-outline btn-sm my-4" %>
   </div>
 <% end %>
+
+<script>
+  // slimselect
+  new SlimSelect({
+    select: '#user_tag_list',
+    settings: {
+      searchPlaceholder: 'Recherche',
+      searchText: 'Pas de résultat',
+      searchingText: 'Recherche...',
+      placeholderText: 'Choisissez un ou plusieurs groupes',
+      allowDeselect: true,
+    },
+    events: {
+      addable: function (value) {
+        return value
+      }
+    }
+  })
+</script>

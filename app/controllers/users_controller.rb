@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   before_action :is_user_authorized
+  before_action :set_tags, only: %i[ new edit ]
 
   # GET /users or /users.json
   def index
@@ -46,6 +47,7 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    @user.tag_list.add(params[:user][:tag_list])
     @user.organisation = current_user.organisation
 
     respond_to do |format|
@@ -63,6 +65,8 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        @user.tag_list = params[:user][:tag_list]
+        @user.save
         format.html { redirect_to user_url(@user), notice: "Participant modifié avec succès." }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -86,6 +90,10 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find_by(slug: params[:id])
+    end
+
+    def set_tags
+      @tags = current_user.organisation.tags 
     end
 
     # Only allow a list of trusted parameters through.

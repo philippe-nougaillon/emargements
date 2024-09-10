@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   mount MissionControl::Jobs::Engine, at: "/jobs"
 
   resources :assemblees do
+    collection do
+      get :import
+      post :import_do
+    end
     member do
       get :envoyer_lien_gestionnaire
     end
@@ -39,6 +43,8 @@ Rails.application.routes.draw do
     get :premium
     get :create_new_admin
     post :create_new_admin_do
+    get :create_new_participant
+    post :create_new_participant_do
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

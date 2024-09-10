@@ -17,7 +17,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user.admin = true
     # @user.tag_list.add("Gestionnaire")
     @user.dispatch_email_to_nom_prénom
-    @user.save
+
+    UserMailer.welcome(@user).deliver_now if @user.save
   end
 
   # GET /resource/edit

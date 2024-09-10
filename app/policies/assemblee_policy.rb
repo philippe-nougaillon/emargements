@@ -36,4 +36,12 @@ class AssembleePolicy < ApplicationPolicy
   def envoyer_lien_gestionnaire?
     show?
   end
+
+  def import?
+    index?
+  end
+
+  def import_do?
+    import?
+  end
 end

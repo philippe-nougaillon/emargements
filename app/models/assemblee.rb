@@ -17,7 +17,7 @@ class Assemblee < ApplicationRecord
   scope :ordered, -> { order(début: :desc) }
 
   def in_progress?
-    (self.début < DateTime.now) && (self.fin > DateTime.now)
+    (self.début < DateTime.now + 10.minutes) && (self.fin > DateTime.now)
   end
 
   def related_users

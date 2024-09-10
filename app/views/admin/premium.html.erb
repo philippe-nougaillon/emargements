@@ -1,5 +1,5 @@
 <h1 class="text-4xl font-bold mb-4 text-center">
-  <%= page_title!("Compte PREMIUM") %>
+  <%= page_title!("Offre PREMIUM") %>
 </h1>
 
 <div class="flex flex-wrap justify-center">
@@ -18,25 +18,25 @@
 
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        Nombre illimité de participants 
+        Le nombre de participants passe de 50 à illimité 
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        Envoi automatique du lien pour signer à tous les participants, avant le début de l'assemblée
+        Accès à l'AUDIT TRAIL, historique des modifications de données (assemblées, participants, signatures, connexions, ...)
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        Accès au MailLog (historique des mails envoyés, avec Statut et État (Ok = acheminé, Ouvert = vu) consultables pendant 5 jours)
-      </p>
-      <p>
-        <span class="badge badge-primary badge-xs"></span> 
-        Accès à l'Audit Trail (journal des modifications de données (connexions, signatures, participants, ...))
+        MAIL LOG : conservation des statuts d'acheminement et d'ouverture au delà de 5 jours.
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
         Enlève le lien d'auto-promotion visible sur les convocations
       </p>
-   
+      <p>
+        <span class="badge badge-primary badge-xs"></span> 
+        Support technique par email
+      </p>
+
       <% unless current_user.premium? %>
         <div class="flex flex-wrap mt-8 justify-around items-center">
           <p>
@@ -52,9 +52,7 @@
           <%= link_to "Payer avec PayPal", "https://www.paypal.com/ncp/payment/RLKRFJG5SD4M6", class: 'btn btn-primary btn-outline btn-lg hover:!text-white' %>
         </div>
       <% end %>
-
-      <%= link_to "Un problème ? Nous contacter...", "https://www.philnoug.com/contact", class: 'mt-12 underline' %>
-
+      <%= link_to "Vous avez une question, une remarque ou un projet à nous soumettre ? Contactez-nous !", "https://www.philnoug.com/contact?objet=Émargements", class: 'mt-12 underline', target:"_blank" %>
     </div>
   </div>
 </div>

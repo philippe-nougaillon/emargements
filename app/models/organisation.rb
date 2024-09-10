@@ -27,6 +27,12 @@ class Organisation < ApplicationRecord
     end
   end
 
+  def tags
+    assemblees_tags_ids = self.assemblees.tag_counts_on(:tags).pluck(:id)
+    users_tags_ids = self.users.tag_counts_on(:tags).pluck(:id)
+    return ActsAsTaggableOn::Tag.where(id: assemblees_tags_ids).or(ActsAsTaggableOn::Tag.where(id: users_tags_ids)).order(:name)
+  end
+
   private
   def slug_candidates
     [SecureRandom.uuid]

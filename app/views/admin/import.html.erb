@@ -26,13 +26,12 @@
     
     <div class="mt-4">
       <%= label_tag :groupes, "Associer ces participants à des groupes d'intérêt" %>
-      <%= text_field_tag :groupes, nil, class:"input input-bordered input-sm w-full shadow", placeholder: "ex: Santé, Mobilité, Territoires, Général" %>
+      <%= select_tag :groupes, options_from_collection_for_select(@tags, :name, :name), multiple: true %>
       <div class="label">
         <span class="label-text-alt">
-          Pour associer ces participants à des groupes d'intérêt, existants ou non.
-
-          <br>
-          Séparez les différents groupes par une virgule.
+          Pour associer ces participants à des groupes d'intérêt, 
+          existants ou non. Pour ajouter un nouveau groupe; entrez son nom 
+          et cliquez sur [+]
         </span>
       </div>
     </div>
@@ -42,3 +41,22 @@
   <% end %>
 
 </div>
+
+<script>
+  // slimselect
+  new SlimSelect({
+    select: '#groupes',
+    settings: {
+      searchPlaceholder: 'Recherche',
+      searchText: 'Pas de résultat',
+      searchingText: 'Recherche...',
+      placeholderText: 'Choisissez un ou plusieurs groupes',
+      allowDeselect: true,
+    },
+    events: {
+      addable: function (value) {
+        return value
+      }
+    }
+  })
+</script>
