@@ -1,10 +1,16 @@
 class AdminController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[signature_collective signature_collective_do signature_individuelle signature_individuelle_do]
   before_action :is_user_authorized, except: %i[signature_collective signature_collective_do signature_individuelle signature_individuelle_do]
-  before_action :set_tags, only: %i[ import create_new_participant ]
+  before_action :set_tags, only: %i[import create_new_participant]
 
   def index
-    @assemblees = current_user.organisation.assemblees.order(:début).where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today - 1.month, Date.today + 2.months)
+    @assemblees = current_user
+                    .organisation
+                    .assemblees
+                    .order(:début)
+                    .where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today - 1.month, Date.today + 2.months)
+
+
     @current_step = current_user.organisation.step
   end
 
@@ -14,7 +20,7 @@ class AdminController < ApplicationController
       @presence.assemblee = assemblee
       @users_not_signed = assemblee.users_not_signed
     else 
-      redirect_to root_path, alert: "Problème avec l'uuid"
+      redirect_to root_path, alert: "Problème avec l'UUID"
     end
   end
 
@@ -36,6 +42,7 @@ class AdminController < ApplicationController
         format.json { render json: @presence.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   def signature_individuelle
@@ -44,7 +51,7 @@ class AdminController < ApplicationController
       @presence.assemblee = assemblee
       @presence.user = user
     else 
-      redirect_to root_path, alert: "Problème avec l'uuid"
+      redirect_to root_path, alert: "Problème avec l'UUID"
     end
   end
 
@@ -65,6 +72,7 @@ class AdminController < ApplicationController
         format.json { render json: @presence.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   def import
@@ -73,6 +81,7 @@ class AdminController < ApplicationController
   def import_do
     users_infos = params[:content].split("\r\n")
     users_imported = ImportUsers.new(users_infos, current_user.organisation_id, params[:groupes]).call
+
     redirect_to root_path, notice: "#{users_imported} participant(s) importé(s) sur #{users_infos.count}"
   end
 
@@ -80,7 +89,7 @@ class AdminController < ApplicationController
     @organisation_audits = Audited::Audit.where(user_id: current_user.organisation.users.pluck(:id))
     @audits = @organisation_audits.order("id DESC")
     @types  = @organisation_audits.pluck(:auditable_type).uniq.sort
-    @actions= %w[update create destroy]
+    @actions= %i[create update destroy]
 
     if params[:start_date].present? && params[:end_date].present? 
       @audits = @audits.where("created_at BETWEEN (?) AND (?)", params[:start_date], params[:end_date])

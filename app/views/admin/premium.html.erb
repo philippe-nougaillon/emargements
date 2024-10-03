@@ -1,9 +1,9 @@
-<h1 class="text-4xl font-bold mb-4 text-center">
+<h1 class="text-4xl font-bold mb-4 text-center text-primary">
   <%= page_title!("Offre PREMIUM") %>
 </h1>
 
 <div class="flex flex-wrap justify-center">
-  <div class="card bg-base-100 shadow-xl">
+  <div class="card bg-base-100 shadow-lg">
     <div class="card-body">
       <h2 class="text-center font-black text-2xl mb-8">
         <% if current_user.premium? && current_user.organisation.expiration_premium %>
@@ -12,44 +12,41 @@
             <%= l current_user.organisation.expiration_premium, format: :custom2 %>
           </span>
         <% else %>
-          Les avantages du compte PREMIUM :
+          <span class="text-primary">
+            Tous les avantages d'avoir un compte 'PREMIUM' :
+          </span>
         <% end %>
       </h2>
 
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        Le nombre de participants passe de 50 à illimité 
+        Nombre de participants <b>illimité</b> (au lieu de 50 avec l'offre gratuite)  
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        Accès à l'AUDIT TRAIL, historique des modifications de données (assemblées, participants, signatures, connexions, ...)
+        <b>Support technique</b> par email à J+1
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        MAIL LOG : conservation des statuts d'acheminement et d'ouverture au delà de 5 jours.
+        Accès à l'AUDIT TRAIL, <b>historique des modifications</b> de données (assemblées, participants, signatures, connexions, ...)
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        Enlève le lien d'auto-promotion visible sur les convocations
+        MAIL LOGS : <b>conservation permanente des statuts</b> d'acheminement et d'ouverture des emails envoyés.
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        Support technique par email
+        <b>Enlève le lien d'auto-promotion</b> visible sur les convocations
+      </p>
+      <p>
+        <span class="badge badge-primary badge-xs"></span> 
+        Tarif unique : 29 €/Mois/Organisation
       </p>
 
       <% unless current_user.premium? %>
-        <div class="flex flex-wrap mt-8 justify-around items-center">
-          <p>
-            <%= link_to "Philippe NOUGAILLON (Consulting IT)", "https://www.philnoug.com/", class: 'underline' %>
-            <br><br>
-            Pôle de développement de l’entrepreneuriat<br>
-            de l’EPT Grand Paris Grand Est<br>
-            106-112 allée Notre Dame des Anges,<br>
-            93370 Montfermeil<br>
-            Siret : 384 396 719 00047
-          </p>
+        <div class="flex flex-wrap mt-4 justify-center gap-24 items-center">
+          <%= link_to "Souscrire à l'offre 'PREMIUM' et payer avec PayPal", "https://www.paypal.com/ncp/payment/RLKRFJG5SD4M6", class: 'btn btn-primary btn-outline btn-lg hover:!text-white' %>
           <%= image_tag "Compte PREMIUM-qrcode.png" %>
-          <%= link_to "Payer avec PayPal", "https://www.paypal.com/ncp/payment/RLKRFJG5SD4M6", class: 'btn btn-primary btn-outline btn-lg hover:!text-white' %>
         </div>
       <% end %>
       <%= link_to "Vous avez une question, une remarque ou un projet à nous soumettre ? Contactez-nous !", "https://www.philnoug.com/contact?objet=Émargements", class: 'mt-12 underline', target:"_blank" %>

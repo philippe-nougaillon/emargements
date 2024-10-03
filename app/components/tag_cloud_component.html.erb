@@ -1,12 +1,12 @@
 <% tag_cloud(@tags, %w(badge-sm badge badge-md badge-lg)) do |tag, css_class| %>
   <%= link_to url_for(params.permit!.merge(tags: params[:tags].include?(tag.name) ? params[:tags] - [tag.name] : params[:tags] + [tag.name])), data: { turbo_frame: "results_frame" }, class: "inline" do %>
     <span class="inline-block align-bottom badge <%= css_class %> <%= params[:tags].include?(tag.name) ? "badge-warning" : "badge-outline" %>">
-    <span class=""><%= tag.name.humanize %></span>
-    <% if params[:tags].include?(tag.name) %>
-      <span class="material-symbols-outlined">
-        filter_alt
-      </span>
-    <% end %>
+      <span class=""><%= tag.name.humanize %></span>
+      <% if params[:tags].include?(tag.name) %>
+        <span class="material-symbols-outlined">
+          filter_alt
+        </span>
+      <% end %>
     </span>
   <% end %>
 <% end %>
