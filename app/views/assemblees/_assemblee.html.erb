@@ -4,6 +4,7 @@
       <p class="text-2xl font-bold">
         <%= assemblee.nom.humanize %>
       </p>
+      
       <p>
         <%= assemblee.horaires_long %>
         <% if assemblee.début > DateTime.now %>
@@ -16,6 +17,7 @@
           </p>
         <% end %>
       </p>
+
       <p class="mt-4">
         Groupes : <% assemblee.tags.each do |tag| %>
           <span class="badge"><%= link_to tag.name.humanize, users_path(tags: [tag.name]), class: "hover:underline" %></span>

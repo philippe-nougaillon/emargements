@@ -2,13 +2,15 @@
   <%= image_tag(@assemblee.organisation.logo, width: 200) %>
   <br><br>
 <% end %>
+
 Bonjour <%= @assemblee.user.prénom %>,
 <br><br>
 Voici le lien de l'assemblée : <%= link_to admin_signature_collective_url(assemblee_id: @assemblee.slug), admin_signature_collective_url(assemblee_id: @assemblee.slug), class: "text-primary hover:underline" %>
 
 <% unless @assemblee.organisation.premium? %>
   <br><br><br><br>
-  Convocation réalisée par 
-  <u><a href='https://emargements.philnoug.com/'>emargements.philnoug.com</a></u>
-  </div>
+  <small>
+    Convocation réalisée par 
+    <u><a href='https://emargements.philnoug.com/'>emargements.philnoug.com</a></u>
+  </small>
 <% end %>
