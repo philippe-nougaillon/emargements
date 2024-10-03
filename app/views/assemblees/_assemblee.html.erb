@@ -52,7 +52,7 @@
     <% if assemblee.in_progress? %>
       <div class="self-end shadow p-4">
         <%= raw assemblee.qrcode(admin_signature_collective_url(assemblee_id: assemblee.slug)) %>
-        <%= link_to "Signer maintenant !", admin_signature_collective_url(assemblee_id: assemblee.slug), class: 'btn btn-outline text-success mt-4 w-full', target: '_blank' %>
+        <%= link_to "Signer maintenant !", admin_signature_collective_url(assemblee_id: assemblee.slug), class: 'btn btn-outline text-success mt-4 w-full', target: '_blank', title: "Lancer la session de signature collective ou flasher le Qr-code pour émarger à partir d'un autre appareil (Tablette)" %>
       </div>
     <% end %>
 
