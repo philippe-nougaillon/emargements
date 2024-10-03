@@ -5,18 +5,16 @@
         <%= assemblee.nom.humanize %>
       </p>
       
-      <p>
-        <b>
-          <%= assemblee.horaires_long %>
-        </b>
+      <p class="font-bold">
+        <%= assemblee.horaires_long %>
         <% if assemblee.début > DateTime.now %>
-          <p class="text-warning font-black">
+          <span class="text-warning">
             (commence dans <%= time_ago_in_words assemblee.début %>)
-          </p>
-        <% elsif ((assemblee.début + assemblee.durée.to_f.hours) - Time.current).positive? %>
-          <p class="text-error font-black">
+          </span>
+        <% elsif assemblee.in_progress? %>
+          <span class="text-error">
             (se termine dans <%= time_ago_in_words assemblee.fin %>)
-          </p>
+          </span>
         <% end %>
       </p>
 
@@ -39,7 +37,7 @@
 
       <div class="flex flex-wrap gap-2 mt-6">
         <%= link_to "Modifier", edit_assemblee_path(assemblee), class:'btn btn-primary btn-outline btn-sm' %>
-        <%= link_to "Générer les convocations", assemblee_path(assemblee, format: :pdf), class:'btn btn-success btn-outline btn-sm', target: "_blank", title: "Générer les convocations (PDF)" %>
+        <%= link_to "Générer les convocations", assemblee_path(assemblee, format: :pdf), class:'btn btn-secondary btn-outline btn-sm', target: "_blank", title: "Générer les convocations (PDF)" %>
         <% if assemblee.fin > DateTime.now %>
           <%= link_to "Envoyer le lien au gestionnaire", envoyer_lien_gestionnaire_assemblee_path(assemblee), class: 'btn btn-warning btn-outline btn-sm', title: "Envoyer au gestionnaire un mail contenant le lien public vers la feuille d'émargement des présences" %>
         <% end %>
@@ -52,9 +50,9 @@
     </div>
 
     <% if assemblee.in_progress? %>
-      <div class="self-end">
+      <div class="self-end shadow p-4">
         <%= raw assemblee.qrcode(admin_signature_collective_url(assemblee_id: assemblee.slug)) %>
-        <%= link_to "Signer (Émargement)", admin_signature_collective_url(assemblee_id: assemblee.slug), class: 'btn btn-outline btn-sm mt-4', target: '_blank' %>
+        <%= link_to "Signer maintenant !", admin_signature_collective_url(assemblee_id: assemblee.slug), class: 'btn btn-outline text-success mt-4 w-full', target: '_blank' %>
       </div>
     <% end %>
 
