@@ -4,8 +4,8 @@
       <% if user_signed_in? && current_user.organisation.logo.attached? %>
         <%= image_tag(current_user.organisation.logo, width: 80, alt:'', class:"mr-2") %>
       <% else %>
-        <span class="material-symbols-outlined !text-5xl text-secondary">
-          history_edu
+        <span class="material-symbols-outlined !text-5xl text-secondary px-4">
+          person_raised_hand
         </span>
       <% end %>
       <span class="hidden sm:block font-bold pl-2 text-primary text-2xl hover:underline">
