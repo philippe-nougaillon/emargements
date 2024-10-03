@@ -16,7 +16,7 @@
       </label>
     </div>
     
-  <div class="mt-4">
+    <div class="mt-4">
       <%= label_tag :groupes, "Groupes d'intérêt", style: "display: block" %>
       <%= select_tag :groupes, options_from_collection_for_select(@tags, :name, :name), multiple: true %>
     </div>
