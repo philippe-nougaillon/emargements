@@ -1,9 +1,25 @@
-<h2 class="text-xl sm:text-2xl">
-  Émargement assemblée du <%= l @presence.assemblee.début.to_date, format: :short %>
-</h2>
-<h1 class="text-2xl sm:text-4xl font-bold text-primary mb-6">
+<h1 class="text-2xl sm:text-4xl font-bold text-primary mt-6">
   <%= page_title!(@presence.assemblee.nom.humanize) %>
 </h1>
+
+<p class="font-bold">
+  <%= @presence.assemblee.horaires_long %>
+  <% if @presence.assemblee.début > DateTime.now %>
+    <span class="text-warning">
+      (commence dans <%= time_ago_in_words @presence.assemblee.début %>)
+    </span>
+  <% elsif @presence.assemblee.in_progress? %>
+    <span class="text-error">
+      (se termine dans <%= time_ago_in_words @presence.assemblee.fin %>)
+    </span>
+  <% end %>
+</p>
+
+<p class="mb-4">
+  Groupes : <% @presence.assemblee.tags.each do |tag| %>
+    <span class="badge"><%= tag.name.humanize %></span>
+  <% end %>
+</p>
 
 <%= form_tag({action: "signature_collective_do", method: :post}) do %>
   <% if @presence.assemblee.in_progress? %>
@@ -18,7 +34,7 @@
           <% end %>
           <div class="mb-4 w-full sm:max-w-96">
             <%= label_tag :user_id, "Participant", style: "display: block" %>
-            <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :slug, :nom_prénom), include_blank: true %>
+            <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :slug, :nom_prénom), include_blank: true, required:true, class: 'input input-lg' %>
           </div>
 
           <div>
@@ -34,16 +50,9 @@
                 <canvas id="signature-pad" class="signature-pad bg-slate-100" width=600 height=300></canvas>
               <% end %>
 
-              <% if ((@presence.assemblee.début + @presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
-                <p class="mt-2">
-                  Temps restant :
-                  <%= time_ago_in_words @presence.assemblee.fin %>
-                </p>
-              <% end %>
-
               <div class="flex flex-wrap gap-4 mt-4">
-                <button id="save" class="btn btn-primary btn-outline btn-lg">Enregistrer émargement</button>
-                <div id="clear" class="btn btn-lg btn-outline">
+                <button id="save" class="btn btn-primary btn-outline btn-lg">Enregistrer cet émargement</button>
+                <div id="clear" class="btn btn-lg btn-outline text-secondary">
                   <span class="material-symbols-outlined">
                     ink_eraser
                   </span>
@@ -56,15 +65,21 @@
         <h1 class="text-2xl text-success">
           Emargement terminé !
           <br>
-          Tous les participants ont déjà émargé
+          Tous les participants à cette assemblée ont déjà émargé
+          <p class="my-4">
+            <%= link_to "Voir les émargements", presences_path(assemblee_id: @presence.assemblee.id), class: 'btn btn-outline text-primary hover:underline'%>
+          </p>
         </h1>
+
       <% end%>
 
       <div class="flex-1">
-        <h2 class="text-2xl font-bold mb-4">Derniers émargements</h2>
-        <% @presence.assemblee.presences.order(created_at: :desc).each do |p| %>
-          <%= p.user.nom_prénom %> a signé il y a <%= time_ago_in_words p.created_at%>
-          <br>
+        <% if @presence.assemblee.presences.any? %>
+          <h2 class="text-2xl text-secondary mb-4">Derniers émargements enregistrés</h2>
+          <% @presence.assemblee.presences.order(created_at: :desc).each do |p| %>
+            <i><%= p.user.nom_prénom %> a signé il y a <%= time_ago_in_words p.created_at%></i>
+            <br>
+          <% end %>
         <% end %>
       </div>
     </div>
