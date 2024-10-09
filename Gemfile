@@ -107,3 +107,9 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "omniauth-google-oauth2", "~> 1.1"
 
 gem "page_title_helper", "~> 7.0"
+
+gem "grpc", "~> 1.67"
+
+gem "google-cloud-ai_platform-v1", "~> 0.53.0"
+
+gem "google-cloud-storage", "~> 1.52"
