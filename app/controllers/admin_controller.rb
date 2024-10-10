@@ -158,6 +158,15 @@ class AdminController < ApplicationController
     end
   end
 
+  def fake_signatures_detector
+    @batch_prediction_jobs = GetBatchPredictionJobs.call
+  end
+
+  def fake_signature_detector
+    @batch_prediction_job = GetBatchPredictionJob.call(params[:batch_prediction_job])
+    @downloaded = GetGoogleCloudStorageFile.call(@batch_prediction_job)
+  end
+
   private
 
   def is_user_authorized

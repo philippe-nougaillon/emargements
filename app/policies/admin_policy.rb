@@ -42,4 +42,12 @@ class AdminPolicy
     create_new_participant?
   end
 
+  def fake_signatures_detector?
+    index? && user.premium?
+  end
+
+  def fake_signature_detector?
+    fake_signatures_detector?
+  end
+
 end

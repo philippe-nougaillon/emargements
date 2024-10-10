@@ -1,0 +1,10 @@
+<h1 class="text-4xl font-bold text-primary mb-6"><%= page_title!("Détection de fausses signatures") %></h1>
+
+<%= @batch_prediction_job.inspect %>
+
+<br><br><br>
+
+<% @downloaded.read.split(' ').each do |line| %>
+  <%= JSON.parse(line.to_json) %>
+  <br><br>
+<% end %>
