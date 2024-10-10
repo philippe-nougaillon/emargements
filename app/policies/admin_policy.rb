@@ -50,4 +50,8 @@ class AdminPolicy
     fake_signatures_detector?
   end
 
+  def launch_fake_signature_detector?
+    fake_signatures_detector?
+  end
+
 end
