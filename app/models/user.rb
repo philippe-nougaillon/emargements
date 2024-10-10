@@ -5,16 +5,14 @@ class User < ApplicationRecord
   audited
 
   # Include default devise modules. Others available are:
-  # :lockable
+  # :lockable, :confirmable,  :timeoutable,
 
   devise  :database_authenticatable,
           :recoverable,
-          :rememberable,
           :validatable,
           :trackable,
-          :timeoutable,
           :registerable,
-          :confirmable,
+          :rememberable,
           :omniauthable,
           omniauth_providers: [:google_oauth2]
 
