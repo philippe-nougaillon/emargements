@@ -33,7 +33,6 @@
   animation-fill-mode: forwards;
 }
 
-
 @keyframes example {
   from {
     opacity: 1;
@@ -48,5 +47,5 @@
   border-color: #5897fb !important;
   background-color: #5897fb !important;
   color: white !important;
-  border-radius: 4px !important;
+  border-radius: 5px !important;
 }
