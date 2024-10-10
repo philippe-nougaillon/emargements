@@ -16,11 +16,20 @@ class AssembleePdf
         move_down @margin_down * 2
       end
 
+      text assemblee.organisation.nom, size: 14
+      move_down @margin_down * 2
       text "<b>CONVOCATION</b>", inline_format: true, size: 16, align: :center
       move_down @margin_down * 4
       text "Bonjour #{user.prénom_nom},"
       move_down @margin_down
-      text "Vous êtes convoqué à l'assemblée '<b>#{assemblee.nom}</b>' qui aura lieu <b>#{assemblee.adresse}</b>, le <b>#{I18n.l(assemblee.début, format: :long)}</b>", inline_format: true
+      text "Vous êtes convoqué à l'assemblée '<b>#{assemblee.nom}</b>' qui aura lieu le <b>#{I18n.l(assemblee.début, format: :long)}</b>", inline_format: true
+      
+      unless assemblee.adresse.blank?
+        move_down @margin_down * 2     
+        text "Adresse de l'assemblée :"
+        move_down @margin_down      
+        text "#{assemblee.adresse}"
+      end 
 
       unless assemblee.organisation.premium?
         move_down @margin_down * 25
