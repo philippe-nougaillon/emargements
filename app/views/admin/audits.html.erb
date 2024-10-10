@@ -1,4 +1,6 @@
-<h1 class="text-4xl font-bold mb-4"><%= page_title!("Audit des modifications") %></h1>
+<h1 class="text-4xl font-bold mb-4">
+  <%= page_title!("Audit des modifications") %>
+</h1>
 
 <%= form_tag request.path, method: :get do %>
   <div class="flex flex-wrap items-end gap-4">
@@ -31,6 +33,8 @@
     </div>   
   </div>
 <% end %>
+
+<div class="divider"></div>
 
 <div class="overflow-x-auto mt-8">
   <table class="table table-sm">
