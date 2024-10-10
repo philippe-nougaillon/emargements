@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     post :create_new_admin_do
     get :create_new_participant
     post :create_new_participant_do
+    get :fake_signatures_detector
+    get :fake_signature_detector
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

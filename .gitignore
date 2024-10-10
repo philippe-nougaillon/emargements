@@ -39,3 +39,6 @@
 
 # Redis
 dump.rdb
+
+# Misc
+service_account.json
