@@ -1,4 +1,4 @@
-<h1 class="text-4xl font-bold text-primary mb-6"><%= page_title!("Détection de fausses signatures") %></h1>
+<h1 class="text-4xl font-bold text-primary mb-6"><%= page_title!("Historique des détections") %></h1>
 
 <div class="overflow-x-auto">
   <table class="table table-sm">
@@ -8,7 +8,7 @@
         <th>Nom</th>
         <th>État</th>
         <th>Créé le</th>
-        <th>Terminé le</th>
+        <th>Durée</th>
         <th>Prédictions traités</th>
       </tr>
     </thead>
@@ -16,14 +16,14 @@
       <% @batch_prediction_jobs.each do |response| %>
         <tr>
           <td><%= time_ago_in_words(Time.at(response.create_time.seconds)) %></td>
-          <td class="font-black"><%= link_to response.display_name, admin_fake_signature_detector_path(batch_prediction_job: response.name.split('batchPredictionJobs/').last) %></td>
+          <td class="font-black text-primary hover:underline"><%= link_to_if response.state.to_s.include?("SUCCEEDED"), response.display_name, admin_fake_signature_detector_path(batch_prediction_job: response.name.split('batchPredictionJobs/').last) %></td>
           <td>
-            <span class="material-symbols-outlined text-<%= response.state.to_s.include?("SUCCEEDED") ? "success" : "secondary" %> px-4">
-              <%= response.state.to_s.include?("SUCCEEDED") ? "check_circle" : "stop_circle" %>
+            <span class="material-symbols-outlined text-<%= response.state.to_s.include?("SUCCEEDED") ? "success" : response.state.to_s.include?("FAILED") ? "error" : "secondary" %>">
+              <%= response.state.to_s.include?("SUCCEEDED") ? "check_circle" : response.state.to_s.include?("FAILED") ? "error" : "stop_circle" %>
             </span>
-            <%= response.state %></td>
+          </td>
           <td><%= l Time.at(response.create_time.seconds) %></td>
-          <td><%= l Time.at(response.end_time.seconds) %></td>
+          <td><%= ((response.end_time.seconds - response.create_time.seconds)/ 1.minutes) %> minutes</td>
           <td><%= response.completion_stats.successful_count %> réussies / <%= response.completion_stats.failed_count %> échouées</td>
         </tr>
       <% end %>
