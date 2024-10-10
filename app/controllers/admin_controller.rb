@@ -167,6 +167,13 @@ class AdminController < ApplicationController
     @downloaded = GetGoogleCloudStorageFile.call(@batch_prediction_job)
   end
 
+  def launch_fake_signature_detector
+    CreateBatchPredictionJob.call(current_user.organisation_id)
+    respond_to do |format|
+      format.html { redirect_to admin_fake_signatures_detector_url, notice: "Détection lancée" }
+    end
+  end
+
   private
 
   def is_user_authorized

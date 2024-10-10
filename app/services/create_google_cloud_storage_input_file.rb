@@ -1,7 +1,9 @@
 class CreateGoogleCloudStorageInputFile < ApplicationService
   require "google/cloud/storage"
+  attr_reader :organisation_id
 
-  def initialize()
+  def initialize(organisation_id)
+    @organisation = Organisation.find(organisation_id.values.first)
   end
 
   def call
@@ -10,7 +12,7 @@ class CreateGoogleCloudStorageInputFile < ApplicationService
 
     content_file = []
 
-    Presence.all.each do |presence|
+    @organisation.presences.each do |presence|
       h = {}
 
       file = "signature_#{presence.id}_assemblee_#{presence.assemblee_id}_#{DateTime.now}.png"

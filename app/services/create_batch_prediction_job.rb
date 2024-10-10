@@ -1,7 +1,9 @@
 class CreateBatchPredictionJob < ApplicationService
   require "google/cloud/ai_platform/v1"
+  attr_reader :organisation_id
 
-  def initialize()
+  def initialize(organisation_id)
+    @organisation = Organisation.find(organisation_id)
   end
 
   def call
@@ -10,12 +12,12 @@ class CreateBatchPredictionJob < ApplicationService
       config.credentials = "#{ENV["GOOGLE_APPLICATION_CREDENTIALS"]}"
     end
 
-    filename = CreateGoogleCloudStorageInputFile.call
+    filename = CreateGoogleCloudStorageInputFile.call(organisation_id: @organisation.id)
 
     client = Google::Cloud::AIPlatform::V1::JobService::Client.new
 
     batch = {
-      "display_name": "test-with-png",
+      "display_name": "batch_organisation_#{@organisation.id}",
       "model": "projects/#{ENV["GOOGLE_PROJECT_ID"]}/locations/#{ENV["GOOGLE_LOCATION"]}/models/#{ENV["GOOGLE_MODEL"]}",
       "model_version_id": "1",
       "input_config": {
