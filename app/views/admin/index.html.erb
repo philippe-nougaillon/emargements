@@ -54,16 +54,18 @@
 </div>
 
 <% if @current_step >= 3 %>
-  <div class="flex flex-wrap gap-8">
-    <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
-    <%= link_to "ORGANISATION", edit_organisation_path(current_user.organisation), class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
+  <div class="flex justify-center mb-4">
+    <%= link_to "ÉMARGEMENTS", presences_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white w-1/2' %>
   </div>
-  <div class="flex flex-wrap gap-8 my-4">
-    <%= link_to "PARTICIPANTS", users_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
-    <%= link_to "MAIL LOGS", mail_logs_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
+  <div class="flex justify-center mb-4">
+    <%= link_to "PARTICIPANTS", users_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white w-1/2' %>
   </div>
-  <div class="flex flex-wrap gap-8 mb-8">
-    <%= link_to "ÉMARGEMENTS", presences_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
-    <%= link_to "AUDIT TRAIL", admin_audits_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white flex-1' %>
+  <div class="flex justify-center mb-8">
+    <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white w-1/2' %>
+  </div>
+  <div class="flex justify-center">
+    <%= link_to "ORGANISATION", edit_organisation_path(current_user.organisation), class: 'btn btn-outline btn-secondary hover:!text-white' %>
+    <%= link_to "MAIL LOGS", mail_logs_path, class: 'btn btn-outline btn-secondary hover:!text-white' %>
+    <%= link_to "AUDIT TRAIL", admin_audits_path, class: 'btn btn-outline btn-secondary hover:!text-white' %>
   </div>
 <% end %>
