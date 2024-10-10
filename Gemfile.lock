@@ -479,6 +479,7 @@ DEPENDENCIES
   jbuilder
   mailgun-ruby (~> 1.2)
   matrix (~> 0.4.2)
+  mini_magick (~> 4.12)
   mission_control-jobs (~> 0.2.1)
   omniauth (~> 2.1)
   omniauth-google-oauth2 (~> 1.1)
