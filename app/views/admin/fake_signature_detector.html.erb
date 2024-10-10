@@ -1,10 +1,45 @@
 <h1 class="text-4xl font-bold text-primary mb-6"><%= page_title!("Détection de fausses signatures") %></h1>
 
-<%= @batch_prediction_job.inspect %>
+<div class="flex gap-4 items-center mb-4">
+  <p><%= time_ago_in_words(Time.at(@batch_prediction_job.create_time.seconds)) %></p>
+  <p class="font-black"><%= link_to @batch_prediction_job.display_name, admin_fake_signature_detector_path(batch_prediction_job: @batch_prediction_job.name.split('batchPredictionJobs/').last) %></p>
+  <p>
+    <span class="material-symbols-outlined text-<%= @batch_prediction_job.state.to_s.include?("SUCCEEDED") ? "success" : @batch_prediction_job.state.to_s.include?("FAILED") ? "error" : "secondary" %> px-4">
+      <%= @batch_prediction_job.state.to_s.include?("SUCCEEDED") ? "check_circle" : @batch_prediction_job.state.to_s.include?("FAILED") ? "error" : "stop_circle" %>
+    </span>
+  </p>
+  <p><%= l Time.at(@batch_prediction_job.create_time.seconds) %></p>
+  <p><%= ((@batch_prediction_job.end_time.seconds - @batch_prediction_job.create_time.seconds)/ 1.minutes) %> minutes</p>
+  <p><%= @batch_prediction_job.completion_stats.successful_count %> réussies / <%= @batch_prediction_job.completion_stats.failed_count %> échouées</p>
+</div>
 
-<br><br><br>
+<div class="divider mb-4"></div>
 
 <% @downloaded.read.split(' ').each do |line| %>
-  <%= JSON.parse(line.to_json) %>
-  <br><br>
+  <% presence = Presence.find_by(id: line.split("signature_").last.split("_assemblee").first)%>
+  <div class="flex gap-8 mb-8">
+    <% if presence %>
+      <div>
+        <p class="text-2xl font-bold text-primary"><%= presence.user.nom_prénom %></p>
+        <p>
+          <%= presence.assemblee.nom.humanize %>
+          / <%= l(presence.assemblee.début, format: :long) %>
+        </p>
+        <%= image_tag presence.signature %>
+      </div>
+    <% end %>
+    <div>
+      <% json = JSON.parse(line)['prediction'] %>
+      <div class="flex gap-4">
+        <% json['displayNames'].length.times do |i| %>
+          <div class="<%= 'font-black text-success' if i.zero? && json['confidences'][i] > 0.8 %>">
+            <p><%= json['displayNames'][i] %></p>
+            <p><%= (json['confidences'][i] * 100).round(2) %>%</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider mb-4"></div>
 <% end %>
