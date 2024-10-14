@@ -18,9 +18,9 @@
 
             <div id="signature-container" class="sm:pr-8">
               <% if request.variant.include?(:phone) %>
-                <canvas id="signature-pad" class="signature-pad" width=300 height=150></canvas>
+                <canvas id="signature-pad" class="signature-pad shadow" width=300 height=150></canvas>
               <% else %>
-                <canvas id="signature-pad" class="signature-pad" width=600 height=300></canvas>
+                <canvas id="signature-pad" class="signature-pad shadow-xl" width=600 height=300></canvas>
               <% end %>
 
               <% if ((@presence.assemblee.début + @presence.assemblee.durée.to_f.hours) - Time.current).positive? %>
@@ -30,7 +30,7 @@
                 </p>
               <% end %>
 
-              <div class="flex gap-4 mt-4">
+              <div class="flex gap-4 mt-8">
                 <button id="save" class="btn btn-primary btn-outline btn-lg">Enregistrer</button>
                 <div id="clear" class="btn btn-lg btn-outline">
                   <span class="material-symbols-outlined">
