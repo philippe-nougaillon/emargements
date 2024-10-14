@@ -10,6 +10,11 @@
       <%= label_tag :assemblee_id, "Assemblée" %>
       <%= select_tag :assemblee_id, options_from_collection_for_select(@assemblees, :id, :nom_long, params[:assemblee_id]), include_blank: true, onchange: 'this.form.submit()' %>
     </div>
+    <div class="max-w-md w-full">
+      <%= label_tag :user_id, "Participant" %>
+      <%= select_tag :user_id, options_from_collection_for_select(@users, :id, :nom_prénom, params[:user_id]), include_blank: true, onchange: 'this.form.submit()' %>
+    </div>
+
     <div>
       <%= render TagCloudComponent.new(tags: @tags) %>
     </div>
@@ -48,6 +53,16 @@
       searchText: 'Pas de résultat',
       searchingText: 'Recherche...',
       placeholderText: 'Filtrer par assemblée',
+      allowDeselect: true
+    }
+  })
+  new SlimSelect({
+    select: '#user_id',
+    settings: {
+      searchPlaceholder: 'Recherche',
+      searchText: 'Pas de résultat',
+      searchingText: 'Recherche...',
+      placeholderText: 'Filtrer par participant',
       allowDeselect: true
     }
   })
