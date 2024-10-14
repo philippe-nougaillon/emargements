@@ -12,7 +12,11 @@
               <li>
                 <hr class="<%= 'bg-primary' if started %>"/>
                 <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.even? %>
-                <div class="timeline-middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 <%= 'text-primary' if started %>"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg></div>
+                <div class="timeline-middle">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 <%= 'text-primary' if started %>">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                  </svg>
+                </div>
                 <%= render partial: "partials/timeline_box", locals: {assemblee:, start: index.even?} if index.odd? %>
                 <hr class="<%= 'bg-primary' if finished %>"/>
               </li>
@@ -68,13 +72,13 @@
   <div class="flex justify-center mb-4">
     <%= link_to "PARTICIPANTS", users_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white w-1/2' %>
   </div>
-  <div class="flex justify-center mb-8">
+  <div class="flex justify-center mb-4">
     <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white w-1/2' %>
   </div>
   <div class="flex justify-center gap-1">
     <%= link_to "Mon organisation", edit_organisation_path(current_user.organisation), title: "Voir les paramètres de mon Organisation", class: 'btn btn-outline btn-secondary hover:!text-white' %>
     <%= link_to "Mail logs", mail_logs_path, title: "Historique des mails envoyés", class: 'btn btn-outline btn-secondary hover:!text-white' %>
     <%= link_to "Audit trail", admin_audits_path, title: "Audit des modifications", class: 'btn btn-outline btn-secondary hover:!text-white' %>
-    <%= link_to "Détections ", admin_fake_signatures_detector_path, title: "Détections de fausses signatures", class: 'btn btn-outline btn-secondary hover:!text-white' %>
+    <%= link_to "Détections des faux", admin_fake_signatures_detector_path, title: "Détections de fausses signatures", class: 'btn btn-outline btn-secondary hover:!text-white' %>
   </div>
 <% end %>
