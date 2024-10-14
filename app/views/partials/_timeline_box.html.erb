@@ -1,8 +1,9 @@
 <div class="timeline-<%= start ? 'start' : 'end' %> timeline-box hover:underline">
   <%= link_to assemblee_path(assemblee) do %>
-    <b><%= assemblee.nom.humanize %></b>
+    <span class="font-bold text-xl text-primary"><%= assemblee.nom.humanize %></span>
     <br>
-    <%= assemblee.horaires %>
+
+    <%= assemblee.horaires_medium %>
     <br>
 
     <p>

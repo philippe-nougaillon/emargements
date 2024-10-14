@@ -6,9 +6,9 @@
       <%= label_tag :search, "Rechercher" %>
       <%= text_field_tag :search, params[:search], include_blank:true, onchange:'this.form.submit()', class: 'input input-bordered input-sm w-full', placeholder: 'Nom/Prénom/Email' %>
     </div>
-    <div class="max-w-72 w-full">
+    <div class="max-w-96 w-full">
       <%= label_tag :assemblee_id, "Assemblée" %>
-      <%= select_tag :assemblee_id, options_from_collection_for_select(@assemblees, :id, :nom, params[:assemblee_id]), include_blank: true, onchange: 'this.form.submit()' %>
+      <%= select_tag :assemblee_id, options_from_collection_for_select(@assemblees, :id, :nom_long, params[:assemblee_id]), include_blank: true, onchange: 'this.form.submit()' %>
     </div>
     <div>
       <%= render TagCloudComponent.new(tags: @tags) %>

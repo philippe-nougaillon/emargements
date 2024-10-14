@@ -1,18 +1,22 @@
 <div id="<%= dom_id presence %>" class="flex flex-col shadow p-4 hover:shadow-xl ease-out duration-300 gap-2 mt-4">
   <div>
     <small>
-      Il y a <%= time_ago_in_words presence.heure %>
+      <i>Il y a <%= time_ago_in_words presence.heure %></i>
     </small>
+
     <p class="text-2xl text-primary"><%= presence.user.nom %></p>
 
-    <p class="my-2">
-      Le <%= l presence.heure, format: :long %>
-    </p>
-    <p class="text-xl">
+    <p class="text-xl font-bold">
       <%= presence.assemblee.nom.humanize %>
     </p>
+
+    <p class="my-2">
+      <%= presence.assemblee.horaires_medium %>
+    </p>
   </div>
+  
   <img src=<%= presence.signature %> style="padding: 10px; height:125px">
+  
   <%= button_to presence, method: :delete, data: {turbo_confirm: "Êtes-vous certain(e) de vouloir supprimer cet émargement ?" }, class:'text-base-300 hover:text-error float-end' do %>
     <span class="material-symbols-outlined">
       delete
