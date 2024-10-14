@@ -59,9 +59,20 @@ class AssembleesController < ApplicationController
   # GET /assemblees/new
   def new
     @assemblee = Assemblee.new
-
-    @assemblee.début = DateTime.now.change(min: 0, sec: 0) + 1.hour
-    @assemblee.durée = 2
+    if params[:assemblee_id].present?
+      assemblee_old = Assemblee.find_by(slug: params[:assemblee_id])
+      @assemblee.nom = assemblee_old.nom
+      @assemblee.tags = assemblee_old.tags
+      @assemblee.début = assemblee_old.début
+      @assemblee.fin = assemblee_old.fin
+      @assemblee.durée = assemblee_old.durée
+      @assemblee.adresse = assemblee_old.adresse
+      @assemblee.automatique = assemblee_old.automatique
+      @assemblee.notifier_participants = assemblee_old.notifier_participants            
+    else
+      @assemblee.début = DateTime.now.change(min: 0, sec: 0) + 1.hour
+      @assemblee.durée = 2
+    end
   end
 
   # GET /assemblees/1/edit
