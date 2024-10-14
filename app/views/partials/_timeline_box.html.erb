@@ -6,13 +6,7 @@
     <%= assemblee.horaires_medium %>
     <br>
 
-    <p>
-      <% assemblee.tags.each do |tag| %>
-        <span class="badge"><%= tag.name.humanize %></span>
-      <% end %>
-    </p>
-
-    <p class="min-h-4 font-black">
+    <p class="italic">
       <% if assemblee.début > DateTime.now %>
         <span class="text-warning">
           Commence dans <%= time_ago_in_words assemblee.début %>
@@ -23,5 +17,12 @@
         </span>
       <% end %>
     </p>
+
+    <p>
+      <% assemblee.tags.each do |tag| %>
+        <span class="badge"><%= tag.name.humanize %></span>
+      <% end %>
+    </p>
+
   <% end %>
 </div>
