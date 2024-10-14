@@ -8,7 +8,7 @@ class AdminController < ApplicationController
                     .organisation
                     .assemblees
                     .order(:début)
-                    .where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today - 3.days, Date.today + 3.days)
+                    .where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today, Date.today + 6.days)
 
     @current_step = current_user.organisation.step
   end
