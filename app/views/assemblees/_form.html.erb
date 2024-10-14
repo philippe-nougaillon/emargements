@@ -33,7 +33,7 @@
   </div>
 
   <div class="mt-4">
-    <%= form.label :adresse, style: "display: block" %>
+    <%= form.label "Lieu (adresse)", style: "display: block" %>
     <%= form.text_area :adresse, class: 'textarea textarea-bordered textarea-sm w-full' %>
   </div>
 
@@ -48,8 +48,8 @@
   </div>
 
   <div>
-    <%= form.submit "Enregistrer", class:'btn btn-primary btn-outline mt-6' %>
-    <%= link_to "Retour", assemblees_path, class:'btn ml-2' %>
+    <%= form.submit "Enregistrer", class:'btn btn-primary btn-outline w-full mt-8 mb-4' %>
+    <%= link_to "Retour", assemblees_path, class:'link' %>
   </div>
 <% end %>
 
