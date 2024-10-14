@@ -64,9 +64,9 @@
     <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white w-1/2' %>
   </div>
   <div class="flex justify-center gap-1">
-    <%= link_to "ORGANISATION", edit_organisation_path(current_user.organisation), title: "Voir les paramètres de mon Organisation", class: 'btn btn-outline btn-secondary hover:!text-white' %>
-    <%= link_to "MAIL LOGS", mail_logs_path, title: "Historique des mails envoyés", class: 'btn btn-outline btn-secondary hover:!text-white' %>
-    <%= link_to "AUDIT TRAIL", admin_audits_path, title: "Audit des modifications", class: 'btn btn-outline btn-secondary hover:!text-white' %>
-    <%= link_to "DÉTECTIONS", admin_fake_signatures_detector_path, title: "Détections de fausses signatures", class: 'btn btn-outline btn-secondary hover:!text-white' %>
+    <%= link_to "Mon organisation", edit_organisation_path(current_user.organisation), title: "Voir les paramètres de mon Organisation", class: 'btn btn-outline btn-secondary hover:!text-white' %>
+    <%= link_to "Mail logs", mail_logs_path, title: "Historique des mails envoyés", class: 'btn btn-outline btn-secondary hover:!text-white' %>
+    <%= link_to "Audit trail", admin_audits_path, title: "Audit des modifications", class: 'btn btn-outline btn-secondary hover:!text-white' %>
+    <%= link_to "Détections ", admin_fake_signatures_detector_path, title: "Détections de fausses signatures", class: 'btn btn-outline btn-secondary hover:!text-white' %>
   </div>
 <% end %>
