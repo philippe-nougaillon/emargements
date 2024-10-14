@@ -5,8 +5,12 @@
 
 Bonjour <%= @user.prénom %>,
 <br><br>
-Voici le lien de l'assemblée : <%= link_to admin_signature_individuelle_url(assemblee_id: @assemblee.slug), admin_signature_individuelle_url(assemblee_id: @assemblee.slug, user_id: @user.slug), class: "text-primary hover:underline" %>
-
+En tant que participant à l'assemblée <%= @assemblee.nom_long %>, 
+prévue le <%= @assemblee.horaires_long %>,
+vous devez émarger votre présence d'une simple signature 
+en cliquant sur ce lien : <%= link_to admin_signature_individuelle_url(assemblee_id: @assemblee.slug), admin_signature_individuelle_url(assemblee_id: @assemblee.slug, user_id: @user.slug), class: "text-primary hover:underline" %>
+<br><br>
+Merci pour votre participation.
 <br><br>
 <%= @assemblee.user.nom_prénom %>,
 <br>
