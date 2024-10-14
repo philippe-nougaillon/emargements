@@ -41,8 +41,16 @@ class Assemblee < ApplicationRecord
     "#{ I18n.l(self.début, format: "%d %b") } #{self.début.hour}h#{self.début.min unless self.début.min == 0} -> #{self.fin.hour}h#{self.fin.min unless self.fin.min == 0}"
   end
 
+  def horaires_medium
+    "#{I18n.l(self.début, format: "%A %d %b")} #{self.début.hour}h#{self.début.min unless self.début.min == 0} -> #{self.fin.hour}h#{self.fin.min unless self.fin.min == 0}"
+  end
+
   def horaires_long
     "#{I18n.l(self.début, format: :custom2)} #{self.début.hour}h#{self.début.min unless self.début.min == 0} -> #{self.fin.hour}h#{self.fin.min unless self.fin.min == 0}"
+  end
+
+  def nom_long
+    "#{self.nom} [#{self.horaires_medium}]"
   end
 
   def users_not_signed
