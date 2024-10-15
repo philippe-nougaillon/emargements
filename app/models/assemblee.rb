@@ -54,7 +54,7 @@ class Assemblee < ApplicationRecord
   end
 
   def users_not_signed
-    # Liste des utilisateurs des groupes de l'assemblée qui n'ont pas signé
+    # Liste des utilisateurs des groupes de la sessino qui n'ont pas signé
     User.where(id: self.related_users)
         .where.not(id: self.presences.pluck(:user_id))
         .ordered

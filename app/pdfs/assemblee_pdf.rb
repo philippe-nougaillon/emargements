@@ -22,11 +22,11 @@ class AssembleePdf
       move_down @margin_down * 4
       text "Bonjour #{user.prénom_nom},"
       move_down @margin_down
-      text "Vous êtes convoqué à l'assemblée '<b>#{assemblee.nom}</b>' qui aura lieu le <b>#{I18n.l(assemblee.début, format: :long)}</b>", inline_format: true
+      text "Vous êtes convoqué à la session '<b>#{assemblee.nom}</b>' qui aura lieu le <b>#{I18n.l(assemblee.début, format: :long)}</b>", inline_format: true
       
       unless assemblee.adresse.blank?
         move_down @margin_down * 2     
-        text "Adresse de l'assemblée :"
+        text "Adresse de la session :"
         move_down @margin_down      
         text "#{assemblee.adresse}"
       end 

@@ -5,5 +5,7 @@
 
 Bonjour <%= @assemblee.user.prénom %>,
 <br><br>
-Voici le lien de l'assemblée : <%= link_to admin_signature_collective_url(assemblee_id: @assemblee.slug), admin_signature_collective_url(assemblee_id: @assemblee.slug), class: "text-primary hover:underline" %>
+Voici le lien pour émarger votre participation à '<%= assemblee.nom_long %>'
+<br><br>
+<%= link_to admin_signature_collective_url(assemblee_id: @assemblee.slug), admin_signature_collective_url(assemblee_id: @assemblee.slug), class: "text-primary hover:underline" %>
 

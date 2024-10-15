@@ -65,7 +65,7 @@
         <h1 class="text-2xl text-success">
           Emargement terminé !
           <br>
-          Tous les participants à cette assemblée ont déjà émargé
+          Tous les participants à cette session ont déjà émargé
           <p class="my-4">
             <%= link_to "Voir les émargements", presences_path(assemblee_id: @presence.assemblee.id), class: 'btn btn-outline text-primary hover:underline'%>
           </p>
@@ -84,9 +84,9 @@
       </div>
     </div>
   <% elsif @presence.assemblee.début > DateTime.now %>
-    <p>L'assemblée n'a pas encore commencé. Vous pourrez émarger à partir du <%= l @presence.assemblee.début.to_date %> à <%= (@presence.assemblee.début - 10.minutes).strftime("%H:%M") %></p>
+    <p>La session n'a pas encore commencé. Vous pourrez émarger à partir du <%= l @presence.assemblee.début.to_date %> à <%= (@presence.assemblee.début - 10.minutes).strftime("%H:%M") %></p>
   <% else %>
-    <p>Cette assemblée est maintenant terminée.</p>
+    <p>Cette session est maintenant terminée.</p>
   <% end %>
 <% end %>
 

@@ -2,7 +2,7 @@
   <div class="flex justify-center mt-4">
     <% if @current_step >= 4 %>
       <div class="flex flex-col items-center">
-        <h1 class="text-3xl font-bold mb-8">Chronologie des prochaines assemblées</h1>
+        <h1 class="text-3xl font-bold mb-8">Chronologie des prochaines sessions</h1>
 
         <% if @assemblees.any? %>
           <ul class="timeline mb-8">
@@ -24,7 +24,7 @@
           </ul>
         <% else %>
           <div class="my-12 shadow">
-            <%= link_to "Créer une nouvelle assemblée", new_assemblee_path, class:'btn btn-success btn-outline btn-lg hover:shadow-xl hover:!text-white' %>
+            <%= link_to "Créer une nouvelle session", new_assemblee_path, class:'btn btn-success btn-outline btn-lg hover:shadow-xl hover:!text-white' %>
           </div>
         <% end %>
         <div class="divider"></div>
@@ -45,7 +45,7 @@
             <%= link_to_if @current_step >= 1, "Importer des participants", admin_import_path, class:'text-primary underline' %>
           </li>
           <li class="step <%= 'step-primary' if @current_step >= 3 %> text-xl" data-content="<%= @current_step >= 3 ? '✓' : '3' %>">
-            <%= link_to_if @current_step >= 2, "Créer une nouvelle assemblée", new_assemblee_path, class:'text-primary underline' %>
+            <%= link_to_if @current_step >= 2, "Créer une nouvelle session", new_assemblee_path, class:'text-primary underline' %>
           </li>
           <li class="step <%= 'step-primary' if @current_step >= 3 %> text-xl" data-content="<%= @current_step >= 3 ? '★' : '4' %>">
             <p>Configuration terminée</p>
@@ -53,11 +53,11 @@
         </ul>
         <% if @current_step >=3 %>
           <h2 class="font-bold text-success text-xl text-center mt-8">
-            Bravo, votre première assemblée est prête !
+            Bravo, votre première session est prête !
             <br><br>
-            Pour générer les convocations, cliquez sur "Assemblées" puis sur "Générer..."
+            Pour générer les convocations, cliquez sur "Sessions" puis sur "Générer..."
             <br>
-            Pour recevoir le lien public vers la feuille d'émargement des présences, cliquez sur "Assemblées" puis sur "Envoyer..."
+            Pour recevoir le lien public vers la feuille d'émargement des présences, cliquez sur "Sessions" puis sur "Envoyer..."
           </h2>
         <% end %>
       </div>
@@ -73,7 +73,7 @@
     <%= link_to "PARTICIPANTS", users_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white w-1/2' %>
   </div>
   <div class="flex justify-center mb-4">
-    <%= link_to "ASSEMBLÉES", assemblees_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white w-1/2' %>
+    <%= link_to "SESSIONS", assemblees_path, class: 'btn btn-outline btn-primary btn-lg hover:!text-white w-1/2' %>
   </div>
   <div class="flex justify-center gap-1">
     <%= link_to "Mon organisation", edit_organisation_path(current_user.organisation), title: "Voir les paramètres de mon Organisation", class: 'btn btn-outline btn-secondary hover:!text-white' %>

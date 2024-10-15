@@ -7,14 +7,13 @@
       <%= text_field_tag :search, params[:search], include_blank:true, onchange:'this.form.submit()', class: 'input input-bordered input-sm w-full', placeholder: 'Nom/Prénom/Email' %>
     </div>
     <div class="max-w-md w-full">
-      <%= label_tag :assemblee_id, "Assemblée" %>
+      <%= label_tag :assemblee_id, "Session" %>
       <%= select_tag :assemblee_id, options_from_collection_for_select(@assemblees, :id, :nom_long, params[:assemblee_id]), include_blank: true, onchange: 'this.form.submit()' %>
     </div>
     <div class="max-w-md w-full">
       <%= label_tag :user_id, "Participant" %>
       <%= select_tag :user_id, options_from_collection_for_select(@users, :id, :nom_prénom, params[:user_id]), include_blank: true, onchange: 'this.form.submit()' %>
     </div>
-
     <div>
       <%= render TagCloudComponent.new(tags: @tags) %>
     </div>
@@ -52,7 +51,7 @@
       searchPlaceholder: 'Recherche',
       searchText: 'Pas de résultat',
       searchingText: 'Recherche...',
-      placeholderText: 'Filtrer par assemblée',
+      placeholderText: 'Filtrer par session',
       allowDeselect: true
     }
   })

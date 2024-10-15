@@ -22,7 +22,7 @@
     </div>
 
     <div class="max-w-72 w-full">
-      <%= label_tag :assemblee_id, "Assemblée" %>
+      <%= label_tag :assemblee_id, "Session" %>
       <%= select_tag :assemblee_id, options_from_collection_for_select(@assemblees, :id, :nom, params[:assemblee_id]), include_blank: true, onchange: 'this.form.submit()' %>
     </div>
     <%# label_tag :admin, "Admin" %>
@@ -49,7 +49,7 @@
       searchPlaceholder: 'Recherche',
       searchText: 'Pas de résultat',
       searchingText: 'Recherche...',
-      placeholderText: 'Filtrer par assemblée',
+      placeholderText: 'Filtrer par session',
       allowDeselect: true
     }
   })
