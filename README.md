@@ -7,9 +7,9 @@
 
 Importer vos participants par thématique (Ex: Santé, Mobilité, etc.)
 
-Créer une assemblée autour d'une ou plusieurs thématiques
+Créer une session (Assemblée, session de formation, etc.) autour d'une ou plusieurs thématiques
 
-Envoyer vos convocations (automatiquement ou manuellement) à l'ensemble des participants liés aux thématiques de l'assemblée. 
+Envoyer vos convocations (automatiquement ou manuellement) à l'ensemble des participants liés aux thématiques de la session. 
 
 Chaque participant recoit la convocation et peux justifier de sa présence en y apposant sa signature manuscrite.
 

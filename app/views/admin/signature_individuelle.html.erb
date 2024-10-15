@@ -1,4 +1,4 @@
-<h2 class="text-xl sm:text-2xl">Émargement assemblée du <%= l @presence.assemblee.début.to_date, format: :short %></h2>
+<h2 class="text-xl sm:text-2xl">Émargement session du <%= l @presence.assemblee.début.to_date, format: :short %></h2>
 <h1 class="text-2xl sm:text-4xl font-bold text-primary mb-6"><%= page_title!(@presence.assemblee.nom.humanize) %></h1>
 
 <%= form_tag({action: "signature_individuelle_do", method: :post}) do %>
@@ -46,9 +46,9 @@
       </div>
     </div>
   <% elsif @presence.assemblee.début > DateTime.now %>
-    <p>L'assemblée n'a pas encore commencé. Elle commencera le <%= l @presence.assemblee.début.to_date %> à <%= @presence.assemblee.début.strftime("%H:%M") %></p>
+    <p>La session n'a pas encore commencé. Elle commencera le <%= l @presence.assemblee.début.to_date %> à <%= @presence.assemblee.début.strftime("%H:%M") %></p>
   <% else %>
-    <p>Cette assemblée est maintenant terminée.</p>
+    <p>Cette session est maintenant terminée.</p>
   <% end %>
 <% end %>
 

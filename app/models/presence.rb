@@ -4,7 +4,7 @@ class Presence < ApplicationRecord
   belongs_to :user
   belongs_to :assemblee
 
-  validates :user_id, uniqueness: {scope: :assemblee_id, message: "Une seule signature par assemblée !" } 
+  validates :user_id, uniqueness: {scope: :assemblee_id, message: "Une seule signature par session !" } 
   validate :check_heure
 
   encrypts :signature
@@ -29,7 +29,7 @@ class Presence < ApplicationRecord
   end
 
   def check_conflit
-    # Check si des assemblées se passent au même moment, et si un participant a signé sur deux de ces assemblées 
+    # Check si des session se passent au même moment, et si un participant a signé sur deux de ces sessions 
     assemblees = self.assemblee.organisation.assemblees.tagged_with(self.user.tags, any: true).where("(assemblees.début BETWEEN :debut AND :fin) OR (assemblees.fin BETWEEN :debut AND :fin) OR (:debut BETWEEN assemblees.début AND assemblees.fin)", {debut: self.assemblee.début, fin: self.assemblee.fin})
     return [((assemblees.count > 1)? assemblees.pluck(:id) : false) , (assemblees.joins(:presences).where('presences.user_id': self.user_id).count > 1)]
   end

@@ -93,7 +93,7 @@ class AssembleesController < ApplicationController
         end
         format.html do 
           redirect_to current_user.organisation.step < 4 ? admin_index_path : assemblees_url
-          flash[:notice] = "Assemblée créée avec succès."
+          flash[:notice] = "Session créée avec succès."
         end
         format.json { render :show, status: :created, location: @assemblee }
       else
@@ -109,7 +109,7 @@ class AssembleesController < ApplicationController
       if @assemblee.update(assemblee_params)
         @assemblee.tag_list = params[:assemblee][:tags]
         @assemblee.save
-        format.html { redirect_to assemblees_url, notice: "Assemblée modifiée avec succès." }
+        format.html { redirect_to assemblees_url, notice: "Session modifiée avec succès." }
         format.json { render :show, status: :ok, location: @assemblee }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -123,7 +123,7 @@ class AssembleesController < ApplicationController
     @assemblee.destroy!
 
     respond_to do |format|
-      format.html { redirect_to assemblees_url, notice: "Assemblée supprimée avec succès." }
+      format.html { redirect_to assemblees_url, notice: "Session supprimée avec succès." }
       format.json { head :no_content }
     end
   end
@@ -139,7 +139,7 @@ class AssembleesController < ApplicationController
   def import_do
     assemblees_infos = params[:assemblees].split("\r\n")
     assemblees_imported = ImportAssemblees.new(assemblees_infos, current_user, params[:groupes]).call
-    redirect_to assemblees_path, notice: "#{assemblees_imported} assemblée(s) importé(s) sur #{assemblees_infos.count}"
+    redirect_to assemblees_path, notice: "#{assemblees_imported} session(s) importée(s) sur #{assemblees_infos.count}"
   end
 
   private

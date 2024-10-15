@@ -5,7 +5,7 @@
         <%= assemblee.nom.humanize %>
       </p>
       
-      <p class="">
+      <p class="font-bold">
         <%= assemblee.horaires_long %>
         <% if assemblee.début > DateTime.now %>
           <span class="text-warning italic">
@@ -43,7 +43,7 @@
         <% if assemblee.fin > DateTime.now %>
           <%= link_to "Envoyer le lien au gestionnaire", envoyer_lien_gestionnaire_assemblee_path(assemblee), class: 'btn btn-warning btn-outline btn-sm', title: "Envoyer au gestionnaire un mail contenant le lien public vers la feuille d'émargement des présences" %>
         <% end %>
-        <%= button_to assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain(e) de vouloir supprimer cette assemblée ? Cela supprimera aussi les signatures liées" }, class: 'btn btn-error btn-outline btn-sm' do %>
+        <%= button_to assemblee, method: :delete, data: {turbo_confirm: "Êtes-vous certain(e) de vouloir supprimer cette session ? Cela supprimera aussi les signatures liées" }, class: 'btn btn-error btn-outline btn-sm' do %>
           <span class="material-symbols-outlined">
             delete
           </span>
