@@ -39,24 +39,14 @@
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        <b>Vérification des fausses signatures</b>
+        <b>Détections des anomalies par l'IA (fausses signatures, usages inhabituels, etc.)</b>
       </p>
       <p>
         <span class="badge badge-primary badge-xs"></span> 
-        <b>Enlève le lien d'auto-promotion</b> visible sur les convocations
-      </p>
-      <p>
-        <span class="badge badge-primary badge-xs"></span> 
-        Tarif unique : 29 €/Mois/Organisation
+        Tarif unique : 99 €/Année/Organisation
       </p>
 
-      <% unless current_user.premium? %>
-        <div class="flex flex-wrap mt-4 justify-center gap-24 items-center">
-          <%= link_to "Souscrire à l'offre 'PREMIUM' et payer avec PayPal", "https://www.paypal.com/ncp/payment/RLKRFJG5SD4M6", class: 'btn btn-primary btn-outline btn-lg hover:!text-white' %>
-          <%= image_tag "Compte PREMIUM-qrcode.png" %>
-        </div>
-      <% end %>
-      <%= link_to "Vous avez une question, une remarque ou un projet à nous soumettre ? Contactez-nous !", "https://www.philnoug.com/contact?objet=Émargements", class: 'mt-12 underline', target:"_blank" %>
+      <%= link_to "Nous contacter", "https://www.philnoug.com/contact?objet=Émargements", class: 'mt-6 underline text-2xl text-primary', target:"_blank" %>
     </div>
   </div>
 </div>

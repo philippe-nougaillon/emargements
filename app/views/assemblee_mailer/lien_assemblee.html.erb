@@ -7,10 +7,3 @@ Bonjour <%= @assemblee.user.prénom %>,
 <br><br>
 Voici le lien de l'assemblée : <%= link_to admin_signature_collective_url(assemblee_id: @assemblee.slug), admin_signature_collective_url(assemblee_id: @assemblee.slug), class: "text-primary hover:underline" %>
 
-<% unless @assemblee.organisation.premium? %>
-  <br><br><br><br>
-  <small>
-    Convocation réalisée par 
-    <u><a href='https://emargements.philnoug.com/'>emargements.philnoug.com</a></u>
-  </small>
-<% end %>
