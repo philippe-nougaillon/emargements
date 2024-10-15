@@ -1,5 +1,5 @@
 <div class="hero min-h-screen bg-base-100">
-  <div class="flex flex-row flex-wrap gap-12 px-4">
+  <div class="flex flex-row flex-wrap gap-8 px-4">
     <div class="mx-auto w-full lg:w-96">
       <div class="card shadow-2xl bg-base-100 p-8">
         <h1 class="text-2xl font-bold border-b border-gray-400 pb-4 w-full text-center my-4">Connexion</h1>
@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div class="mx-auto mt-12">
+    <div class="mx-auto mt-8">
 
       <h1 class="text-4xl text-primary font-black">
         <%= page_title!("Émargements") %>
@@ -40,21 +40,29 @@
         Application de gestion de Feuilles de présences numériques
       </h2>
 
-      <h3 class="text-xl text-secondary font-black my-6">
+      <h3 class="text-2xl text-primary font-black">
         Vous souhaitez remplacer vos feuilles de présence papier 
         <br>
         par une solution numérique, simple et automatique ?
-        <br><br>
-        Cette application permet de créer des session, d'y associer des participants 
+      </h3>
+
+      <h4 class="text-xl text-secondary my-6">
+        Cette application permet de créer des sessions, d'y associer des participants par groupes d'intérêt,
         <br>
-        et de leur envoyer automatiquement un lien vers un formulaire de signature,
+        et soit de leur envoyer automatiquement un lien vers un formulaire de signature
         <br>
-         10 minutes avant le début de la session.
+        10 minutes avant le début de la session, soit d'envoyer un lien au gestionnaire 
+        <br>
+        uniquement pour scéance de signatures collective (ex: passage d'une tablette entre participants).
         <br><br>
         Pour une confidentialité renforcée, les données de signature stockées 
         <br>
         dans la base de données sont chiffrées.
-      </h3>
+        <br><br>
+        Les données collectées peuvent être traitées par une IA pour faire de la détection d'anomalies
+        <br>
+        (ex: fausses signatures, usages inhabituels, etc.). Compte PREMIUM uniquement.
+      </h4>
     </div>
   </div>
 </div>
