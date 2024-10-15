@@ -5,8 +5,8 @@
 
 Bonjour <%= @user.prénom %>,
 <br><br>
-En tant que participant à l'assemblée <%= @assemblee.nom_long %>, 
-prévue le <%= @assemblee.horaires_long %>,
+En tant que participant à <b><%= @assemblee.nom %></b>, 
+prévue le <b><%= @assemblee.horaires_long %></b>,
 vous devez émarger votre présence d'une simple signature 
 en cliquant sur ce lien : <%= link_to admin_signature_individuelle_url(assemblee_id: @assemblee.slug), admin_signature_individuelle_url(assemblee_id: @assemblee.slug, user_id: @user.slug), class: "text-primary hover:underline" %>
 <br><br>
