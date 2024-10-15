@@ -19,7 +19,7 @@ class AdminPolicy
   end
 
   def audits?
-    index? && user.premium?
+    index?
   end
 
   def premium?
