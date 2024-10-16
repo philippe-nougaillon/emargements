@@ -15,10 +15,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # Associer l'utilisateur à une organisation
     @user.organisation = Organisation.create(nom: "Mon_organisation")
     @user.admin = true
-    # @user.tag_list.add("Gestionnaire")
     @user.dispatch_email_to_nom_prénom
-
-    UserMailer.welcome(@user).deliver_now if @user.save
+    @user.save
+    Events.instance.publish('organisation.created', payload: {user_id: @user.id})
   end
 
   # GET /resource/edit

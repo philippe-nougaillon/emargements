@@ -1,4 +1,4 @@
-<div id="<%= dom_id presence %>" class="flex flex-col shadow p-4 hover:shadow-xl ease-out duration-300 gap-2 mt-4">
+<div id="<%= dom_id presence %>" class="flex flex-col shadow p-4 hover:shadow-xl ease-out duration-500 gap-2 mt-4">
   <div>
     <small class="italic text-secondary">
       <i>Il y a <%= time_ago_in_words presence.heure %></i>
@@ -10,7 +10,7 @@
       <%= presence.assemblee.nom.humanize %>
     </p>
 
-    <p class="text-secondary my-2">
+    <p class="text-secondary">
       <%= presence.assemblee.horaires_medium %>
     </p>
   </div>
