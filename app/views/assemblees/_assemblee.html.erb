@@ -22,14 +22,17 @@
         Groupes : <% assemblee.tags.each do |tag| %>
           <span class="badge"><%= link_to tag.name.humanize, users_path(tags: [tag.name]), class: "hover:underline" %></span>
         <% end %>
-      </p>
-
-      <p class="mt-4">
+        |         
         Gestionnaire : <%= assemblee.user.nom_prénom %> (<%= assemblee.user.email %>)
       </p>
 
       <p class="my-4">
-        ÉMARGEMENTS :
+        Statut : 
+        <span class="text-nowrap font-bold <%= assemblee.style %>">
+          <%= assemblee.workflow_state.humanize %>
+        </span>
+        |
+        Émargements :
         <%= link_to assemblee.presences.count, presences_path(assemblee_id: assemblee.id), class: 'text-primary hover:underline' %>
         /
         <%= link_to "#{assemblee.related_users.count} participant(s)", users_path(assemblee_id: assemblee.id), class: 'text-primary hover:underline' %>

@@ -2,6 +2,9 @@ class Assemblee < ApplicationRecord
   extend FriendlyId
 	friendly_id :slug_candidates, use: :slugged
 
+  include Workflow
+  include WorkflowActiverecord
+
   audited
 
   acts_as_taggable_on :tags
@@ -15,6 +18,35 @@ class Assemblee < ApplicationRecord
   after_save :update_fin
 
   scope :ordered, -> { order(début: :desc) }
+
+  # WORKFLOW
+  # 
+    
+  NOUVEAU   = 'nouveau'
+  EN_COURS  = 'en cours'
+  TERMINE   = 'terminé'
+  ARCHIVE   = 'archivé'
+
+  workflow do
+    state NOUVEAU, meta: {style: 'badge text-primary'}
+    state EN_COURS, meta: {style: 'badge text-success'}
+    state TERMINE, meta: {style: 'badge text-error'}
+    state ARCHIVE, meta: {style: 'badge text-secondary'}
+  end
+
+  # pour que le changement de 'workflow_state' se voit dans l'audit trail
+  def persist_workflow_state(new_value)
+    self[:workflow_state] = new_value
+    save!
+  end
+
+  #
+  # Decorators ------------------------------------
+  #
+
+  def style
+    self.current_state.meta[:style]
+  end
 
   def in_progress?
     (self.début < DateTime.now + 10.minutes) && (self.fin > DateTime.now)
