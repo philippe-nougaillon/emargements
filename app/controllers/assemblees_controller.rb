@@ -27,6 +27,10 @@ class AssembleesController < ApplicationController
       end
     end
 
+    if params[:workflow_state].present?
+      @assemblees = @assemblees.where("assemblees.workflow_state = ?", params[:workflow_state].to_s.downcase)
+    end
+
     respond_to do |format|
       format.html
 
