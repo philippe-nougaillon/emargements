@@ -15,7 +15,7 @@
   <% end %>
 </p>
 
-<p class="mb-4">
+<p class="my-4">
   Groupes : <% @presence.assemblee.tags.each do |tag| %>
     <span class="badge"><%= tag.name.humanize %></span>
   <% end %>
@@ -33,7 +33,7 @@
             </div>
           <% end %>
           <div class="mb-4 w-full sm:max-w-96">
-            <%= label_tag :user_id, "Participant", style: "display: block" %>
+            <%= label_tag :user_id, "Participant (Choisir votre nom dans la liste)", style: "display: block" %>
             <%= select_tag :user_id, options_from_collection_for_select(@users_not_signed, :slug, :nom_prénom), include_blank: true, required:true, class: 'input input-lg' %>
           </div>
 
@@ -51,8 +51,8 @@
               <% end %>
 
               <div class="flex flex-wrap gap-4 mt-8">
-                <button id="save" class="btn btn-primary btn-outline btn-lg">Enregistrer cet émargement</button>
-                <div id="clear" class="btn btn-lg btn-outline text-secondary">
+                <button id="save" class="btn btn-primary btn-outline hover:shadow-xl hover:!text-white btn-lg">Enregistrer cet émargement</button>
+                <div id="clear" class="btn btn-lg btn-outline text-secondary" title="Effacer la signature">
                   <span class="material-symbols-outlined">
                     ink_eraser
                   </span>

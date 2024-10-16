@@ -12,7 +12,7 @@
         <% if @presence.assemblee.users_not_signed.include?(@presence.user) %>
           <div>
             <div>
-              <%= label_tag :signature, "Signature", style: "display: block" %>
+              <%= label_tag :signature, "Signature (Merci de signer dans le cadre ci-dessous)", style: "display: block" %>
               <%= text_field_tag :signature, "", style:'display: none' %>
             </div>
 
@@ -31,9 +31,9 @@
               <% end %>
 
               <div class="flex gap-4 mt-8">
-                <button id="save" class="btn btn-primary btn-outline btn-lg">Enregistrer</button>
+                <button id="save" class="btn btn-primary btn-outline hover:shadow-xl hover:!text-white btn-lg">Enregistrer</button>
                 <div id="clear" class="btn btn-lg btn-outline">
-                  <span class="material-symbols-outlined">
+                  <span class="material-symbols-outlined" title="Effacer la signature">
                     ink_eraser
                   </span>
                 </div>
