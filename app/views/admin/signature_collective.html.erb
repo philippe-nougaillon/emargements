@@ -6,11 +6,11 @@
   <%= @presence.assemblee.horaires_long %>
   <% if @presence.assemblee.début > DateTime.now %>
     <span class="text-warning">
-      (commence dans <%= time_ago_in_words @presence.assemblee.début %>)
+      début de session dans <%= time_ago_in_words @presence.assemblee.début %>)
     </span>
   <% elsif @presence.assemblee.in_progress? %>
     <span class="text-error">
-      (se termine dans <%= time_ago_in_words @presence.assemblee.fin %>)
+      (fin de session dans <%= time_ago_in_words @presence.assemblee.fin %>)
     </span>
   <% end %>
 </p>

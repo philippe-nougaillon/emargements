@@ -13,7 +13,7 @@
         </span>
       <% elsif ((assemblee.début + assemblee.durée.to_f.hours) - Time.current).positive? %>
         <span class="text-error">
-          Se termine dans <%= time_ago_in_words assemblee.fin %>
+          fin de session dans <%= time_ago_in_words assemblee.fin %>
         </span>
       <% end %>
     </p>
