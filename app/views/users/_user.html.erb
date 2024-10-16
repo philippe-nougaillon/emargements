@@ -20,7 +20,7 @@
   </p>
 
   <p class="mt-4">
-    <%= link_to_if user.presences.count.positive?, pluralize(user.presences.count, 'émargement', plural: 'émargements'), presences_path(search: user.email), class: 'text-primary hover:underline', title: "Voir tous les émargements de ce participant." %>
+    <%= link_to_if user.presences.count.positive?, pluralize(user.presences.count, 'émargement', plural: 'émargements'), presences_path(user_id: user.id), class: 'text-primary hover:underline', title: "Voir tous les émargements de ce participant." %>
   </p>
   
 </div>

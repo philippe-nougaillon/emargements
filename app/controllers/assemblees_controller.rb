@@ -76,6 +76,7 @@ class AssembleesController < ApplicationController
     else
       @assemblee.début = DateTime.now.change(min: 0, sec: 0) + 1.hour
       @assemblee.durée = 2
+      @assemblee.automatique = true
     end
   end
 

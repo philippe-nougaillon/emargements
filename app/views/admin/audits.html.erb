@@ -50,10 +50,17 @@
     </thead>
 
     <%= render partial: 'audit', collection: @audits %>
+
+    <tfoot>
+      <tr>
+        <tr colspan="6"></tr>
+      </tr>
+    </tfoot>
+
   </table>
 </div>
 
 <div class="my-6">
-    <%== pagy_info(@pagy) %>
-    <%== pagy_nav(@pagy) %>
-  </div>
+  <%== pagy_info(@pagy) %>
+  <%== pagy_nav(@pagy) %>
+</div>
