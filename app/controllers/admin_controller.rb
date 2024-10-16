@@ -31,9 +31,9 @@ class AdminController < ApplicationController
 
     respond_to do |format|
       if @presence.save
-        # Mise à jour du statut Terminé
+        # Mise à jour du statut complet
         if @presence.assemblee.users_not_signed.count.zero?
-          @presence.assemblee.update(workflow_state: 'terminé')
+          @presence.assemblee.update(workflow_state: 'complet')
         end
 
         format.html { redirect_to admin_signature_collective_url(assemblee_id: params[:assemblee_id]), notice: "L'émargement de #{@presence.user.nom_prénom} a été créé avec succès." }
@@ -67,9 +67,9 @@ class AdminController < ApplicationController
 
     respond_to do |format|
       if @presence.save
-        # Mise à jour du statut Terminé
+        # Mise à jour du statut complet
         if @presence.assemblee.users_not_signed.count.zero?
-          @presence.assemblee.update(workflow_state: 'terminé')
+          @presence.assemblee.update(workflow_state: 'complet')
         end
 
         format.html { redirect_to admin_signature_individuelle_url(assemblee_id: params[:assemblee_id], user_id: params[:user_id]), notice: "Votre émargement a été créé avec succès." }

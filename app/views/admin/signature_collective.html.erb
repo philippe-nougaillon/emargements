@@ -6,7 +6,7 @@
   <%= @presence.assemblee.horaires_long %>
   <% if @presence.assemblee.début > DateTime.now %>
     <span class="text-warning">
-      début de session dans <%= time_ago_in_words @presence.assemblee.début %>)
+      (début de session dans <%= time_ago_in_words @presence.assemblee.début %>)
     </span>
   <% elsif @presence.assemblee.in_progress? %>
     <span class="text-error">
@@ -63,7 +63,7 @@
         </div>
       <% else %>
         <h1 class="text-2xl text-success">
-          Emargement terminé !
+          Emargement complet !
           <br>
           Tous les participants à cette session ont déjà émargé
           <p class="my-4">
