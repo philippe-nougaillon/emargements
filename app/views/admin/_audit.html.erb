@@ -5,18 +5,12 @@
     (<%= l(audit.created_at, format: :custom) %>)
   </td>
   <td>
-    <% if audit.user_id %>
-      <% if audit.user %>
-        <%= audit.user.email %>
-        (#<%= audit.user.id %>)
-        <br>
-        <%= audit.user.admin? %>
-        <br>
-      <% end %>
-      IP: <%= audit.remote_address %>
-    <% else %>
-      SYSTEM CONSOLE
-    <% end %>
+    <%= audit.user.email %>
+    (#<%= audit.user.id %>)
+    <br>
+    <%= 'Admin' if audit.user.admin? %>
+    <br>
+    IP: <%= audit.remote_address %>
   </td>
   <td>
     <%= audit.auditable_type %>

@@ -88,8 +88,6 @@ gem "rqrcode", "~> 2.2"
 
 gem "exception_notification", "~> 4.5"
 
-# gem "aws-sdk-s3", require: false
-
 gem "audited", "~> 5.5"
 
 gem "dry-events", "~> 1.0"
