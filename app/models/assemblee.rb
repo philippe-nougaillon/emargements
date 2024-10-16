@@ -24,13 +24,13 @@ class Assemblee < ApplicationRecord
     
   NOUVEAU   = 'nouveau'
   EN_COURS  = 'en cours'
-  TERMINE   = 'terminé'
+  COMPLET   = 'complet'
   ARCHIVE   = 'archivé'
 
   workflow do
     state NOUVEAU, meta: {style: 'badge text-primary'}
-    state EN_COURS, meta: {style: 'badge text-success'}
-    state TERMINE, meta: {style: 'badge text-error'}
+    state EN_COURS, meta: {style: 'badge text-warning'}
+    state COMPLET, meta: {style: 'badge text-success'}
     state ARCHIVE, meta: {style: 'badge text-secondary'}
   end
 
@@ -39,7 +39,7 @@ class Assemblee < ApplicationRecord
     self[:workflow_state] = new_value
     save!
   end
-  
+
   def self.workflow_state_humanized
     self.workflow_spec.states.keys.map{|i| i.to_s.humanize }
   end

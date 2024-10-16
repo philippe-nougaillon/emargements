@@ -9,7 +9,7 @@
         <%= assemblee.horaires_long %>
         <% if assemblee.début > DateTime.now %>
           <span class="text-warning italic">
-            début de session dans <%= time_ago_in_words assemblee.début %>)
+            (début de session dans <%= time_ago_in_words assemblee.début %>)
           </span>
         <% elsif assemblee.in_progress? %>
           <span class="text-error italic">
