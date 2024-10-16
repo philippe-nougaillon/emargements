@@ -14,7 +14,7 @@ class Organisation < ApplicationRecord
   validates :nom, presence: true
 
   def step
-    if self.nom.include?('Mon_organisation')
+    if self.nom == 'Mon_organisation'
       0
     elsif !(self.users.count > 1)
       1
