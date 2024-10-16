@@ -116,6 +116,8 @@ class AdminController < ApplicationController
       @audits = @audits.where("audited_changes ILIKE ?", "%#{params[:search]}%")
     end
 
+    @pagy, @audits = pagy(@audits)
+
   end
 
   def premium
