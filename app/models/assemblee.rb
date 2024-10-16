@@ -39,6 +39,10 @@ class Assemblee < ApplicationRecord
     self[:workflow_state] = new_value
     save!
   end
+  
+  def self.workflow_state_humanized
+    self.workflow_spec.states.keys.map{|i| i.to_s.humanize }
+  end
 
   #
   # Decorators ------------------------------------
