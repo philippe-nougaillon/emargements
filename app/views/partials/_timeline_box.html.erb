@@ -6,10 +6,10 @@
     <%= assemblee.horaires_medium %>
     <br>
 
-    <p class="italic">
+    <p class="italic text-sm">
       <% if assemblee.début > DateTime.now %>
         <span class="text-warning">
-          Commence dans <%= time_ago_in_words assemblee.début %>
+          début de session dans <%= time_ago_in_words assemblee.début %>
         </span>
       <% elsif ((assemblee.début + assemblee.durée.to_f.hours) - Time.current).positive? %>
         <span class="text-error">
