@@ -116,3 +116,5 @@ gem "mini_magick", "~> 4.12"
 gem "workflow"
 gem "workflow-activerecord"
 
+
+gem "pagy", "~> 9.1"
