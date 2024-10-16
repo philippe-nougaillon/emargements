@@ -455,6 +455,10 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    workflow (3.1.1)
+    workflow-activerecord (6.0.1)
+      activerecord (>= 6.0)
+      workflow (~> 3.0)
     zeitwerk (2.6.18)
 
 PLATFORMS
@@ -502,6 +506,8 @@ DEPENDENCIES
   tzinfo-data
   view_component (~> 3.11)
   web-console
+  workflow
+  workflow-activerecord
 
 RUBY VERSION
    ruby 3.3.1p55

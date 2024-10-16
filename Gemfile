@@ -114,3 +114,7 @@ gem "google-cloud-ai_platform-v1", "~> 0.53.0"
 
 gem "google-cloud-storage", "~> 1.52"
 gem "mini_magick", "~> 4.12"
+
+gem "workflow"
+gem "workflow-activerecord"
+
