@@ -1,10 +1,12 @@
 <div class="timeline-<%= start ? 'start' : 'end' %> timeline-box hover:underline">
   <%= link_to assemblee_path(assemblee) do %>
-    <span class="font-bold text-xl text-primary"><%= assemblee.nom.humanize %></span>
-    <br>
+    <span class="font-bold text-xl text-primary">
+      <%= assemblee.nom.humanize %>
+    </span>
 
-    <%= assemblee.horaires_medium %>
-    <br>
+    <p>
+      <%= assemblee.horaires_medium %>
+    </p>
 
     <p>
       <% assemblee.tags.each do |tag| %>
