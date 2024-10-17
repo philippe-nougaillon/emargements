@@ -29,11 +29,11 @@ class Assemblee < ApplicationRecord
   ARCHIVE   = 'archivé'
 
   workflow do
-    state ATTENTE, meta: {style: 'badge badge-lg text-primary'}
+    state ATTENTE,  meta: {style: 'badge badge-lg text-primary'}
     state EN_COURS, meta: {style: 'badge badge-lg text-error'}
-    state COMPLET, meta: {style: 'badge badge-lg text-warning'}
-    state INCOMPLET, meta: {style: 'badge badge-lg text-success'}
-    state ARCHIVE, meta: {style: 'badge badge-lg text-secondary'}
+    state COMPLET,  meta: {style: 'badge badge-lg text-success'}
+    state INCOMPLET,meta: {style: 'badge badge-lg text-warning'}
+    state ARCHIVE,  meta: {style: 'badge badge-lg text-secondary'}
   end
 
   # pour que le changement de 'workflow_state' se voit dans l'audit trail
