@@ -17,7 +17,7 @@ class Assemblee < ApplicationRecord
 
   after_save :update_fin
 
-  scope :ordered, -> { order(workflow_state: :desc, début: :desc) }
+  scope :ordered, -> { order(updated_at: :desc) }
 
   # WORKFLOW
   # 
