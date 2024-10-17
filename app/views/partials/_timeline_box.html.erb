@@ -20,7 +20,7 @@
 
     <p>
       <% assemblee.tags.each do |tag| %>
-        <span class="badge"><%= tag.name.humanize %></span>
+        <span class="font-bold <%= assemblee.style %>"><%= assemblee.workflow_state.humanize %></span>
       <% end %>
     </p>
 

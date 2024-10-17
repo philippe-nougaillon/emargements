@@ -29,7 +29,7 @@ class Assemblee < ApplicationRecord
 
   workflow do
     state ATTENTE, meta: {style: 'badge badge-lg text-primary'}
-    state EN_COURS, meta: {style: 'badge badge-lg text-warning'}
+    state EN_COURS, meta: {style: 'badge badge-lg text-error'}
     state COMPLET, meta: {style: 'badge badge-lg text-success'}
     state ARCHIVE, meta: {style: 'badge badge-lg text-secondary'}
   end
