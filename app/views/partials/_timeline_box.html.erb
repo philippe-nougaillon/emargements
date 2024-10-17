@@ -6,21 +6,21 @@
     <%= assemblee.horaires_medium %>
     <br>
 
-    <p class="italic text-sm">
-      <% if assemblee.début > DateTime.now %>
-        <span class="text-warning">
-          début de session dans <%= time_ago_in_words assemblee.début %>
-        </span>
-      <% elsif ((assemblee.début + assemblee.durée.to_f.hours) - Time.current).positive? %>
-        <span class="text-error">
-          fin de session dans <%= time_ago_in_words assemblee.fin %>
-        </span>
-      <% end %>
-    </p>
-
     <p>
       <% assemblee.tags.each do |tag| %>
         <span class="font-bold <%= assemblee.style %>"><%= assemblee.workflow_state.humanize %></span>
+      <% end %>
+    </p>
+
+    <p class="italic text-sm">
+      <% if assemblee.début > DateTime.now %>
+        <span class="text-warning">
+          (débute dans <%= time_ago_in_words assemblee.début %>)
+        </span>
+      <% elsif ((assemblee.début + assemblee.durée.to_f.hours) - Time.current).positive? %>
+        <span class="text-error">
+          (fin de session dans <%= time_ago_in_words assemblee.fin %>)
+        </span>
       <% end %>
     </p>
 
