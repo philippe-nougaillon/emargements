@@ -41,7 +41,11 @@
             </div>
           </div>
         <% else %>
-          Vous avez signé à <%= @presence.assemblee.presences.find_by(user_id: @presence.user).created_at.strftime("%H:%M") %> et nous vous en remercions. 
+          Vous avez signé à 
+          <%= @presence.assemblee.presences.find_by(user_id: @presence.user).created_at.strftime("%H:%M") %> 
+          et nous vous en remercions.
+          <br><br>
+          Vous pouvez maintenant fermer cette page.
         <% end %>
       </div>
     </div>
