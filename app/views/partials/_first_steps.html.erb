@@ -1,0 +1,31 @@
+    <% if false %>
+      <div class="flex flex-col items-center gap-4 mb-12">
+        <% if current_user.sign_in_count < 2 %>
+          <h1 class="text-3xl font-bold">Bienvenue !</h1>
+        <% end %>
+        <% unless @current_step >=3 %>
+          <h2>Il reste quelques étapes avant de pouvoir envoyer vos premières convocations</h2>
+        <% end %>
+        <ul class="steps">
+          <li class="step <%= 'step-primary' if @current_step >= 1 %> text-xl" data-content="<%= @current_step >= 1 ? '✓' : '1' %>">
+            <%= link_to "Renommer mon organisation", edit_organisation_path(current_user.organisation), class:'text-primary underline' %>
+          </li>
+          <li class="step <%= 'step-primary' if @current_step >= 2 %> text-xl" data-content="<%= @current_step >= 2 ? '✓' : '2' %>">
+            <%= link_to_if @current_step >= 1, "Importer des participants", admin_import_path, class:'text-primary underline' %>
+          </li>
+          <li class="step <%= 'step-primary' if @current_step >= 3 %> text-xl" data-content="<%= @current_step >= 3 ? '✓' : '3' %>">
+            <%= link_to_if @current_step >= 2, "Créer une nouvelle session", new_assemblee_path, class:'text-primary underline' %>
+          </li>
+          <li class="step <%= 'step-primary' if @current_step >= 3 %> text-xl" data-content="<%= @current_step >= 3 ? '★' : '4' %>">
+            <p>Configuration terminée</p>
+          </li>
+        </ul>
+        <% if @current_step >=3 %>
+          <h2 class="font-bold text-success text-xl text-center mt-8">
+            Bravo, votre première session est prête !
+            <br><br>
+            Pour envoyer le lien vers la feuille d'émargement des présences, cliquez sur "Sessions" puis sur "Envoyer..."
+          </h2>
+        <% end %>
+      </div>
+    <% end %>

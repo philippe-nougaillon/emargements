@@ -4,13 +4,11 @@ class AdminController < ApplicationController
   before_action :set_tags, only: %i[import create_new_participant]
 
   def index
-    @assemblees = current_user
-                    .organisation
-                    .assemblees
-                    .order(:début)
-                    .where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today, Date.today + 6.days)
+    @assemblees = current_user.organisation.assemblees
+                              .where("DATE(assemblees.début) BETWEEN ? AND ?", Date.today, Date.today + 6.days)
+                              .order(:début)
 
-    @current_step = current_user.organisation.step
+    #@current_step = current_user.organisation.step
   end
 
   def signature_collective
